@@ -1,0 +1,13 @@
+.navbar{
+    text-align: center;
+    width: 100%;
+    background-color: aquamarine;
+    box-shadow: lightgreen 0px 0px 15px;
+}
+.hdr{
+    text-align: center;
+    font-family: "URW Chancery";
+}
+.pad{
+    padding: 10px;
+}
