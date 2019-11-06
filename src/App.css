@@ -1,22 +1,104 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
+  width: 100%;
+  height: 64px;
+  padding: 0 128px 0 128px;
+  background-color: palegreen;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #09d3ac;
+.header-brand {
+  font: 24px bold Montserrat;
+}
+
+.login {
+  display: none;
+}
+
+.view {
+  padding: 64px 128px 64px 128px;
+}
+
+.footer {
+  padding: 0 128px 0 128px;
+  display: flex;
+  background-color: palegreen;
+  justify-content: space-between;
+}
+
+.footer-item {
+
+}
+
+.home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-illustration {
+  min-width: 256px;
+  height: 256px;
+  border: solid black 1px;
+}
+
+.home-titles {
+  padding-left: 48px;
+  display: flex;
+  height: 256px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-title-big {
+
 }
