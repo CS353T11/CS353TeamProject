@@ -105,7 +105,29 @@ body {
   width: 1px;
 
 }
-
+.login {
+  padding: 8px 24px;
+  border: 1px solid black;
+  font-weight: bold;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  border-radius: 15px;
+}
+.submit {
+  padding: 8px 24px;
+  border: 1px solid black;
+  font-weight: bold;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  &:hover {
+    background-color: black;
+    color: white;
+    transition: 0.1s;
+    font-weight: 700;
+  }
+}
 .btn-login {
   padding: 8px 24px;
   border: 1px solid black;

@@ -42,12 +42,13 @@ export default class LoginPopUp extends React.Component {
         return (
             <div className="login">
                 <form onSubmit={this.handleSubmit}>
-                    <label>E-mail </label>
+                    <label>E-mail: </label>
                     <input type="text" name="email" id="email" onChange={this.handleChange} />
-                    <br />
-                    <label>Password</label>
+                    <br></br>
+                    <label>Password:</label>
                     <input type="password" id="password" name="password" onChange={this.handleChange} />
-                    <button type="submit">Log in</button>
+                    <br></br>
+                    <button type="submit" className='submit'>Log In</button>
                     
                 </form>
             </div>

@@ -9,7 +9,7 @@ export default class LoggedOutHeader extends React.Component {
                     <NavLink to='/'><b className="bold">plan</b>my.ml</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/home/login'>Mealplans</NavLink>
+                    <NavLink to='/home/login'>Meal Plans</NavLink>
                 </span>
                 <span className="header-link">
                     <NavLink to='/home/login'>Recipes</NavLink>
@@ -21,7 +21,7 @@ export default class LoggedOutHeader extends React.Component {
                     <NavLink to='/about'>About Us</NavLink>
                 </span>
                 <span className="header-login">
-                    <NavLink className="btn-login" to='/home/login'>LOGIN</NavLink>
+                    <NavLink className="btn-login" to='/home/login'>LOG IN</NavLink>
                 </span>
             </header>
         );
