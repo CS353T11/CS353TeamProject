@@ -1,6 +1,6 @@
 import React from 'react';
 //import logo from './logo.svg';
-import './App.css';
+import './scss/styles.scss';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Footer from './components/layout/footer';
 import HomeView from './components/home/homeview';

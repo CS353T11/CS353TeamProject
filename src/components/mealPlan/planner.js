@@ -6,9 +6,7 @@ import NutriScore from './nutriSoure';
 export default class Planner extends React.Component {
     render() {
         return (
-            <div id="main">
-                <h1>Plan My Meal</h1>
-                View Profile
+            <div className="view">
                 <SearchBar/>
                 <WeekPlan/>
                 <NutriScore/>
