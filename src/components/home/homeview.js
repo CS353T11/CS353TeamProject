@@ -27,9 +27,9 @@ export default class HomeView extends React.Component {
                         <img alt="cute big img"></img>
                     </div>
                     <div className="home-titles">
-                        <h2 className="title">Plan your meals easily<br />
-                            Track your nutrition.<br />
-                            Get your <b className="bold">goals.</b>
+                        <h2 className="title">Plan your <b className="bold">meals.</b><br />
+                            Track your <b className="bold">nutrition.</b><br />
+                            Reach your <b className="bold">goals.</b>
                         </h2>
                         <p className="subtitle">
                             Create your flexible mealplan and input your actual meals.<br />

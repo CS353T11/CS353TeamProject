@@ -13,6 +13,7 @@ import NutriScore from './components/mealPlan/nutriSoure'
 import Goals from './components/mealPlan/goals'
 //all the components have moved to components directory, you can find the path there
 
+
 export default class App extends React.Component {
     state = {
         user: null,
@@ -40,9 +41,10 @@ export default class App extends React.Component {
                     <Route path="/" component={HomeView} exact />
                     <Route path='/home' component={HomeView} />
                     <Route path='/plan' component={Planner} />
-                    <Route path='/rcipes' component={NutriScore} />
+                    <Route path='/recipes' component={NutriScore} />
                     <Route path='/goals' component={Goals} />
                     <Route path='/signup' component={SignUp} />
+
                 </Switch>
                 <Footer />
             </BrowserRouter>
