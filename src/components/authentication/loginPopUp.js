@@ -8,12 +8,14 @@ export default class LoginPopUp extends React.Component {
         error: null
     }
 
+    //change the state when the content change in the form
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         })
     }
 
+    //handle the submit
     handleSubmit = (e) => {
         e.preventDefault()
         const { email, password } = this.state;
