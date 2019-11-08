@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from './searchBar';
 import WeekPlan from './weekPlan';
-import NutriScore from './nutriSoure';
+import NutriScore from './nutriScore';
 
 export default class Planner extends React.Component {
     render() {

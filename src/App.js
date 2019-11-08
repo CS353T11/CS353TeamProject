@@ -9,7 +9,7 @@ import firebase from './components/firebase/firebase';
 import LoggedInHeader from './components/layout/loggedInHeader';
 import LoggedOutHeader from './components/layout/loggedOutHeader';
 import Planner from './components/mealPlan/planner'
-import NutriScore from './components/mealPlan/nutriSoure'
+import NutriScore from './components/mealPlan/nutriScore'
 import Goals from './components/mealPlan/goals'
 //all the components have moved to components directory, you can find the path there
 

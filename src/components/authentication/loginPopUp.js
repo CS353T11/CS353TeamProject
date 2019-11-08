@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 
+
 export default class LoginPopUp extends React.Component {
     state = {
         email: '',
@@ -33,6 +34,9 @@ export default class LoginPopUp extends React.Component {
                 this.setState({ error });
             })
     }
+
+
+
 
     render() {
         return (

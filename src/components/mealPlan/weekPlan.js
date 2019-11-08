@@ -2,7 +2,7 @@ import React from 'react'
 export default class WeekPlan extends React.Component{
     render() {
         return (
-            <table id="plan">
+            <table className="plan">
                 <tr>
                     <th>Meal</th>
                     <th>Monday</th>
