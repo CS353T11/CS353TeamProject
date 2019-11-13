@@ -1,42 +1,39 @@
-import React from 'react'
+import React from 'react';
+import {TextInput} from 'react-materialize';
 export default class SearchBar extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    keyPressed(event) {
+        if (event.key === "Enter") {
+            alert("Yooooo");
+        }
+    }
+
     render() {
         return (
             <div className="searchbar">
                 <div className="search-header">
                     <h3 className="search-title">Search your meals</h3>
-                    <input className="input search-input"></input>
-                    <a className="btn-hide"> </a>
+                    <TextInput placeholder=" eg. Apple" icon="search" className="search-input" onKeyPress={this.keyPressed}/>
                 </div>
                 <div className="search-results">
+
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
+                    </div>
+                    <div className="api-item">
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
-                    </div>
-
-                    <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
                     </div>
                 </div>
             </div>

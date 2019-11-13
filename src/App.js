@@ -44,9 +44,8 @@ export default class App extends React.Component {
                     <Route path='/recipes' component={NutriScore} />
                     <Route path='/goals' component={Goals} />
                     <Route path='/signup' component={SignUp} />
-
                 </Switch>
-                <Footer />
+                <Footer/>
             </BrowserRouter>
         )
     }

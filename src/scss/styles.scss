@@ -147,20 +147,34 @@ body {
   background: $secondaryColor;
   display: flex;
   border-radius: 12px;
-  padding: 16px;
+  padding: 24px;
   flex-direction: column;
   margin-bottom: 32px;
+  width:900px;
+  margin-left:auto;
+  margin-right:auto;
   .search-header {
     display: flex;
     margin-bottom: 16px;
+    .input-field{
+      margin-top:-0.5rem!important;
+    }
+    .input-field .prefix{
+      top:0.75rem!important;
+      right:-15%!important;
+      cursor:pointer;
+    }
   }
   .search-title {
     font: bold 24px $sans-serif;
     margin-right: 32px;
   }
-  .search-input {
-    border-radius: 6px;
-    margin-right: auto;
+  .search-input{
+    border-radius: 6px!important;
+    margin-right: auto!important;
+    background: white !important;
+    padding:4px 12px!important;
+    font-size:18px !important;
   }
   .search-results {
     display: flex;
