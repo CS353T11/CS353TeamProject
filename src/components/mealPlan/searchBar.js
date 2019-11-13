@@ -10,33 +10,33 @@ export default class SearchBar extends React.Component {
                 </div>
                 <div className="search-results">
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
+                        <img className="item-img" alt="tomato"></img>
+                        <p className="item-title">Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
+                        <img  className="item-img" alt="tomato"></img>
+                        <p className="item-title">Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
+                        <img className="item-img" alt="tomato"></img>
+                        <p className="item-title">Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
+                        <img className="item-img" alt="tomato"></img>
+                        <p className="item-title">Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
+                        <img className="item-img" alt="tomato"></img>
+                        <p className="item-title">Food</p>
                     </div>
 
                     <div className="api-item">
-                        <img alt="tomato"></img>
-                        <p>Food</p>
+                        <img  className="item-img"  alt="tomato"></img>
+                        <p className="item-title">Food</p>
                     </div>
                 </div>
             </div>

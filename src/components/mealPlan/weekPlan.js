@@ -2,26 +2,89 @@ import React from 'react'
 export default class WeekPlan extends React.Component{
     render() {
         return (
-            <table className="plan">
-                <tr>
-                    <th>Meal</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
-
+            <table className="mealplan">
+                <tr className="plan-header">
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                    <th>Sun</th>
                 </tr>
                 <tr>
-                    <th>Meal 1</th>
+                    <td>
+                        <div className="plan-item active">API ITEM</div>
+                        <div className="plan-item active">API ITEM</div>
+                        <div className="plan-item active">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
                 </tr>
                 <tr>
-                    <th>Meal 2</th>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                        <div className="plan-item">API ITEM</div>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
                 </tr>
                 <tr>
-                    <th>Meal 3</th>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
+                    <td>
+                        <div className="plan-item">API ITEM</div>
+                    </td>
                 </tr>
             </table>
         );
