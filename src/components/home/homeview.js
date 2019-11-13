@@ -20,8 +20,6 @@ export default class HomeView extends React.Component {
     render() {
         return (
             <div className="view">
-                {/* loginPopUp can only show in home page, because of the structure */}
-                <Switch><Route path='/home/login' component={LoginPopUp} /></Switch>
                 <div className="home">
                     <div className="home-illustration">
                         <img alt="cute big img"></img>

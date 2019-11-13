@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Modal, Button } from 'react-materialize';
+import LoginPopUP from '../authentication/loginPopUp';
 
 export default class LoggedOutHeader extends React.Component {
     render() {
@@ -9,19 +11,19 @@ export default class LoggedOutHeader extends React.Component {
                     <NavLink to='/'><b className="bold">plan</b>my.ml</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/home/login'>Meal Plans</NavLink>
+                    <NavLink to='/home'>Meal Plans</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/home/login'>Recipes</NavLink>
+                    <NavLink to='/home'>Recipes</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/home/login'>Goals</NavLink>
+                    <NavLink to='/home'>Goals</NavLink>
                 </span>
                 <span className="header-link">
                     <NavLink to='/about'>About Us</NavLink>
                 </span>
                 <span className="header-login">
-                    <NavLink className="btn-login" to='/home/login'>LOG IN</NavLink>
+                    <LoginPopUP />
                 </span>
             </header>
         );

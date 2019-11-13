@@ -5,11 +5,11 @@ export default class signUp extends React.Component {
         return (
         <div className="signUp">
             <form>
-                {/* <label>Username </label>
+                <label>Username </label>
                 <input type="text" name="username" />
                 <br/>
                 <label>Password</label>
-                <input type="text" name="password" /> */}
+                <input type="text" name="password" />
             </form>
         </div>
         )
