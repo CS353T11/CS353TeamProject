@@ -54,22 +54,24 @@ export default class SearchBar extends React.Component {
                 </div>
                 <div className="search-results">
 
-                    <div className="api-item">
-                    </div>
+                    {this.state.results.hints ?
+                        this.state.results.hints.map((obj,index) => {
+                            return (
+                                <div className="api-item" key={index}>
+                                    {obj.food.label}
+                                </div>
+                            );
+                        }) :
+                        (
+                            <div className="api-item" >
 
-                    <div className="api-item">
-                    </div>
-                    <div className="api-item">
-                    </div>
+                            </div>
+                        )
+                    }
 
-                    <div className="api-item">
-                    </div>
 
-                    <div className="api-item">
-                    </div>
 
-                    <div className="api-item">
-                    </div>
+
                 </div>
             </div>
         );

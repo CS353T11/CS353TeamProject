@@ -3,6 +3,7 @@ export default class WeekPlan extends React.Component{
     render() {
         return (
             <table className="mealplan">
+                <thead>
                 <tr className="plan-header">
                     <th>Mon</th>
                     <th>Tue</th>
@@ -12,6 +13,8 @@ export default class WeekPlan extends React.Component{
                     <th>Sat</th>
                     <th>Sun</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
                         <div className="plan-item active">API ITEM</div>
@@ -86,6 +89,7 @@ export default class WeekPlan extends React.Component{
                         <div className="plan-item">API ITEM</div>
                     </td>
                 </tr>
+                </tbody>
             </table>
         );
     }

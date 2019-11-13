@@ -99,12 +99,12 @@ body {
   }
 }
 
-
 .btn-hide {
   height: 1px;
   width: 1px;
 
 }
+
 .login {
   padding: 8px 24px;
   border: 1px solid black;
@@ -114,6 +114,7 @@ body {
   justify-content: center;
   border-radius: 15px;
 }
+
 .submit {
   padding: 8px 24px;
   border: 1px solid black;
@@ -150,7 +151,7 @@ body {
   padding: 24px;
   flex-direction: column;
   margin-bottom: 32px;
-  width:900px;
+  width:100%;
   margin-left:auto;
   margin-right:auto;
   .search-header {
@@ -171,14 +172,17 @@ body {
   }
   .search-input{
     border-radius: 6px!important;
-    margin-right: auto!important;
+    margin: 0!important;
     background: white !important;
     padding:4px 12px!important;
     font-size:18px !important;
+    height: 32px!important;
   }
+
   .search-results {
     display: flex;
     justify-content: flex-start;
+    overflow-x: scroll;
   }
   .api-item {
     display: flex;
@@ -188,7 +192,7 @@ body {
     background: white;
     border-radius: 12px;
     margin-right: 16px;
-    width: 128px;
+    min-width: 128px;
     height: 128px;
     .item-title {
       padding: 4px;
@@ -234,6 +238,7 @@ body {
     font: 20px $sans-serif;
     th {
       height: 32px;
+      border-radius: 0;
     }
     th:first-child {
       border-top-left-radius: 12px;
@@ -248,7 +253,7 @@ body {
   height: 256px;
   background: #c4c4c4;
   border-radius: 12px;
-  padding: 16px;
+  padding: 24px;
   margin-top: 32px;
   font: bold 24px $sans-serif;
 }
