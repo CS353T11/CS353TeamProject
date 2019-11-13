@@ -8,9 +8,10 @@ import SignUp from './components/authentication/signUp';
 import firebase from './components/firebase/firebase';
 import LoggedInHeader from './components/layout/loggedInHeader';
 import LoggedOutHeader from './components/layout/loggedOutHeader';
-import Planner from './components/mealPlan/planner'
-import NutriScore from './components/mealPlan/nutriScore'
-import Goals from './components/mealPlan/goals'
+import Planner from './components/mealPlan/planner';
+import NutriScore from './components/mealPlan/nutriScore';
+import Goals from './components/mealPlan/goals';
+import  Profile from './components/userInfo/profile';
 //all the components have moved to components directory, you can find the path there
 
 
@@ -44,6 +45,7 @@ export default class App extends React.Component {
                     <Route path='/recipes' component={NutriScore} />
                     <Route path='/goals' component={Goals} />
                     <Route path='/signup' component={SignUp} />
+                    <Route path='/profile' component={Profile}/>
                 </Switch>
                 <Footer/>
             </BrowserRouter>

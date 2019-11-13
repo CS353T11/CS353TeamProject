@@ -30,7 +30,7 @@ export default class LoggedInHeader extends React.Component {
                     <NavLink to='/goals'>Goals</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/about'>About Us</NavLink>
+                    <NavLink to='/profile'>Profile</NavLink>
                 </span>
                 <span className="header-login">
                     <a href="/#" className="btn-login"  onClick={this.logOutUser}>LOG OUT</a>

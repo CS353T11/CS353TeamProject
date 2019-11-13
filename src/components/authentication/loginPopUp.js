@@ -39,18 +39,18 @@ export default class LoginPopUp extends React.Component {
 
 
     render() {
-        const LoginTrigger = <Button>Log In</Button>;
+        const LoginTrigger = <Button className="btn-login">Log In</Button>;
         return (
             <Modal header="LogIn" trigger={LoginTrigger}>
                 <div className="login">
                     <form onSubmit={this.handleSubmit}>
                         <label>E-mail: </label>
-                        <input type="text" name="email" id="email" onChange={this.handleChange} />
+                        <input type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
                         <br></br>
                         <label>Password:</label>
-                        <input type="password" id="password" name="password" onChange={this.handleChange} />
+                        <input type="password" id="password" name="password" placeholder={"Enter Password"} onChange={this.handleChange} />
                         <br></br>
-                        <button type="submit" className='submit'>Log In</button>
+                        <button type="submit" className="btn-login" >Log In</button>
                     </form>
                 </div>
             </Modal>
