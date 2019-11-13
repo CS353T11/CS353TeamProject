@@ -18,22 +18,22 @@ export default class LoggedInHeader extends React.Component {
         return (
             <header className="header">
                 <span className="header-brand">
-                    planmy.ml
+                    <NavLink to='/'><b className="bold">plan</b>my.ml</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/plan'>Mealplans</NavLink>
+                    <NavLink to='/plan'>Meal Plans</NavLink>
                 </span>
                 <span className="header-link">
-                    Recipes
+                    <NavLink to='/recipes'>Recipes</NavLink>
                 </span>
                 <span className="header-link">
-                    Goals
+                    <NavLink to='/goals'>Goals</NavLink>
                 </span>
                 <span className="header-link">
-                    About Us
+                    <NavLink to='/about'>About Us</NavLink>
                 </span>
                 <span className="header-login">
-                    <a href="/#" onClick={this.logOutUser}>LOGOUT</a>
+                    <a href="/#" className="btn-login"  onClick={this.logOutUser}>LOG OUT</a>
                 </span>
             </header>
         );

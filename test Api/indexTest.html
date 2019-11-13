@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div id="container" class="m-auto text-center" style="height:100vh; width: 100vh">
+    <div class="m-5">
+        <h1 id="woee">
+            If your seeing this oh noooooo
+        </h1>
+    </div>
+    <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">API Request Results </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div class="input-group p-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Basic Nutrition of: </span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" id="checkFood"></textarea>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-dark">
+        <thead class="thead-light">
+        <tr>
+            <td>Basic Nutrition for <span id="foodName"></span></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Calories: <span id="cal"></span></td>
+        </tr>
+        <tr>
+            <td>Fat: <span id="fat"></span></td>
+        </tr>
+        <tr>
+            <td>Protein: <span id="protein"></span></td>
+        </tr>
+        <tr>
+            <td>Carbohydrates: <span id="carbs"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" onclick="testy($('#checkFood').val())" id="test">Call Food Api</button>
+    <hr>
+    <button type="button" class="btn btn-danger">
+        Magic JS function
+    </button>
+    <div class="my-4" style="background-color: lightblue">
+        RESULT HERE
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="testingJs.js"></script>
+<script src="prepareApi.js"></script>
+
+</body>
+</html>
