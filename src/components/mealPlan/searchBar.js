@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextInput} from 'react-materialize';
-import axios from 'axios'
+import axios from 'axios';
 export default class SearchBar extends React.Component {
 
     constructor(props){
@@ -19,13 +19,14 @@ export default class SearchBar extends React.Component {
 	}
 
      keyPressed = async (event) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" || event.type === "click") {
+            document.body.style.cursor = "progress";
 			let urlFood=encodeURI(this.state.searchTerm);
             //making a hard coded post request for an apple
-            let results = await axios.get("https://api.edamam.com/api/food-database/parser?ingr="+urlFood+"&app_id=9ccfd3ea&app_key=422e0ba66ae6c563f47a9fe391a437f0")
+            let results=await axios.get("https://api.edamam.com/api/food-database/parser?ingr="+urlFood+"&app_id=9ccfd3ea&app_key=422e0ba66ae6c563f47a9fe391a437f0")
                 .then(function(response){
                     console.log("----------Response JSON----------");
-                    console.table(response.data);
+                    console.log(response.data);
                     console.log("---------------------------------");
                     var obj=response.data;
                     //var objs;
@@ -35,27 +36,37 @@ export default class SearchBar extends React.Component {
                 })
                 .catch(function(error){
                     console.log(error);
+                    return "Error 400";
             })
+            //stops from setting state when user inputs empty string
+            if(results !== "Error 400"){
+                this.setState({
+                    results: results
+                })
+                document.body.style.cursor = "default";
+            }else{
+                console.log("Empty Search Parameters!");
+                document.body.style.cursor = "default";
+            }
 
-			this.setState({
-				results: results
-			})
         }
     }
 
     render() {
-		console.log(this.state);
+		//console.log(this.state);
         return (
             <div className="searchbar">
                 <div className="search-header">
                     <h3 className="search-title">Search your meals</h3>
                     <TextInput placeholder=" eg. Apple" icon="search" className="search-input" id="searchTerm"
-							   onKeyPress={this.keyPressed} onChange={this.handleChange}/>
+                               onKeyPress={this.keyPressed} onChange={this.handleChange}/>
+					<div className="iconClick" onClick={this.keyPressed}>
+                    </div>
                 </div>
                 <div className="search-results">
 
-                    {this.state.results.hints ?
-                        this.state.results.hints.map((obj,index) => {
+                    {this.state.results.hints && this.state.results.hints!="" ?
+                        this.state.results.hints.slice(0,6).map((obj,index) => {
                             return (
                                 <div className="api-item" key={index}>
                                     {obj.food.label}
@@ -63,14 +74,11 @@ export default class SearchBar extends React.Component {
                             );
                         }) :
                         (
-                            <div className="api-item" >
+                            <div>
 
                             </div>
                         )
                     }
-
-
-
 
                 </div>
             </div>

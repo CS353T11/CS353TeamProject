@@ -103,7 +103,7 @@ body {
 
 .login {
   padding: 8px 24px;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   font-weight: bold;
   display: flex;
   text-decoration: none;
@@ -147,7 +147,7 @@ body {
   padding: 24px;
   flex-direction: column;
   margin-bottom: 32px;
-  width:100%;
+  width:900px;
   margin-left:auto;
   margin-right:auto;
   .search-header {
@@ -157,8 +157,20 @@ body {
       margin-top:-0.5rem!important;
     }
     .input-field .prefix{
-      top:0.75rem!important;
-      right:-15%!important;
+      top:0.35rem!important;
+      right:-13%!important;
+      width:32px!important;
+      //cursor:pointer;
+    }
+    .input-field .prefix ~ input{
+      width:83%!important;
+    }
+    .iconClick{
+      height: 35px;
+      width: 35px;
+      position: relative;
+      top: -5px;
+      right: 6px;
       cursor:pointer;
     }
   }
@@ -178,7 +190,7 @@ body {
   .search-results {
     display: flex;
     justify-content: flex-start;
-    overflow-x: scroll;
+
   }
   .api-item {
     display: flex;
@@ -198,6 +210,21 @@ body {
       height: 100%;
       border-bottom: 1px solid $secondaryColor;
     }
+  }
+}
+
+.dragDropTest{
+  background: $secondaryColor;
+  padding:10px;
+  margin:auto;
+  width:200px;
+  height:170px;
+  margin-bottom:40px;
+  text-align: center;
+  .dragBox{
+    background: white;
+    margin-top:10px;
+    height:80%;
   }
 }
 
