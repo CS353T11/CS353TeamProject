@@ -1,0 +1,259 @@
+@import "reset.scss";
+@import "vars.scss";
+
+body {
+  font-family: $sans-serif;
+}
+
+.header {
+  width: 100%;
+  height: 80px;
+  padding: 0 96px 0 96px;
+  background-color: palegreen;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .header-brand {
+    font: normal 32px $sans-serif;
+    .bold {
+      font-weight: bold;
+    }
+  }
+}
+
+.view {
+  padding: 48px 96px 48px 96px;
+  min-height: calc(100vh - 128px);
+}
+
+.footer {
+  display: flex;
+  height: 256px;
+  background-color: palegreen;
+  flex-direction: column;
+  justify-content: flex-end;
+  .footer-top {
+    padding: 0 96px 0 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 224px;
+  }
+  .footer-bottom {
+    padding: 0 96px 0 96px;
+    background-color: white;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    .copyright {
+      margin-left: 20%;
+    }
+  }
+  .footer-item {
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    .bold {
+      font-weight: bold;
+    }
+  }
+}
+
+.home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .home-illustration {
+    min-width: 35%;
+    height: 321px;
+    border: solid black 1px;
+  }
+  .home-titles {
+    min-width: 65%;
+    padding-left: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .title {
+    font-size: 48px;
+    margin-bottom: 48px;
+    .bold {
+      font-weight: bold;
+    }
+  }
+  .subtitle {
+    font-size: 20px;
+    margin-bottom: 48px;
+  }
+  .btn-login {
+    width: 280px;
+  }
+}
+
+.btn-hide {
+  height: 1px;
+  width: 1px;
+
+}
+
+.login {
+  padding: 8px 24px;
+  border: 1px solid black;
+  font-weight: bold;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+.submit {
+  padding: 8px 24px;
+  border: 1px solid black;
+  font-weight: bold;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  &:hover {
+    background-color: black;
+    color: white;
+    transition: 0.1s;
+    font-weight: 700;
+  }
+}
+.btn-login {
+  padding: 8px 24px;
+  border: 1px solid black;
+  font-weight: bold;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  &:hover {
+    background-color: black;
+    color: white;
+    transition: 0.1s;
+    font-weight: 700;
+  }
+}
+
+.searchbar {
+  background: $secondaryColor;
+  display: flex;
+  border-radius: 12px;
+  padding: 24px;
+  flex-direction: column;
+  margin-bottom: 32px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  .search-header {
+    display: flex;
+    margin-bottom: 16px;
+    .input-field{
+      margin-top:-0.5rem!important;
+    }
+    .input-field .prefix{
+      top:0.75rem!important;
+      right:-15%!important;
+      cursor:pointer;
+    }
+  }
+  .search-title {
+    font: bold 24px $sans-serif;
+    margin-right: 32px;
+  }
+  .search-input{
+    border-radius: 6px!important;
+    margin: 0!important;
+    background: white !important;
+    padding:4px 12px!important;
+    font-size:18px !important;
+    height: 32px!important;
+  }
+
+  .search-results {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: scroll;
+  }
+  .api-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background: white;
+    border-radius: 12px;
+    margin-right: 16px;
+    min-width: 128px;
+    height: 128px;
+    .item-title {
+      padding: 4px;
+    }
+    .item-img {
+      width: 100%;
+      height: 100%;
+      border-bottom: 1px solid $secondaryColor;
+    }
+  }
+}
+
+.mealplan {
+  border-radius: 12px;
+  border-collapse: inherit;
+  background: lightgray;
+  th, td {
+    text-align: center;
+  }
+  td {
+    background: white;
+    border: 4px solid lightgray;
+    border-radius: 12px;
+    height: 160px;
+    padding: 8px;
+  }
+  .plan-item {
+    background: gray;
+    margin-bottom: 4px;
+    cursor: pointer;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    &.active {
+      background: crimson;
+    }
+  }
+  .plan-header {
+    background: $secondaryColor;
+    padding: 16px;
+    font: 20px $sans-serif;
+    th {
+      height: 32px;
+      border-radius: 0;
+    }
+    th:first-child {
+      border-top-left-radius: 12px;
+    }
+    th:last-child {
+      border-top-right-radius: 12px;
+    }
+  }
+}
+
+.nutriscore {
+  height: 256px;
+  background: #c4c4c4;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 32px;
+  font: bold 24px $sans-serif;
+}
+
+
+
+
