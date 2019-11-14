@@ -219,6 +219,17 @@ body {
 
 .dragDropTest{
   background: $secondaryColor;
+  padding:10px;
+  margin:auto;
+  width:200px;
+  height:170px;
+  margin-bottom:40px;
+  text-align: center;
+  .dragBox{
+    background: white;
+    margin-top:10px;
+    height:80%;
+  }
 }
 
 .mealplan {
