@@ -65,11 +65,22 @@ export default class SearchBar extends React.Component {
                 </div>
                 <div className="search-results">
 
-                    {this.state.results.hints && this.state.results.hints!="" ?
+                    {this.state.results.hints && this.state.results.hints!=="" ?
                         this.state.results.hints.slice(0,6).map((obj,index) => {
+							console.log(obj.food);
+							console.log(index);
                             return (
-                                <div className="api-item" key={index}>
-                                    {obj.food.label}
+                                <div className="api-item" key={"foodRes"+index} id={"foodRes"+index}>
+									<h3>{obj.food.label}</h3>
+									<div id={"foodNutr"+index}>
+										Calories:{" "+obj.food.nutrients.ENERC_KCAL+"\n"}
+										Carbs:{" "+obj.food.nutrients.CHOCDF+"\n"}
+										Fat:{" "+obj.food.nutrients.FAT+"\n"}
+										Protein:{" "+obj.food.nutrients.PROCNT+"\n"}
+										<span style={{fontWeight:"bold"}}>Quantity:
+											{" "+this.state.results.parsed[0].quantity
+											+this.state.results.parsed[0].measure.label}</span>
+									</div>
                                 </div>
                             );
                         }) :

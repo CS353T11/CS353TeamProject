@@ -1,6 +1,77 @@
 @import "reset.scss";
 @import "vars.scss";
 
+@mixin searchResFoodNutr{
+  display: none;
+  height: 128px;
+  width: 128px;
+  border-radius: 12px;
+  position: absolute;
+  background: hsla(0, 0%, 35%, 0.85);
+  z-index: 5;
+  margin-top: 14px;
+  color:white;
+  font-size: 14px;
+  padding:14px;
+}
+
+@mixin searchResFoodRes{
+  #foodRes0{
+    //background: red!important;
+    #foodNutr0{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr0{
+      display: block;
+    }
+  }
+  #foodRes1{
+    //background: red!important;
+    #foodNutr1{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr1{
+      display: block;
+    }
+  }
+  #foodRes2{
+    //background: red!important;
+    #foodNutr2{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr2{
+      display: block;
+    }
+  }
+  #foodRes3{
+    //background: red!important;
+    #foodNutr3{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr3{
+      display: block;
+    }
+  }
+  #foodRes4{
+    //background: red!important;
+    #foodNutr4{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr4{
+      display: block;
+    }
+  }
+  #foodRes5{
+    //background: red!important;
+    #foodNutr5{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr5{
+      display: block;
+    }
+  }
+}
+
 body {
   font-family: $sans-serif;
 }
@@ -163,7 +234,7 @@ body {
       //cursor:pointer;
     }
     .input-field .prefix ~ input{
-      width:83%!important;
+      width:105%!important;
     }
     .iconClick{
       height: 35px;
@@ -202,6 +273,8 @@ body {
     margin-right: 16px;
     min-width: 128px;
     height: 128px;
+    font-size:18px;
+    padding:14px;
     .item-title {
       padding: 4px;
     }
@@ -211,6 +284,7 @@ body {
       border-bottom: 1px solid $secondaryColor;
     }
   }
+  @include searchResFoodRes();
 }
 
 .dragDropTest{
