@@ -77,9 +77,10 @@ export default class SearchBar extends React.Component {
 										Carbs:{" "+obj.food.nutrients.CHOCDF+"\n"}
 										Fat:{" "+obj.food.nutrients.FAT+"\n"}
 										Protein:{" "+obj.food.nutrients.PROCNT+"\n"}
-										<span style={{fontWeight:"bold"}}>Quantity:
-											{" "+this.state.results.parsed[0].quantity
-											+this.state.results.parsed[0].measure.label}</span>
+										/*TODO: Add Error avoidance by check if measure.label exists*/
+										{/*<span style={{fontWeight:"bold"}}>Quantity:*/}
+										{/*	{" "+this.state.results.parsed[0].quantity*/}
+										{/*	+this.state.results.parsed[0].measure.label}</span>*/}
 									</div>
                                 </div>
                             );
