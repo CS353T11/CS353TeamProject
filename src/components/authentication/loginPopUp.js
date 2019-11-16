@@ -26,7 +26,8 @@ export default class LoginPopUp extends React.Component {
                 this.setState({
                     email: '',
                     password: '',
-                    error: null
+                    error: null,
+                    forget: false
                 });
                 this.props.history.push('/');
             })
@@ -35,24 +36,58 @@ export default class LoginPopUp extends React.Component {
             })
     }
 
-
-
+    //handle the forget password process
+    handleForget = (e) => {
+        e.preventDefault();
+        const { email } = this.state;
+        firebase.auth().
+            sendPasswordResetEmail(email)
+            .then(() => {
+                this.setState({
+                    email: '',
+                    password: '',
+                    error: null,
+                    forget: false
+                });
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                this.setState({ error });
+            })
+    }
 
     render() {
-        const LoginTrigger = <a className="btn-login">Log In</a>;
+        const LoginTrigger = <a onClick={()=> this.setState({forget: false})} className="btn-login">LOGIN</a>;
+        console.log(this.state);
         return (
-            <Modal header="LogIn" trigger={LoginTrigger}>
-                <div className="login">
-                    <form onSubmit={this.handleSubmit}>
-                        <label>E-mail: </label>
-                        <input type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
-                        <br></br>
-                        <label>Password:</label>
-                        <input type="password" id="password" name="password" placeholder={"Enter Password"} onChange={this.handleChange} />
-                        <br></br>
-                        <button type="submit" className="btn-login" >Log In</button>
-                    </form>
-                </div>
+            <Modal trigger={LoginTrigger} actions={false} className="login">
+                {this.state.forget ?
+                    (<div>
+                        <h3 className="login-header">Forgot your password?</h3>
+                        <form onSubmit={this.handleForget} className="form">
+                            <p className="text">Don't worry. We will send you a link so that you can restore it. </p>
+                            <br/>
+                            <label className="label">Email:</label>
+                            <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
+                            <a className="forgot" onClick={()=> this.setState({forget: false})}>I remembered!</a>
+                            <button type="submit" className="btn-login" >RESET PASSWORD</button>
+                        </form>
+                    </div>)
+                    :
+                    (<div>
+                        <h3 className="login-header">Login Member</h3>
+                        <form onSubmit={this.handleSubmit} className="form">
+                            <label className="label">Email: </label>
+                            <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
+                            <br></br>
+                            <label className="label">Password:</label>
+                            <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
+                            <br></br>
+                            <a className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</a>
+                            <button type="submit" className="btn-login" >LOGIN</button>
+                        </form>
+                    </div>)
+                    }
             </Modal>
         )
     }

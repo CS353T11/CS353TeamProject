@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Modal, Button } from 'react-materialize';
 import LoginPopUP from '../authentication/loginPopUp';
 
 export default class LoggedOutHeader extends React.Component {

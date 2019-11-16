@@ -173,13 +173,50 @@ body {
 }
 
 .login {
-  padding: 8px 24px;
-  /*border: 1px solid black;*/
-  font-weight: bold;
-  display: flex;
-  text-decoration: none;
-  justify-content: center;
-  border-radius: 15px;
+  padding: 32px 64px 0;
+  margin-top: 64px;
+  width: 480px;
+  height: 312px;
+  border-radius: 12px;
+  .modal-footer {
+    display: none;
+  }
+  .modal-content {
+    padding: 0;
+  }
+  .login-header {
+    font: bold 20px $sans-serif;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .btn-login {
+    margin-top: 8px;
+    width: 100%;
+    background: transparent;
+  }
+  .input {
+    height: 40px !important;
+    &:focus {
+      border-bottom: 1px solid $primaryColor !important;
+      -webkit-box-shadow: 0 1px 0 0 $primaryColor !important;
+      box-shadow: 0 1px 0 0 $primaryColor !important;
+    }
+  }
+  .label {
+    color: black;
+  }
+  .text {
+    margin-bottom: 17px;
+  }
+  .forgot {
+    display: block;
+    font-size: 12px;
+    text-decoration: black;
+    text-align: center;
+    text-decoration: underline;
+    margin: 8px 0 16px;
+    cursor: pointer;
+  }
 }
 
 .submit {
@@ -201,9 +238,10 @@ body {
   border: 1px solid black;
   font-weight: bold;
   display: flex;
+  cursor: pointer;
   text-decoration: none;
   justify-content: center;
-  &:hover {
+  &:hover, :active {
     background-color: black;
     color: white;
     transition: 0.1s;
@@ -263,6 +301,7 @@ body {
     justify-content: flex-start;
 
   }
+
   .api-item {
     display: flex;
     flex-direction: column;
