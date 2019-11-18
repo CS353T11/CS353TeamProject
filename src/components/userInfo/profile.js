@@ -20,31 +20,35 @@ export default class HomeView extends React.Component {
     render() {
         return (
             <div className="view">
-                <div className="home">
-                    <h2 className="title"><a className="bold">User Profile</a></h2>
-                    <br/>
-                    <table >
-                        <tr>
-                            <th>Firstname:</th>
-                            <th>*name here*</th>
+                <div className="profile">
+                    <span className="user-details">
+                        <div className="profile-id">
+                            <img alt="avatar"></img><br></br>
+                            <h2 className="title"><a className="bold">Your Name</a></h2>
+                            <button>edit details</button>
+                        </div>
+                    </span>
+                    <div className="extra-details">
+                        <table className="xtra-dets">
+                            <tr>
+                                <th><b className="bold">Age</b></th>
+                                <td>here</td>
+                            </tr>
+                            <tr>
+                                <th><b className="bold">Gender</b></th>
+                                <td>here</td>
+                            </tr>
+                            <tr>
+                                <th><b className="bold">Height</b></th>
+                            <td>here</td>
                         </tr>
-                        <tr>
-                            <td>Surname:</td>
-                            <th>*name here*</th>
-                        </tr>
-                        <tr>
-                            <td>Date of Birth:</td>
-                            <td>*here*</td>
-                        </tr>
-                        <tr>
-                            <td>Weight:</td>
-                            <td>*here*</td>
-                        </tr>
-                        <tr>
-                            <td>Activity Level:</td>
-                            <td>*here*</td>
-                        </tr>
-                    </table>
+                            <tr>
+                                <th><b className="bold">Weight</b></th>
+                                <td>here</td>
+                            </tr>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         );

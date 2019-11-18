@@ -1,6 +1,77 @@
 @import "reset.scss";
 @import "vars.scss";
 
+@mixin searchResFoodNutr{
+  display: none;
+  height: 128px;
+  width: 128px;
+  border-radius: 12px;
+  position: absolute;
+  background: hsla(0, 0%, 35%, 0.85);
+  z-index: 5;
+  margin-top: 14px;
+  color:white;
+  font-size: 14px;
+  padding:14px;
+}
+
+@mixin searchResFoodRes{
+  #foodRes0{
+    //background: red!important;
+    #foodNutr0{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr0{
+      display: block;
+    }
+  }
+  #foodRes1{
+    //background: red!important;
+    #foodNutr1{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr1{
+      display: block;
+    }
+  }
+  #foodRes2{
+    //background: red!important;
+    #foodNutr2{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr2{
+      display: block;
+    }
+  }
+  #foodRes3{
+    //background: red!important;
+    #foodNutr3{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr3{
+      display: block;
+    }
+  }
+  #foodRes4{
+    //background: red!important;
+    #foodNutr4{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr4{
+      display: block;
+    }
+  }
+  #foodRes5{
+    //background: red!important;
+    #foodNutr5{
+      @include searchResFoodNutr();
+    }
+    &:hover>#foodNutr5{
+      display: block;
+    }
+  }
+}
+
 body {
   font-family: $sans-serif;
 }
@@ -15,6 +86,7 @@ body {
   justify-content: space-between;
   .header-brand {
     font: normal 32px $sans-serif;
+    margin-bottom: 4px;
     .bold {
       font-weight: bold;
     }
@@ -102,13 +174,50 @@ body {
 }
 
 .login {
-  padding: 8px 24px;
-  /*border: 1px solid black;*/
-  font-weight: bold;
-  display: flex;
-  text-decoration: none;
-  justify-content: center;
-  border-radius: 15px;
+  padding: 32px 64px 0;
+  margin-top: 64px;
+  width: 480px;
+  height: 312px;
+  border-radius: 12px;
+  .modal-footer {
+    display: none;
+  }
+  .modal-content {
+    padding: 0;
+  }
+  .login-header {
+    font: bold 20px $sans-serif;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .btn-login {
+    margin-top: 8px;
+    width: 100%;
+    background: transparent;
+  }
+  .input {
+    height: 40px !important;
+    &:focus {
+      border-bottom: 1px solid $primaryColor !important;
+      -webkit-box-shadow: 0 1px 0 0 $primaryColor !important;
+      box-shadow: 0 1px 0 0 $primaryColor !important;
+    }
+  }
+  .label {
+    color: black;
+  }
+  .text {
+    margin-bottom: 17px;
+  }
+  .forgot {
+    display: block;
+    font-size: 12px;
+    text-decoration: black;
+    text-align: center;
+    text-decoration: underline;
+    margin: 8px 0 16px;
+    cursor: pointer;
+  }
 }
 
 .submit {
@@ -130,9 +239,10 @@ body {
   border: 1px solid black;
   font-weight: bold;
   display: flex;
+  cursor: pointer;
   text-decoration: none;
   justify-content: center;
-  &:hover {
+  &:hover, :active {
     background-color: black;
     color: white;
     transition: 0.1s;
@@ -144,15 +254,34 @@ body {
   background: $secondaryColor;
   display: flex;
   border-radius: 12px;
-  padding: 24px;
+  padding: 24px 24px 12px;
   flex-direction: column;
   margin-bottom: 32px;
-  width:900px;
+  width: 100%;
+  height: 218px;
   margin-left:auto;
   margin-right:auto;
   .search-header {
     display: flex;
     margin-bottom: 16px;
+    align-items: center;
+    height: 32px;
+    .search-input{
+      border-radius: 6px!important;
+      margin: 24px 0 0!important;
+      background: white !important;
+      padding:4px 12px!important;
+      font-size:18px !important;
+      height: 24px!important;
+      &:focus {
+        border-bottom: 1px solid $primaryColor !important;
+        -webkit-box-shadow: 0 1px 0 0 $primaryColor !important;
+        box-shadow: 0 1px 0 0 $primaryColor !important;
+      }
+    }
+    i.material-icons.prefix {
+      margin: 19px 0;
+    }
     .input-field{
       margin-top:-0.5rem!important;
     }
@@ -160,57 +289,90 @@ body {
       top:0.35rem!important;
       right:-13%!important;
       width:32px!important;
-      //cursor:pointer;
+      &.active, :hover {
+        color: $primaryColor !important;
+      }
     }
     .input-field .prefix ~ input{
-      width:83%!important;
+      width:105%!important;
     }
-    .iconClick{
-      height: 35px;
-      width: 35px;
-      position: relative;
-      top: -5px;
-      right: 6px;
-      cursor:pointer;
+    .icon-click{
+      height: 34px;
+      width: 34px;
+      z-index: 1;
+      cursor:pointer !important;
+    }
+    .qty-view {
+      font: normal 20px $sans-serif;
+      margin-left: auto;
+    }
+    .search-title {
+      font: bold 24px $sans-serif;
+      margin-right: 32px;
     }
   }
-  .search-title {
-    font: bold 24px $sans-serif;
-    margin-right: 32px;
-  }
-  .search-input{
-    border-radius: 6px!important;
-    margin: 0!important;
-    background: white !important;
-    padding:4px 12px!important;
-    font-size:18px !important;
-    height: 32px!important;
-  }
-
   .search-results {
     display: flex;
     justify-content: flex-start;
-
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 144px;
+    margin-bottom: -16px;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      width: 0px;  /* Remove scrollbar space */
+      background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 5px;
+      opacity: 0.1;
+    }
   }
+
   .api-item {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: grab;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
+    align-items: flex-start;
+    justify-content: space-between;
     background: white;
     border-radius: 12px;
     margin-right: 16px;
-    min-width: 128px;
-    height: 128px;
-    .item-title {
-      padding: 4px;
-    }
-    .item-img {
+    min-width: 172px;
+    height: 124px;
+    font-size:18px;
+    padding: 12px;
+    .food-title {
+      padding: 0 0 4px;
+      white-space: nowrap;
+      overflow: hidden;
       width: 100%;
-      height: 100%;
-      border-bottom: 1px solid $secondaryColor;
+      border-bottom: 3px black solid;
+      font: bold 15px $sans-serif;
+      text-transform: capitalize;
+    }
+    .food-info {
+      font: 13px $sans-serif;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .info-line {
+        display: flex;
+        border-bottom: 1px black solid;
+      }
+      .info-line:last-child {
+        border-bottom: none;
+      }
+      .nutrient-name {
+        font-weight: bold;
+        margin-right: auto;
+      }
     }
   }
+  /*@include searchResFoodRes();*/
 }
 
 .dragDropTest{
@@ -281,6 +443,33 @@ body {
   font: bold 24px $sans-serif;
 }
 
+.user-details {
+  position: absolute;
+  background-color: palegreen;
+  color: black;
+  z-index: -1;
+  top: 0%;
+  left: 0%;
+  margin-top: -128px;
+  margin-left: 0;
+  width: 300px;
+  height: 1000px;
+}
 
+.profile-id {
+  position: absolute;
+  background-color: #6bfa6b;
+  color: white;
+  top: 20%;
+  left: 0%;
+  margin-top: -128px;
+  margin-left: 0;
+  width: 300px;
+  height: 400px;
+}
 
-
+.xtra-dets{
+  position: absolute;
+  width: 60%;
+  right: 0%;
+}
