@@ -33,7 +33,7 @@ export default class HomeView extends React.Component {
                             Create your flexible mealplan and input your actual meals.<br />
                             Track your nutrition with our simplified graphics and adjust <br /> your plan to get your goals.
                     </p>
-                        {this.state.user ? null : <NavLink className="btn-login" to='/home/register'>CREATE YOUR ACCOUNT</NavLink>}
+                        {this.state.user ? null : <NavLink className="btn-login" to='/register'>CREATE YOUR ACCOUNT</NavLink>}
                     </div>
                 </div>
             </div>
