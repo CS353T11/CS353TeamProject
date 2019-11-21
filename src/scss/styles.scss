@@ -444,34 +444,34 @@ body {
 }
 
 .user-details {
-  position: absolute;
+  position: relative;
   background-color: palegreen;
   color: black;
-  z-index: -1;
-  top: 0%;
-  left: 0%;
-  margin-top: -128px;
-  margin-left: 0;
   width: 300px;
   height: 1000px;
 }
 
 .profile-id {
-  position: absolute;
+  position: relative;
   background-color: #6bfa6b;
   color: white;
-  top: 20%;
-  left: 0%;
-  margin-top: -128px;
-  margin-left: 0;
   width: 300px;
   height: 400px;
+  justify-content: center;
+  padding: 25%;
 }
 
 .xtra-dets{
-  position: absolute;
+  position: relative;
   width: 60%;
-  right: 0%;
+}
+
+.profile {
+  display: flex;
+}
+
+.table {
+  display: table;
 }
 
 .register-form{
@@ -481,4 +481,13 @@ body {
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+.row {
+  display: table-row;
+  padding: 20px;
+}
+
+.cell {
+  display: table-cell;
+  padding: 20px;
 }
