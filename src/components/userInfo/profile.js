@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import LoginPopUp from '../authentication/loginPopUp';
 import firebase from 'firebase';
+import Avatar from '../../images/avatar.svg';
 
 export default class HomeView extends React.Component {
     state = {
@@ -19,38 +20,41 @@ export default class HomeView extends React.Component {
 
     render() {
         return (
-            <div className="view">
                 <div className="profile">
-                    <span className="user-details">
+                    <div className="user-details">
                         <div className="profile-id">
-                            <img alt="avatar"></img><br></br>
+                            <img src={Avatar} alt="avatar"></img><br></br>
                             <h2 className="title"><a className="bold">Your Name</a></h2>
+                            <div><b className="bold">email</b></div>
+                            <div><b className="bold">password</b></div>
                             <button>edit details</button>
                         </div>
-                    </span>
-                    <div className="extra-details">
-                        <table className="xtra-dets">
-                            <tr>
-                                <th><b className="bold">Age</b></th>
-                                <td>here</td>
-                            </tr>
-                            <tr>
-                                <th><b className="bold">Gender</b></th>
-                                <td>here</td>
-                            </tr>
-                            <tr>
-                                <th><b className="bold">Height</b></th>
-                            <td>here</td>
-                        </tr>
-                            <tr>
-                                <th><b className="bold">Weight</b></th>
-                                <td>here</td>
-                            </tr>
-                        </table>
                     </div>
-
+                    <div className="extra-details">
+                        <div className="table">
+                            <div className="row">
+                                <div className="cell">Age</div>
+                                <div className="cell">here</div>
+                            </div>
+                            <div className="row">
+                                <div className="cell">Gender</div>
+                                <div className="cell">here</div>
+                            </div>
+                            <div className="row">
+                                <div className="cell">Height</div>
+                                <div className="cell">here</div>
+                            </div>
+                            <div className="row">
+                                <div className="cell">Weight</div>
+                                <div className="cell">here</div>
+                            </div>
+                            <div className="row">
+                                <div className="cell">Activity level</div>
+                                <div className="cell">here</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         );
     }
 
