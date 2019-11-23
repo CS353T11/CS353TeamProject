@@ -31,6 +31,7 @@ export default class HomeView extends React.Component {
                         </div>
                     </div>
                     <div className="extra-details">
+                        <h1>User Details</h1>
                         <div className="table">
                             <div className="row">
                                 <div className="cell">Age</div>
@@ -53,6 +54,9 @@ export default class HomeView extends React.Component {
                                 <div className="cell">here</div>
                             </div>
                         </div>
+                    </div>
+                    <div className="achievements">
+                        Achievements
                     </div>
                 </div>
         );

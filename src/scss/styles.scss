@@ -448,33 +448,33 @@ body {
   background-color: palegreen;
   color: black;
   width: 300px;
-  height: 1000px;
+  height: 600px;
 }
 
 .profile-id {
   position: relative;
-  background-color: #6bfa6b;
+  //background-color: #6bfa6b;
   color: white;
   width: 300px;
-  height: 400px;
+  height: 350px;
   justify-content: center;
-  padding: 25%;
+  text-align: center;
+  padding: 15%;
 }
 
-.xtra-dets{
+.extra-details{
   position: relative;
-  width: 60%;
+  width: 50%;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 .profile {
   display: flex;
 }
 
-.table {
-  display: table;
-}
-
-.register-form{
+.register-form {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -482,12 +482,28 @@ body {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+.table {
+  display: table;
+  width: auto;
+  border-spacing: 5px;
+  margin-left: 15%;
+  text-align: left;
+}
 .row {
   display: table-row;
-  padding: 20px;
+  width: auto;
+  clear: both;
+}
+.cell {
+  float: left;
+  display: table-column;
+  width: 200px;
+  padding: 40px;
 }
 
-.cell {
-  display: table-cell;
-  padding: 20px;
+.achievements {
+  position: relative;
+  margin-right: 0%;
+  padding: 10px;
 }
