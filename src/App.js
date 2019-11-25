@@ -1,5 +1,4 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './scss/styles.scss';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Footer from './components/layout/footer';
