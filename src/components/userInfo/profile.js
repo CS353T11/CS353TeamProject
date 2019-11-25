@@ -1,6 +1,4 @@
 import React from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
-import LoginPopUp from '../authentication/loginPopUp';
 import firebase from 'firebase';
 import Avatar from '../../images/avatar.svg';
 
@@ -24,7 +22,7 @@ export default class HomeView extends React.Component {
                     <div className="user-details">
                         <div className="profile-id">
                             <img src={Avatar} alt="avatar"></img><br></br>
-                            <h2 className="title"><a className="bold">Your Name</a></h2>
+                            <h2 className="title"><p className="bold">Your Name</p></h2>
                             <div><b className="bold">email</b></div>
                             <div><b className="bold">password</b></div>
                             <button>edit details</button>

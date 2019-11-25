@@ -40,8 +40,8 @@ export default class LoginPopUp extends React.Component {
     handleForget = (e) => {
         e.preventDefault();
         const { email } = this.state;
-        firebase.auth().
-            sendPasswordResetEmail(email)
+        firebase.auth()
+            .sendPasswordResetEmail(email)
             .then(() => {
                 this.setState({
                     email: '',
@@ -57,7 +57,7 @@ export default class LoginPopUp extends React.Component {
     }
 
     render() {
-        const LoginTrigger = <a onClick={()=> this.setState({forget: false})} className="btn-login">LOGIN</a>;
+        const LoginTrigger = <p onClick={()=> this.setState({forget: false})} className="btn-login">LOGIN</p>;
         console.log(this.state);
         return (
             <Modal trigger={LoginTrigger} actions={false} className="login">
@@ -69,7 +69,7 @@ export default class LoginPopUp extends React.Component {
                             <br/>
                             <label className="label">Email:</label>
                             <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
-                            <a className="forgot" onClick={()=> this.setState({forget: false})}>I remembered!</a>
+                            <p className="forgot" onClick={()=> this.setState({forget: false})}>I remembered!</p>
                             <button type="submit" className="btn-login" >RESET PASSWORD</button>
                         </form>
                     </div>)
@@ -83,7 +83,7 @@ export default class LoginPopUp extends React.Component {
                             <label className="label">Password:</label>
                             <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
                             <br></br>
-                            <a className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</a>
+                            <p className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</p>
                             <button type="submit" className="btn-login" >LOGIN</button>
                         </form>
                     </div>)

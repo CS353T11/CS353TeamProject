@@ -1,6 +1,4 @@
 import React from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
-import LoginPopUp from '../authentication/loginPopUp';
 import firebase from 'firebase';
 
 export default class Register extends React.Component {

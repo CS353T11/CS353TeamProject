@@ -266,12 +266,31 @@ body {
     margin-bottom: 16px;
     align-items: center;
     height: 32px;
+    input.qty-input {
+      font: normal 18px $sans-serif;
+      margin: 0 0 0 auto;
+      width: 60px;
+      background: white;
+      height: 24px;
+      border-radius: 6px;
+      padding:4px 12px;
+      &:focus {
+        border-bottom: 1px solid $primaryColor !important;
+        -webkit-box-shadow: 0 1px 0 0 $primaryColor !important;
+        box-shadow: 0 1px 0 0 $primaryColor !important;
+      }
+    }
+    .qty-label {
+      display: block;
+      margin-left: 4px;
+      font: bold 16px $sans-serif;
+    }
     .search-input{
+      font: normal 16px $sans-serif !important;
       border-radius: 6px!important;
       margin: 24px 0 0!important;
       background: white !important;
       padding:4px 12px!important;
-      font-size:18px !important;
       height: 24px!important;
       &:focus {
         border-bottom: 1px solid $primaryColor !important;
@@ -301,10 +320,6 @@ body {
       width: 34px;
       z-index: 1;
       cursor:pointer !important;
-    }
-    .qty-view {
-      font: normal 20px $sans-serif;
-      margin-left: auto;
     }
     .search-title {
       font: bold 24px $sans-serif;

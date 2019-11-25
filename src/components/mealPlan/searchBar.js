@@ -8,6 +8,7 @@ export default class SearchBar extends React.Component {
 		this.state = {
 			searchTerm: '',
 			results: '',
+            qtyGrams: 100,
 		}
     }
 
@@ -78,20 +79,13 @@ export default class SearchBar extends React.Component {
             <div className="searchbar">
                 <div className="search-header">
                     <h3 className="search-title">Search your meals</h3>
-                    <TextInput placeholder=" eg. Apple" icon="search" className="search-input" id="searchTerm"
+                    <TextInput placeholder="Search..." icon="search" className="search-input" id="searchTerm"
                                onKeyPress={this.keyPressed} onChange={this.handleChange}/>
 					<div className="icon-click" onClick={this.keyPressed}>
                     </div>
-                    <div className="qty-view">
-                        {/*THIS IS NOT PROPERLY WORKING WE WILL HAVE TO THINK THE SOLUTION
-                        {   (this.state.results.hints && this.state.results.hints!==""
-                        && this.state.results.hints[0].quantity && this.state.results.hints[0].measure) ?
-                         ("Qty: "+this.state.results.parsed[0].quantity+" "+this.state.results.parsed[0].measure.label)
-                            :
-                            "no qtyfied"
-                        }
-                        */}
-                    </div>
+                    <input className="qty-input" id="qtyGrams" type="number" step="10" min="0" placeholder="100"
+                           onChange={this.handleChange}></input>
+                    <p className="qty-label" > g</p>
                 </div>
                 <div className="search-results">
 
@@ -103,10 +97,10 @@ export default class SearchBar extends React.Component {
                                         {/*TO DO: MARQUEE WHEN OVERFLOWING AND HOVERING*/}
 									</h3>
 									<div className="food-info" id={"foodNutr"+index}>
-                                        <p className="info-line"><b className="nutrient-name">Calories</b>{this.round(obj.food.nutrients.ENERC_KCAL, 2)}kcal</p>
-                                        <p className="info-line"><b className="nutrient-name">Fat</b>{this.round(obj.food.nutrients.FAT, 2)}g</p>
-                                        <p className="info-line"><b className="nutrient-name">Carbs</b>{this.round(obj.food.nutrients.CHOCDF, 2)}g</p>
-                                        <p className="info-line"><b className="nutrient-name">Protein</b>{this.round(obj.food.nutrients.PROCNT, 2)}g</p>
+                                        <p className="info-line"><b className="nutrient-name">Calories</b>{this.round(obj.food.nutrients.ENERC_KCAL*(this.state.qtyGrams/100), 2)}kcal</p>
+                                        <p className="info-line"><b className="nutrient-name">Fat</b>{this.round(obj.food.nutrients.FAT*(this.state.qtyGrams/100), 2)}g</p>
+                                        <p className="info-line"><b className="nutrient-name">Carbs</b>{this.round(obj.food.nutrients.CHOCDF*(this.state.qtyGrams/100), 2)}g</p>
+                                        <p className="info-line"><b className="nutrient-name">Protein</b>{this.round(obj.food.nutrients.PROCNT*(this.state.qtyGrams/100), 2)}g</p>
 									</div>
                                 </div>
                             );

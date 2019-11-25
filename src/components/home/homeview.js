@@ -1,6 +1,5 @@
 import React from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
-import LoginPopUp from '../authentication/loginPopUp';
+import { NavLink } from 'react-router-dom';
 import firebase from 'firebase';
 
 export default class HomeView extends React.Component {
