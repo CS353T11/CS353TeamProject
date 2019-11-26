@@ -335,7 +335,7 @@ body {
     margin-bottom: -16px;
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
-      width: 0px;  /* Remove scrollbar space */
+      width: 0;  /* Remove scrollbar space */
       background: transparent;  /* Optional: just make scrollbar invisible */
     }
     &::-webkit-scrollbar-thumb {
@@ -346,7 +346,7 @@ body {
   }
 
   .api-item {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     cursor: grab;
     display: flex;
     flex-direction: column;
@@ -450,12 +450,65 @@ body {
 }
 
 .nutriscore {
-  height: 256px;
   background: #c4c4c4;
   border-radius: 12px;
   padding: 24px;
   margin-top: 32px;
   font: bold 24px $sans-serif;
+  .title {
+    margin-bottom: 12px;
+  }
+  .nutribar-container {
+    display: flex;
+    flex-flow: row-reverse;
+    margin-bottom: 6px;
+  }
+  .counter {
+    z-index: 1;
+    font: normal 16px $sans-serif;
+    white-space: nowrap;
+  }
+  .subtitle {
+    font: bold 16px $sans-serif;
+    white-space: nowrap;
+    width: 80px;
+    margin-right: 24px;
+    display: flex;
+  }
+}
+
+.nutribar {
+  //border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: lightgray;
+  border-radius: 12px;
+  width: 100%;
+  margin: auto;
+  height: 18px;
+  .bar {
+    display: block;
+    position: absolute;
+    left: 0;
+    height: 18px;
+    border-radius: 12px;
+    width: 0;
+    max-width: 101%;
+    &#kcalbar {
+      background: $kcalColor;
+    }
+    &#protsbar {
+      background: $protsColor;
+    }
+    &#carbsbar {
+      background: $carbsColor;
+    }
+    &#fatsbar {
+      background: $fatsColor;
+    }
+  }
 }
 
 .user-details {
@@ -519,6 +572,6 @@ body {
 
 .achievements {
   position: relative;
-  margin-right: 0%;
+  margin-right: 0;
   padding: 10px;
 }
