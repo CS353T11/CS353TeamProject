@@ -50,16 +50,13 @@ export default class Register extends React.Component {
         return (
             <div className="view">
                 <div className="register">
-                    {/*<div className="home-illustration">
-                        <img alt="cute big img"></img>
-                    </div>*/}
+                    {/*<h3 className="register-header">Register Member</h3>*/}
                     <div className="register-form">
-                        <h2 className="register-header">Register Member</h2>
-                        <br></br>
+                        {<h3 className="register-header">Register Member</h3>}
+                        <br></br><br></br>
                         <form onSubmit={this.handleSubmit} className="form">
                             <label className="label">Email: </label>
                             <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
-                            <br></br>
                             <label className="label">Password:</label>
                             <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
                             <label className="label">Confirm Password:</label>
