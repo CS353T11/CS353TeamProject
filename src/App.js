@@ -11,6 +11,7 @@ import NutriScore from './components/mealPlan/nutriScore';
 import Goals from './components/mealPlan/goals';
 import Profile from './components/userInfo/profile';
 import Register from './components/authentication/register';
+import CreatePlanTest from "./components/mealPlan/createPlanTest";
 
 //all the components have moved to components directory, you can find the path there
 
@@ -45,6 +46,7 @@ export default class App extends React.Component {
                     <Route path='/goals' component={Goals} />
                     <Route path='/profile' component={Profile}/>
                     <Route path='/register' component={Register}/>
+                    <Route path='/createplantest' component={CreatePlanTest}/>
                 </Switch>
                 <Footer/>
             </BrowserRouter>

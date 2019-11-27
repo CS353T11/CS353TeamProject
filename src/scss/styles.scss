@@ -551,6 +551,10 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.register-header {
+  font: bold 32px $sans-serif;
+}
+
 .table {
   display: table;
   width: auto;
@@ -574,4 +578,10 @@ body {
   position: relative;
   margin-right: 0;
   padding: 10px;
+}
+
+.btn-group {
+  button {
+    display:inline-block;
+  }
 }

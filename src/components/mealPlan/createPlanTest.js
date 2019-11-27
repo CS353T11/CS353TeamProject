@@ -1,26 +1,9 @@
 import React from 'react'
-export default class WeekPlan extends React.Component{
+export default class CreatePlanTest extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            rows: [
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            ]
+            rows: []
         };
 
         this.addRow = this.addRow.bind(this);
@@ -48,13 +31,9 @@ export default class WeekPlan extends React.Component{
         this.setState({ rows: joined })
     }
 
-    render(){
+    render() {
         return (
             <div>
-                <div className="btn-group">
-                    <button className="btn-login" onClick={this.addRow}>ADD</button>
-                    <button className="btn-login" onClick={this.addRow}>REMOVE</button>
-                </div>
                 <div>
                     <table className="mealplan">
                         <thead>
@@ -72,9 +51,11 @@ export default class WeekPlan extends React.Component{
                         {this.state.rows}
                         </tbody>
                     </table>
+                    <div>
+                        <button className="btn-login" onClick={this.addRow}>ADD</button>
+                    </div>
                 </div>
             </div>
-            /*<div className="plan-item">API ITEM</div>*/
         );
     }
 }
