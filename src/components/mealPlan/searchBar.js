@@ -1,6 +1,7 @@
 import React from 'react';
 import {TextInput} from 'react-materialize';
 import axios from 'axios';
+import ResultTile from "./ResultTile";
 export default class SearchBar extends React.Component {
 
     constructor(props){
@@ -92,17 +93,16 @@ export default class SearchBar extends React.Component {
                     {this.state.results.hints && this.state.results.hints!=="" ?
                         this.state.results.hints.map((obj,index) => {
                             return (
-                                <div className="api-item" key={"foodRes"+index} id={"foodRes"+index}>
-									<h3 className="food-title">{obj.food.label}
-                                        {/*TO DO: MARQUEE WHEN OVERFLOWING AND HOVERING*/}
-									</h3>
-									<div className="food-info" id={"foodNutr"+index}>
-                                        <p className="info-line"><b className="nutrient-name">Calories</b>{this.round(obj.food.nutrients.ENERC_KCAL*(this.state.qtyGrams/100), 2)}kcal</p>
-                                        <p className="info-line"><b className="nutrient-name">Fat</b>{this.round(obj.food.nutrients.FAT*(this.state.qtyGrams/100), 2)}g</p>
-                                        <p className="info-line"><b className="nutrient-name">Carbs</b>{this.round(obj.food.nutrients.CHOCDF*(this.state.qtyGrams/100), 2)}g</p>
-                                        <p className="info-line"><b className="nutrient-name">Protein</b>{this.round(obj.food.nutrients.PROCNT*(this.state.qtyGrams/100), 2)}g</p>
-									</div>
-                                </div>
+                                    <ResultTile
+                                        id={"foodRes"+index}
+                                        draggable="true"
+                                        index={index}
+                                        label={obj.food.label}
+                                        Cal={this.round(obj.food.nutrients.ENERC_KCAL*(this.state.qtyGrams/100), 2)}
+                                        Fat={this.round(obj.food.nutrients.FAT*(this.state.qtyGrams/100), 2)}
+                                        Carbs={this.round(obj.food.nutrients.CHOCDF*(this.state.qtyGrams/100), 2)}
+                                        Pro={this.round(obj.food.nutrients.PROCNT*(this.state.qtyGrams/100), 2)}
+                                    >wee</ResultTile>
                             );
                         }) :
                         (
