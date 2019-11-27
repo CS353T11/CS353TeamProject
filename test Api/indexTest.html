@@ -4,7 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+
+    <script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyAk3c8TRe0LKHPTpYa8ZwEpiUaVKMih8Q0",
+			authDomain: "planmyml.firebaseapp.com",
+			databaseURL: "https://planmyml.firebaseio.com",
+			projectId: "planmyml",
+			storageBucket: "planmyml.appspot.com",
+			messagingSenderId: "202103742726",
+			appId: "1:202103742726:web:d052a44ef8ecec32c67e87",
+			measurementId: "G-9GQ2VK5K3G"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		firebase.analytics();
+    </script>
 </head>
 <body>
 <div id="container" class="m-auto text-center" style="height:100vh; width: 100vh">
@@ -56,10 +80,10 @@
     </table>
     <button type="button" class="btn btn-primary" onclick="testy($('#checkFood').val())" id="test">Call Food Api</button>
     <hr>
-    <button type="button" class="btn btn-danger">
+    <button type="button" id="buttonFire" class="btn btn-danger" onclick="testFire()">
         Magic JS function
     </button>
-    <div class="my-4" style="background-color: lightblue">
+    <div class="my-4" id="resultFire" style="background-color: lightblue">
         RESULT HERE
     </div>
 </div>

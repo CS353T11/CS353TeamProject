@@ -3,10 +3,12 @@ export default class DragDrop extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            list: [1, 2, 3],
             foodList:{
-                name: 'jasper',
-                age: 28
+                label: '',
+                cal:'',
+                fat:'',
+                pro:'',
+                carbs:''
             }
         }
     }
@@ -19,10 +21,13 @@ export default class DragDrop extends React.Component {
         console.log(foodObj);
         this.setState(prevState =>{
             let foodList=Object.assign({}, prevState.foodList);
-            foodList.name=foodObj.label;
-            return foodList
+            foodList.label=foodObj.label;
+            foodList.cal=foodObj.cal;
+            foodList.pro=foodObj.pro;
+            foodList.fat=foodObj.fat;
+            foodList.carbs=foodObj.carbs;
+            return {foodList};
         })
-        console.log(this.state.foodList);
         //e.target.appendChild(card);
         //this.setState({wow[0]=car});
         //this.state.wow[0]=car;
@@ -40,9 +45,11 @@ export default class DragDrop extends React.Component {
                  onDragOver={this.dragOver}
             >
                 <ul>
-                    {this.state.list.map(item => (
-                        <li key={item}>{item}</li>
-                    ))}
+                    <li>{this.state.foodList.label}</li>
+                    <li>{this.state.foodList.cal}</li>
+                    <li>{this.state.foodList.fat}</li>
+                    <li>{this.state.foodList.carbs}</li>
+                    <li>{this.state.foodList.pro}</li>
                 </ul>
             </div>
         );

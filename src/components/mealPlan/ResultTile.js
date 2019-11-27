@@ -3,7 +3,11 @@ import React from 'react';
 export default class ResultTile extends React.Component{
     dragStart = e =>{
         const foodObj={
-            label:"ew"
+            label:this.props.label,
+            cal:this.props.Cal,
+            fat:this.props.Fat,
+            pro:this.props.Pro,
+            carbs:this.props.carbs
         };
         var foodJSON=JSON.stringify(foodObj)
 
