@@ -4,6 +4,10 @@ export default class DragDrop extends React.Component {
         super(props);
         this.state={
             list: [1, 2, 3],
+            foodList:{
+                name: 'jasper',
+                age: 28
+            }
         }
     }
 
@@ -13,6 +17,12 @@ export default class DragDrop extends React.Component {
         const foodObj=JSON.parse(foodJSON);
 
         console.log(foodObj);
+        this.setState(prevState =>{
+            let foodList=Object.assign({}, prevState.foodList);
+            foodList.name=foodObj.label;
+            return foodList
+        })
+        console.log(this.state.foodList);
         //e.target.appendChild(card);
         //this.setState({wow[0]=car});
         //this.state.wow[0]=car;
