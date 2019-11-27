@@ -3,13 +3,7 @@ export default class DragDrop extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            foodList:{
-                label: '',
-                cal:'',
-                fat:'',
-                pro:'',
-                carbs:''
-            }
+            foodList:[{label: '', cal:'', fat:'', pro:'', carbs:''},]
         }
     }
 
@@ -18,15 +12,21 @@ export default class DragDrop extends React.Component {
         const foodJSON=e.dataTransfer.getData('foodJSON');
         const foodObj=JSON.parse(foodJSON);
 
-        console.log(foodObj);
         this.setState(prevState =>{
             let foodList=Object.assign({}, prevState.foodList);
-            foodList.label=foodObj.label;
-            foodList.cal=foodObj.cal;
-            foodList.pro=foodObj.pro;
-            foodList.fat=foodObj.fat;
-            foodList.carbs=foodObj.carbs;
-            return {foodList};
+            let temp={
+            	label:foodObj.label,
+				cal:foodObj.cal,
+				fat:foodObj.fat,
+				pro:foodObj.pro,
+				carbs:foodObj.carbs
+			};
+            // var ar=[{wow:''}];
+			// ar=ar.concat(temp);
+			//foodList.concat(temp);
+			console.log(temp);
+			console.log(foodList);
+			return {foodList};
         })
         //e.target.appendChild(card);
         //this.setState({wow[0]=car});
@@ -45,11 +45,11 @@ export default class DragDrop extends React.Component {
                  onDragOver={this.dragOver}
             >
                 <ul>
-                    <li>{this.state.foodList.label}</li>
-                    <li>{this.state.foodList.cal}</li>
-                    <li>{this.state.foodList.fat}</li>
-                    <li>{this.state.foodList.carbs}</li>
-                    <li>{this.state.foodList.pro}</li>
+                    <li>{this.state.foodList[0].label}</li>
+                    <li>{this.state.foodList[0].cal}</li>
+                    <li>{this.state.foodList[0].fat}</li>
+                    <li>{this.state.foodList[0].carbs}</li>
+                    <li>{this.state.foodList[0].pro}</li>
                 </ul>
             </div>
         );
