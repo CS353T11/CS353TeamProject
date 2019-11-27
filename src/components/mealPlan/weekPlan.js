@@ -1,4 +1,5 @@
 import React from 'react'
+import DragDropBox from "./DragDropBox";
 export default class WeekPlan extends React.Component{
     constructor(props) {
         super(props);
@@ -6,18 +7,25 @@ export default class WeekPlan extends React.Component{
             rows: [
                 <tr>
                     <td>
+                        <DragDropBox/>
                     </td>
                     <td>
+                        <DragDropBox/>
                     </td>
                     <td>
+                        <DragDropBox/>
                     </td>
                     <td>
+                        <DragDropBox/>
                     </td>
                     <td>
+                        <DragDropBox/>
                     </td>
                     <td>
+                        <DragDropBox/>
                     </td>
                     <td>
+                        <DragDropBox/>
                     </td>
                 </tr>
             ]

@@ -1,12 +1,13 @@
 import React from 'react';
 import FoodItem from "./FoodItem";
 
-export default class DragDrop extends React.Component {
+export default class DragDropTest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			foodList: []
-		}
+		};
+		this.targetDel=this.targetDel.bind(this);
 	}
 
 	drop = e => {
@@ -35,6 +36,20 @@ export default class DragDrop extends React.Component {
 		e.preventDefault();
 	};
 
+	onRemoveItem = i =>{
+		this.setState(state=>{
+			const foodList=state.foodList.filter((item,j) => i!==j);
+			return {foodList};
+		});
+	};
+
+	targetDel(e){
+		console.log("WOW! it was you NUMBER "+e.currentTarget.value);
+		//TODO: Fix: why can't i read the targets value? Reason: Use currentTarget to Traverse DOM for actual target
+		let i=parseInt(e.currentTarget.value);
+		this.onRemoveItem(i);
+	};
+
 	render() {
 		return (
 			<div className={this.props.className}
@@ -44,8 +59,13 @@ export default class DragDrop extends React.Component {
 			>
                 {this.state.foodList[0]?
                     this.state.foodList.map((obj,index) =>{
+                    	//TODO: Add unique key to eac FoodItem component, perhaps hashing?
                         return(
-                            <FoodItem obj={obj}/>
+                            <FoodItem
+								obj={obj}
+								index={index}
+								onDel={this.targetDel}
+							/>
                         );
                     })
                     :
@@ -55,6 +75,6 @@ export default class DragDrop extends React.Component {
                 }
 			</div>
 		);
-	}
+	};
 
 }

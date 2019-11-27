@@ -481,6 +481,12 @@ body {
     border-radius: 12px;
     height: 160px;
     padding: 8px;
+    max-width:50px;
+    width:14%;
+    .dropBox{
+      width:100%;
+      height:100%;
+    }
   }
   .plan-item {
     background: gray;
@@ -513,7 +519,32 @@ body {
 }
 
 .foodItem{
-  padding:4px;
+  margin:8px 4px 8px 4px;
+  background: #fafafa;
+  border-radius: 8px;
+  .foodItemTitle{
+    padding:8px 12px 8px 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-transform: capitalize;
+    font-size: 14px;
+    position: relative;
+    font:bold 13px "Montserrat";
+    .foodItemDel{
+      display:none;
+    }
+    &:hover>.foodItemDel{
+      display: block;
+      border-radius: 20px;
+      position: absolute;
+      top:-5px;
+      right:0px;
+      padding:0px!important;
+      &:hover{
+        color: #f44336;
+      }
+    }
+  }
 }
 
 .nutriscore {

@@ -73,6 +73,7 @@ export default class SearchBar extends React.Component {
 
         }
     }
+    //TODO: Add functionality that prevents multiple calls to the api at a time with a clear loading indicator
 
     render() {
 		//console.log(this.state);
@@ -95,6 +96,7 @@ export default class SearchBar extends React.Component {
                             return (
                                     <SearchResultTile
                                         id={"foodRes"+index}
+                                        key={"foodRes"+index}
                                         draggable="true"
                                         index={index}
                                         label={obj.food.label}
