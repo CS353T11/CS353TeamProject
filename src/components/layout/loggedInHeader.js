@@ -27,7 +27,7 @@ export default class LoggedInHeader extends React.Component {
                     <NavLink to='/recipes'>Recipes</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/goals'>Goals</NavLink>
+                    <NavLink to='/goals'>Progress</NavLink>
                 </span>
                 <span className="header-link">
                     <NavLink to='/profile'>Profile</NavLink>
