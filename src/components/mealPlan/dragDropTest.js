@@ -1,4 +1,5 @@
 import React from 'react';
+import FoodItem from "./FoodItem";
 
 export default class DragDrop extends React.Component {
 	constructor(props) {
@@ -22,14 +23,12 @@ export default class DragDrop extends React.Component {
 				pro: foodObj.pro,
 				carbs: foodObj.carbs
 			};
-			console.log(temp);
+			//console.log(temp);
 			foodList.push(temp);
 			console.log(foodList);
 			return {foodList};
 		})
 		//e.target.appendChild(card);
-		//this.setState({wow[0]=car});
-		//this.state.wow[0]=car;
 	};
 
 	dragOver = e => {
@@ -43,13 +42,17 @@ export default class DragDrop extends React.Component {
 				 onDrop={this.drop}
 				 onDragOver={this.dragOver}
 			>
-				<ul>
-					<li>{this.state.foodList[0].label}</li>
-					<li>{this.state.foodList[0].cal}</li>
-					<li>{this.state.foodList[0].fat}</li>
-					<li>{this.state.foodList[0].carbs}</li>
-					<li>{this.state.foodList[0].pro}</li>
-				</ul>
+                {this.state.foodList[0]?
+                    this.state.foodList.map((obj,index) =>{
+                        return(
+                            <FoodItem obj={obj}/>
+                        );
+                    })
+                    :
+                    <ul>
+                        <li>Nothing to show here</li>
+                    </ul>
+                }
 			</div>
 		);
 	}

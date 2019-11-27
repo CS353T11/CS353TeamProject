@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextInput} from 'react-materialize';
 import axios from 'axios';
-import ResultTile from "./ResultTile";
+import SearchResultTile from "./SearchResultTile";
 export default class SearchBar extends React.Component {
 
     constructor(props){
@@ -93,7 +93,7 @@ export default class SearchBar extends React.Component {
                     {this.state.results.hints && this.state.results.hints!=="" ?
                         this.state.results.hints.map((obj,index) => {
                             return (
-                                    <ResultTile
+                                    <SearchResultTile
                                         id={"foodRes"+index}
                                         draggable="true"
                                         index={index}
@@ -102,7 +102,7 @@ export default class SearchBar extends React.Component {
                                         Fat={this.round(obj.food.nutrients.FAT*(this.state.qtyGrams/100), 2)}
                                         Carbs={this.round(obj.food.nutrients.CHOCDF*(this.state.qtyGrams/100), 2)}
                                         Pro={this.round(obj.food.nutrients.PROCNT*(this.state.qtyGrams/100), 2)}
-                                    >wee</ResultTile>
+                                    />
                             );
                         }) :
                         (

@@ -5,7 +5,7 @@ import NutriScore from './nutriScore';
 import DragDrop from './dragDropTest';
 import InitialBox from "./testY";
 
-export default class Planner extends React.Component {
+export default class MealPlannerPage extends React.Component {
     render() {
         return (
             <div className="view">

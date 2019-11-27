@@ -1,3 +1,3 @@
 # CS353TeamProject
-Meal Planner Team Project
+Meal MealPlannerPage Team Project
 

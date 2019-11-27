@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ResultTile extends React.Component{
+export default class SearchResultTile extends React.Component{
     dragStart = e =>{
         const foodObj={
             label:this.props.label,
@@ -9,7 +9,7 @@ export default class ResultTile extends React.Component{
             pro:this.props.Pro,
             carbs:this.props.carbs
         };
-        var foodJSON=JSON.stringify(foodObj)
+        var foodJSON=JSON.stringify(foodObj);
 
         //NOTE: .setData takes a string argument for data to be passed, hence the JSON.stringify
         e.dataTransfer.setData('foodJSON',foodJSON);
@@ -26,7 +26,6 @@ export default class ResultTile extends React.Component{
     render() {
         return(
             <div className="api-item"
-                 key={this.props.id}
                  id={this.props.id}
                  draggable={this.props.draggable}
                  onDragStart={this.dragStart}

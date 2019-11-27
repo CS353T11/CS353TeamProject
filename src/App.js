@@ -6,7 +6,7 @@ import HomeView from './components/home/homeview';
 import firebase from './components/firebase/firebase';
 import LoggedInHeader from './components/layout/loggedInHeader';
 import LoggedOutHeader from './components/layout/loggedOutHeader';
-import Planner from './components/mealPlan/planner';
+import MealPlannerPage from './components/mealPlan/MealPlannerPage';
 import NutriScore from './components/mealPlan/nutriScore';
 import Goals from './components/mealPlan/goals';
 import Profile from './components/userInfo/profile';
@@ -41,7 +41,7 @@ export default class App extends React.Component {
                 <Switch>
                     <Route path="/" component={HomeView} exact />
                     <Route path='/home' component={HomeView} />
-                    <Route path='/plan' component={Planner} />
+                    <Route path='/plan' component={MealPlannerPage} />
                     <Route path='/recipes' component={NutriScore} />
                     <Route path='/goals' component={Goals} />
                     <Route path='/profile' component={Profile}/>
