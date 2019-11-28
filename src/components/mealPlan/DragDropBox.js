@@ -65,6 +65,7 @@ export default class DragDropTest extends React.Component {
 			>
 				{this.state.foodList[0]?
 					this.state.foodList.map((obj,index) =>{
+
 						return(
 							<FoodItem
 								obj={obj}

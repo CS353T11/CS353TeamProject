@@ -38,18 +38,25 @@ export default class WeekPlan extends React.Component{
         var joined = this.state.rows.concat(
             <tr>
                 <td>
+                    <DragDropBox/>
                 </td>
                 <td>
+                    <DragDropBox/>
                 </td>
                 <td>
+                    <DragDropBox/>
                 </td>
                 <td>
+                    <DragDropBox/>
                 </td>
                 <td>
+                    <DragDropBox/>
                 </td>
                 <td>
+                    <DragDropBox/>
                 </td>
                 <td>
+                    <DragDropBox/>
                 </td>
             </tr>
         );
