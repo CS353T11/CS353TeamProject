@@ -669,7 +669,6 @@ body {
   float: left;
   display: table-column;
   width: 200px;
-  padding: 10px;
 }
 
 .achievements {
@@ -682,4 +681,8 @@ body {
   button {
     display:inline-block;
   }
+}
+
+.hdr {
+  font-size: x-large;
 }
