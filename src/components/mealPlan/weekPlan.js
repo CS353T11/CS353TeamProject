@@ -3,73 +3,12 @@ import DragDropBox from "./DragDropBox";
 export default class WeekPlan extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            rows: [
-                <tr>
-                    <td>
-                        <DragDropBox/>
-                    </td>
-                    <td>
-                        <DragDropBox/>
-                    </td>
-                    <td>
-                        <DragDropBox/>
-                    </td>
-                    <td>
-                        <DragDropBox/>
-                    </td>
-                    <td>
-                        <DragDropBox/>
-                    </td>
-                    <td>
-                        <DragDropBox/>
-                    </td>
-                    <td>
-                        <DragDropBox/>
-                    </td>
-                </tr>
-            ]
-        };
-
-        this.addRow = this.addRow.bind(this);
-    }
-
-    addRow() {
-        var joined = this.state.rows.concat(
-            <tr>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-            </tr>
-        );
-        this.setState({ rows: joined })
+        this.state = {}
     }
 
     render(){
         return (
             <div>
-                <div className="btn-group">
-                    <button className="btn-login" onClick={this.addRow}>ADD</button>
-                    <button className="btn-login" onClick={this.addRow}>REMOVE</button>
-                </div>
                 <div>
                     <table className="mealplan">
                         <thead>
@@ -84,12 +23,11 @@ export default class WeekPlan extends React.Component{
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.rows}
+                        {this.props.rows}
                         </tbody>
                     </table>
                 </div>
             </div>
-            /*<div className="plan-item">API ITEM</div>*/
         );
     }
 }

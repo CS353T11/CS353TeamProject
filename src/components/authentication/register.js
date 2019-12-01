@@ -37,7 +37,7 @@ export default class Register extends React.Component {
         }
         console.log(this.state.error)
     }
-
+//eafasfsdf
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
