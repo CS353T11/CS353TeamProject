@@ -7,6 +7,12 @@ export default class DragDropTest extends React.Component {
 		//TODO:Calculate nutrition for entire dropBox
 		this.state = {
 			foodList: [],
+			totalNutr: {
+				cal: "",
+				fat: "",
+				pro: "",
+				carbs: "",
+			},
 			foodListNutr:{
 				cal: "",
 				fat: "",
@@ -93,9 +99,26 @@ export default class DragDropTest extends React.Component {
 			console.log("Grouped:");
 			console.log(grpFood);
 
+			//Now we calculate total nutrition
+			let totalNutr = grpFood.reduce((a,b) => {
+				return {
+					cal: a.cal + b.cal,
+					fat: a.fat + b.fat,
+					pro: a.pro + b.pro,
+					carbs: a.carbs + b.carbs,
+				}
+			});
+
+			console.log("Total:");
+			console.log(totalNutr);
+
 			this.setState({
 				foodList: grpFood,
+				totalNutr: totalNutr,
 			})
+
+			console.log(this.props);
+			this.props.getTotalNutr(totalNutr, this.props.index);
 
 		}
 	}
