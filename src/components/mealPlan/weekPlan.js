@@ -23,7 +23,7 @@ export default class WeekPlan extends React.Component{
                         </tr>
                         </thead>
                         <tbody>
-                        {this.props.rows}
+                            {this.props.rows}
                         </tbody>
                     </table>
                 </div>

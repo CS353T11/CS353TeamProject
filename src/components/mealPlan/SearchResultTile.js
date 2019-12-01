@@ -7,7 +7,8 @@ export default class SearchResultTile extends React.Component{
             cal:this.props.Cal,
             fat:this.props.Fat,
             pro:this.props.Pro,
-            carbs:this.props.carbs
+            carbs:this.props. Carbs,
+            qty: this.props.Qty
         };
         var foodJSON=JSON.stringify(foodObj);
 
@@ -31,7 +32,7 @@ export default class SearchResultTile extends React.Component{
                  onDragStart={this.dragStart}
                  onDragOver={this.dragOver}
             >
-                <h3 className="food-title">{this.props.label}</h3>
+                <h3 className="food-title">{this.props.label} <b className="food-qty">({this.props.Qty} g)</b></h3>
                 <div className="food-info" id={"foodNutr"+this.props.index}>
                     <p className="info-line"><b className="nutrient-name">Calories</b>{this.props.Cal}kcal</p>
                     <p className="info-line"><b className="nutrient-name">Fat</b>{this.props.Fat}g</p>

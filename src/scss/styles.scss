@@ -297,6 +297,7 @@ body {
     font-weight: 700;
   }
 }
+
 .btn-login {
   padding: 8px 24px;
   border: 1px solid black;
@@ -469,24 +470,22 @@ body {
 }
 
 .mealplan {
-  border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   border-collapse: inherit;
   background: lightgray;
   th, td {
     text-align: center;
   }
-  td {
+  td.dropBox {
     background: white;
     border: 4px solid lightgray;
     border-radius: 12px;
-    height: 160px;
-    padding: 8px;
-    max-width:50px;
-    width:14%;
-    .dropBox{
-      width:100%;
-      height:100%;
-    }
+    min-height: 64px;
+    height: 52px;
+    padding: 4px;
+    max-width: 50px;
+    width: 14%;
   }
   .plan-item {
     background: gray;
@@ -503,10 +502,11 @@ body {
   }
   .plan-header {
     background: $secondaryColor;
-    padding: 16px;
-    font: 20px $sans-serif;
+    padding: 0;
+    font: bold 20px $sans-serif;
     th {
-      height: 32px;
+      height: 10px;
+      padding: 8px;
       border-radius: 0;
     }
     th:first-child {
@@ -518,18 +518,49 @@ body {
   }
 }
 
+.mp-settings {
+  display: flex;
+  background: lightgray;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  .btn-login {
+    height: 20px ;
+    font-size: 12px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    border: $secondaryColor;
+    &:first-child{
+      border-bottom-left-radius: 12px;
+    }
+  }
+  .add {
+
+  }
+  .rm {
+
+  }
+  .save {
+    border-bottom-right-radius: 12px;
+  }
+  .del {
+    margin-right: auto;
+  }
+}
+
 .foodItem{
-  margin:8px 4px 8px 4px;
+  margin: 4px 0;
   background: #fafafa;
   border-radius: 8px;
   .foodItemTitle{
-    padding:8px 12px 8px 0px;
+    padding:8px 12px 8px 2px;
     overflow: hidden;
     white-space: nowrap;
+    border-radius: 8px;
     text-transform: capitalize;
-    font-size: 14px;
+    text-align: left;
     position: relative;
-    font:bold 13px "Montserrat";
+    font: bold 11px "Montserrat";
     .foodItemDel{
       display:none;
     }
@@ -537,7 +568,7 @@ body {
       display: block;
       border-radius: 20px;
       position: absolute;
-      top:-5px;
+      top:-2px;
       right:0px;
       padding:0px!important;
       &:hover{
@@ -675,12 +706,6 @@ body {
   position: relative;
   margin-right: 0;
   padding: 10px;
-}
-
-.btn-group {
-  button {
-    display:inline-block;
-  }
 }
 
 .hdr {

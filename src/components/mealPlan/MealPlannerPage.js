@@ -2,7 +2,6 @@ import React from 'react';
 import SearchBar from './searchBar';
 import WeekPlan from './weekPlan';
 import NutriScore from './nutriScore';
-import CreatePlan from "./createPlan";
 import DragDropBox from "./DragDropBox";
 // import DragDropTest from './DragDropTest';
 // import InitialBox from "./testY";
@@ -16,61 +15,58 @@ export default class MealPlannerPage extends React.Component {
             creationcheck: false,
             rows: [
                 <tr key="row0">
-                    <td>
                         <DragDropBox/>
-                    </td>
-                    <td>
                         <DragDropBox/>
-                    </td>
-                    <td>
                         <DragDropBox/>
-                    </td>
-                    <td>
                         <DragDropBox/>
-                    </td>
-                    <td>
                         <DragDropBox/>
-                    </td>
-                    <td>
                         <DragDropBox/>
-                    </td>
-                    <td>
                         <DragDropBox/>
-                    </td>
                 </tr>
             ]
         };
         this.addRow = this.addRow.bind(this);
+        this.saveMealplan = this.saveMealplan.bind(this);
+        this.deleteMealplan = this.deleteMealplan.bind(this)
+    }
+
+    async componentDidMount() {
+        await this.addRow();
+        await this.addRow();
+
+        //Retrieve from the database if the user already has a mealplan
     }
 
     addRow() {
         let joined = this.state.rows.concat(
             <tr key={"row"+this.state.rowcount}>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
-                <td>
-                    <DragDropBox/>
-                </td>
+                <DragDropBox/>
+                <DragDropBox/>
+                <DragDropBox/>
+                <DragDropBox/>
+                <DragDropBox/>
+                <DragDropBox/>
+                <DragDropBox/>
             </tr>
         );
         this.setState({ rows: joined,
         rowcount: (++this.state.rowcount)})
+    }
+
+    saveMealplan(){
+        this.setState({mealplansaved: true});
+
+        //Here we should do the thing with the database
+    }
+
+    async deleteMealplan(){
+
+        await this.setState({mealplansaved: false,
+        rows: [], rowcount: 0});
+        await this.addRow();
+        await this.addRow();
+        await this.addRow();
+        //Here we should do the thing with the database
     }
 
     //Performs the creation process changing the view depending if the user has a mealplan saved or not
@@ -80,6 +76,10 @@ export default class MealPlannerPage extends React.Component {
                 <div className="view">
                     <SearchBar/>
                     <WeekPlan rows={this.state.rows}/>
+                    <div className="mp-settings">
+                        <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
+                        <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
+                    </div>
                     <NutriScore/>
                 </div>
             )
@@ -90,9 +90,11 @@ export default class MealPlannerPage extends React.Component {
                     <div className="view">
                         <SearchBar/>
                         <WeekPlan rows={this.state.rows}/>
-                        <div className="btn-group">
-                            <button className="btn-login" onClick={this.addRow}>ADD</button>
-                            <button className="btn-login" onClick={this.addRow}>REMOVE</button>
+                        <div className="mp-settings">
+                            <span className="btn-login add" onClick={this.addRow}>ADD</span>
+                            <span className="btn-login rm" onClick={this.addRow}>REMOVE</span>
+                            <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
+                            <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                         </div>
                         <NutriScore/>
                     </div>

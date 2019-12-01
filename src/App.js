@@ -10,7 +10,6 @@ import MealPlannerPage from './components/mealPlan/MealPlannerPage';
 import Goals from './components/mealPlan/goals';
 import Profile from './components/userInfo/profile';
 import Register from './components/authentication/register';
-import CreatePlan from "./components/mealPlan/createPlan";
 
 //all the components have moved to components directory, you can find the path there
 
@@ -45,7 +44,6 @@ export default class App extends React.Component {
                     <Route path='/goals' component={Goals} />
                     <Route path='/profile' component={Profile}/>
                     <Route path='/register' component={Register}/>
-                    <Route path='/create' component={CreatePlan}/>
                 </Switch>
                 <Footer/>
             </BrowserRouter>

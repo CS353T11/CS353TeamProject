@@ -104,6 +104,7 @@ export default class SearchBar extends React.Component {
                                         Fat={this.round(obj.food.nutrients.FAT*(this.state.qtyGrams/100), 2)}
                                         Carbs={this.round(obj.food.nutrients.CHOCDF*(this.state.qtyGrams/100), 2)}
                                         Pro={this.round(obj.food.nutrients.PROCNT*(this.state.qtyGrams/100), 2)}
+                                        Qty={this.state.qtyGrams}
                                     />
                             );
                         }) :
