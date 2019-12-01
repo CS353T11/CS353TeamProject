@@ -45,7 +45,7 @@ export default class MealPlannerPage extends React.Component {
         let totalNutrWeek;
 
         this.state.nutritionValues[key] = tileNutr;
-        ++this.state.nutritionValues.length;
+        //++this.state.nutritionValues.length;
 
         if(this.state.nutritionValues.length > 1){
             totalNutrWeek = this.state.nutritionValues.reduce((a,b) => {
