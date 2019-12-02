@@ -68,7 +68,7 @@ export default class Goals extends React.Component {
                         <br/>
                         Ketogenic:
                         your daily caloric intake = x;
-                        20% carbs
+                        10% carbs
                         35% protein
                         55% fat
                     </div>
