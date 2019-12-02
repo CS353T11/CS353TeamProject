@@ -15,12 +15,17 @@ export default class SearchBar extends React.Component {
 
 	//change the state when the content change in the form
 	handleChange = (e) => {
+        let val = e.target.value;
+        if(e.target.id === "qtyGrams"){
+            val = (+e.target.value);
+        }
 		this.setState({
-			[e.target.id]: e.target.value
+			[e.target.id]: val
 		})
 	}
 
-	//Rounds a number to only "exp" decimals : https://stackoverflow.com/questions/1726630/formatting-a-number-with-exactly-two-decimals-in-javascript
+	//Rounds a number to only "exp" decimals :
+    // https://stackoverflow.com/questions/1726630/formatting-a-number-with-exactly-two-decimals-in-javascript
 	round = (value, exp) => {
         if (typeof exp === 'undefined' || +exp === 0)
             return Math.round(value);
@@ -29,7 +34,7 @@ export default class SearchBar extends React.Component {
         exp = +exp;
 
         if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0))
-            return NaN;
+            return 0;
 
         // Shift
         value = value.toString().split('e');
@@ -45,14 +50,15 @@ export default class SearchBar extends React.Component {
             document.body.style.cursor = "progress";
 			let urlFood=encodeURI(this.state.searchTerm);
             //making a hard coded post request for an apple
-            let results=await axios.get("https://api.edamam.com/api/food-database/parser?ingr="+urlFood+"&app_id=9ccfd3ea&app_key=422e0ba66ae6c563f47a9fe391a437f0")
+            let results= await axios.get("https://api.edamam.com/api/food-database/parser?ingr="
+                +urlFood+"&app_id=9ccfd3ea&app_key=422e0ba66ae6c563f47a9fe391a437f0")
                 .then(function(response){
+                    /*
                     console.log("----------Response JSON----------");
                     console.log(response.data);
                     console.log("---------------------------------");
+                    */
                     var obj=response.data;
-                    //var objs;
-                    //console.log(data.hints[0].measures[1].label);
 
                     return obj;
                 })
@@ -73,6 +79,7 @@ export default class SearchBar extends React.Component {
 
         }
     }
+
     //TODO: Add functionality that prevents multiple calls to the api at a time with a clear loading indicator
 
     render() {

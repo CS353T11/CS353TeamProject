@@ -154,6 +154,15 @@ body {
       font-weight: bold;
     }
   }
+  .header-link {
+    font-weight: bold;
+    &:hover {
+      color: white;
+    }
+    &:active {
+      color: white;
+    }
+  }
 }
 
 .view {

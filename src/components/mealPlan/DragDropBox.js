@@ -18,7 +18,7 @@ export default class DragDropTest extends React.Component {
 				fat: "",
 				pro: "",
 				carbs: "",
-				qty: ""
+				qty: 0
 			}
 		};
 		this.targetDel=this.targetDel.bind(this);
@@ -75,14 +75,14 @@ export default class DragDropTest extends React.Component {
 				if (!acc[cv.label]) {
 					acc[cv.label] = {};
 					acc[cv.label].label = cv.label;
-					acc[cv.label].cal = acc[cv.label].fat = acc[cv.label].pro = acc[cv.label].carbs = acc[cv.label].qty = 0
+					acc[cv.label].cal = acc[cv.label].fat = acc[cv.label].pro = acc[cv.label].carbs = acc[cv.label].qty = 0;
 				}
 				//We add up the nutrients of the same label
 				acc[cv.label].cal += cv.cal;
 				acc[cv.label].fat += cv.fat;
 				acc[cv.label].pro += cv.pro;
 				acc[cv.label].carbs += cv.carbs;
-				acc[cv.label].qty += cv.qty;
+				acc[cv.label].qty += (+cv.qty);
 				return acc;
 			}, {});
 

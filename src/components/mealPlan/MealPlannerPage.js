@@ -19,11 +19,17 @@ export default class MealPlannerPage extends React.Component {
                 carbs: 0,
                 fats: 0,
             },
+            totalNutrReal:  {
+                kcal: 0,
+                prots: 0,
+                carbs: 0,
+                fats: 0,
+            },
             totalNutrRecomended:  {
-                kcal: 2000,
-                prots: 300,
-                carbs: 200,
-                fats: 150,
+                kcal: 2000*7,
+                prots: 200*7,
+                carbs: 100*7,
+                fats: 80*7,
             },
             nutritionValues: [],
             rows: [],
@@ -45,10 +51,17 @@ export default class MealPlannerPage extends React.Component {
         let totalNutrWeek;
 
         this.state.nutritionValues[key] = tileNutr;
-        //++this.state.nutritionValues.length;
+        ++this.state.nutritionValues.length;
 
-        if(this.state.nutritionValues.length > 1){
-            totalNutrWeek = this.state.nutritionValues.reduce((a,b) => {
+        if(this.state.nutritionValues.length > 2){
+            let foodArray = this.state.nutritionValues;
+            foodArray = Object.keys(foodArray).map(key => {
+                let { cal, fat, pro, carbs } = foodArray[key];
+                return {
+                    cal,fat,pro,carbs
+                };
+            });
+            totalNutrWeek = foodArray.reduce((a,b) => {
                 console.log(a,b);
                 return ({
                     cal: a.cal + b.cal,
@@ -61,13 +74,14 @@ export default class MealPlannerPage extends React.Component {
         else {
             totalNutrWeek = tileNutr;
         }
+
         console.log(this.state.nutritionValues);
         console.log("total");
         console.log(totalNutrWeek);
 
         this.setState(
             {nutritionValues: this.state.nutritionValues,
-                totalNutrWeek:  {
+                totalNutrPlan:  {
                     kcal: totalNutrWeek.cal,
                     prots: totalNutrWeek.pro,
                     carbs: totalNutrWeek.carbs,
@@ -100,8 +114,18 @@ export default class MealPlannerPage extends React.Component {
     }
 
     async deleteMealplan(){
-        await this.setState({mealplansaved: false,
-        rows: [], rowcount: 0});
+        await this.setState({
+            rowcount: 0,
+            mealplansaved: false,
+            creationcheck: true,
+            totalNutrPlan:  {
+                kcal: 0,
+                prots: 0,
+                carbs: 0,
+                fats: 0,
+            },
+            nutritionValues: [],
+            rows: [],});
         await this.addRow();
         await this.addRow();
         await this.addRow();
@@ -119,7 +143,7 @@ export default class MealPlannerPage extends React.Component {
                         <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
                         <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                     </div>
-                    <NutriScore/>
+                    <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>
                 </div>
             )
         }
@@ -135,7 +159,7 @@ export default class MealPlannerPage extends React.Component {
                             <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
                             <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                         </div>
-                        <NutriScore/>
+                        <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>
                     </div>
                 )
             }
