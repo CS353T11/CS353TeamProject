@@ -9,7 +9,7 @@ export default class Profile extends React.Component {
         user: null,
         name: '',
         age: '',
-        //gerder: null,
+        gender: null,
         height: '',
         weight: '',
         activityLevel: '',

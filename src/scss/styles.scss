@@ -699,6 +699,10 @@ body {
   padding: 10px;
 }
 
+.results{
+  display: flex;
+}
+
 .profile {
   display: flex;
 }
@@ -742,4 +746,13 @@ body {
 
 .hdr {
   font-size: x-large;
+}
+
+.plan{
+  //position: center;
+  margin-left: 25%;
+  width: 50%;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
 }
