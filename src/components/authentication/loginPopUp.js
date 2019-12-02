@@ -58,7 +58,7 @@ export default class LoginPopUp extends React.Component {
 
     render() {
         const LoginTrigger = <p onClick={()=> this.setState({forget: false})} className="btn-login">LOGIN</p>;
-        console.log(this.state);
+        //console.log(this.state);
         return (
             <Modal trigger={LoginTrigger} actions={false} className="login">
                 {this.state.forget ?
