@@ -66,7 +66,6 @@ export default class EditProfile extends React.Component {
                         <h1 className="title"></h1><h1 className="bold">{name}</h1>
                         <div><b className="bold">email</b></div>
                         <div><b className="bold">password</b></div>
-                        <button className="submit">edit details</button>
                     </div>
                 </div>
                 <div className="extra-details">
