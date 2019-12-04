@@ -9,6 +9,7 @@ import LoggedOutHeader from './components/layout/loggedOutHeader';
 import MealPlannerPage from './components/mealPlan/MealPlannerPage';
 import Goals from './components/mealPlan/goals';
 import Profile from './components/userInfo/profile';
+import EditProfile from './components/userInfo/editProfile';
 import Register from './components/authentication/register';
 
 //all the components have moved to components directory, you can find the path there
@@ -43,6 +44,7 @@ export default class App extends React.Component {
                     <Route path='/recipes' component={HomeView} />
                     <Route path='/goals' component={Goals} />
                     <Route path='/profile' component={Profile}/>
+                    <Route path='/edit_profile' component={EditProfile}/>
                     <Route path='/register' component={Register}/>
                 </Switch>
                 <Footer/>

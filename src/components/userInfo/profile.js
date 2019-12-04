@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 import Avatar from '../../images/avatar.svg';
-import { RadioGroup, Select } from 'react-materialize';
+import { NavLink } from 'react-router-dom';
 
 export default class Profile extends React.Component {
     state = {
@@ -13,12 +13,6 @@ export default class Profile extends React.Component {
         weight: '',
         activityLevel: '',
         error: '',
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
     }
 
     componentDidMount() {
@@ -35,26 +29,6 @@ export default class Profile extends React.Component {
         })
     }
 
-    handleSubmit = e => {
-        e.preventDefault()
-        const userId = this.state.user.uid;
-        const timestamp = new Date().toLocaleString();
-        const { name, age, gender, height, weight, activityLevel } = this.state;
-        //console.log(this.state)
-        firebase.firestore().collection('profiles').doc(userId)
-            .set({
-                name,
-                age,
-                height,
-                gender,
-                weight,
-                activityLevel,
-                timestamp: timestamp,
-            }).then(this.props.history.push('/profile')).catch(error => {
-                this.setState({ error })
-            })
-    }
-
     render() {
         //console.log(this.state)
         const { name, age, gender, height, weight, activityLevel, } = this.state;
@@ -66,86 +40,37 @@ export default class Profile extends React.Component {
                         <h1 className="title"></h1><h1 className="bold">{name}</h1>
                         <div><b className="bold">email</b></div>
                         <div><b className="bold">password</b></div>
-                        <button className="submit">edit details</button>
+                        <NavLink to='/edit_profile'>edit details</NavLink>
                     </div>
                 </div>
                 <div className="extra-details">
-                    <form onSubmit={this.handleSubmit} className="form">
                         <div className="hdr">User Details</div>
                         <div className="table">
                             <div className="row">
                                 <div className="cell">Name:</div>
-                                <div className="cell"><input id="name" required className="input" type="text" placeholder="Name" onChange={this.handleChange} value={name}></input></div>
+                                <div className="cell">{name}</div>
                             </div>
                             <div className="row">
                                 <div className="cell">Age:</div>
-                                <div className="cell"><input id="age" required className="input" type="text" placeholder="Age" onChange={this.handleChange} value={age}></input></div>
+                                <div className="cell">{age}</div>
                             </div>
                             <div className="row">
                                 <div className="cell">Gender:</div>
-                                <Select id="gender" onChange={this.handleChange}
-                                    // onChange={function noRefCheck() { }}
-                                    // options={{
-                                    //     classes: '',
-                                    //     dropdownOptions: { alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250 }
-                                    // }} 
-                                    value={gender?gender:""}>
-                                    <option
-                                        disabled
-                                        value=""
-                                    >
-                                        Gender
-                                        </option>
-                                    <option value="Male">
-                                        Male
-                                        </option>
-                                    <option value="Female">
-                                        Female
-                                        </option>
-                                </Select>
+                                <div className="cell">{gender}</div>
                             </div>
                             <div className="row">
                                 <div className="cell">Height (cm):</div>
-                                <div className="cell"><input id="height" required className="input" type="text" placeholder="Height" onChange={this.handleChange} value={height}></input></div>
+                                <div className="cell">{height}</div>
                             </div>
                             <div className="row">
                                 <div className="cell">Weight (kg):</div>
-                                <div className="cell"><input id="weight" required className="input" type="text" placeholder="Weight" onChange={this.handleChange} value={weight}></input></div>
+                                <div className="cell">{weight}</div>
                             </div>
                             <div className="row">
                                 <div className="cell">Activity level:</div>
-                                <Select id="activityLevel" onChange={this.handleChange}
-                                    // onChange={function noRefCheck() { }}
-                                    // options={{
-                                    //     classes: '',
-                                    //     dropdownOptions: { alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250 }
-                                    // }} 
-                                    value={activityLevel?activityLevel:""}>
-                                    <option
-                                        disabled
-                                        value=""
-                                    >
-                                        Activity Level
-                                        </option>
-                                    <option value="Low">
-                                        Low
-                                        </option>
-                                    <option value="Moderate">
-                                        Moderate
-                                        </option>
-                                    <option value="High">
-                                        High
-                                        </option>
-                                </Select>
+                                <div className="cell">{activityLevel}</div>
                             </div>
                         </div>
-                        <div>
-                            <button type="submit" className="submit">Submit</button>
-                            <div>
-                                {this.state.error ? <p>{this.state.error.message}</p> : null}
-                            </div>
-                        </div>
-                    </form>
                 </div>
                 <div className="achievements">
                     Achievements
