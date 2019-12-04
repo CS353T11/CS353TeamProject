@@ -49,6 +49,8 @@ export default class MealPlannerPage extends React.Component {
 
     getTotalNutr(tileNutr, key){
         let totalNutrWeek;
+        console.log("TILE NUTR:")
+        console.log(tileNutr);
 
         this.state.nutritionValues[key] = tileNutr;
         ++this.state.nutritionValues.length;
@@ -56,19 +58,23 @@ export default class MealPlannerPage extends React.Component {
         if(this.state.nutritionValues.length > 2){
             let foodArray = this.state.nutritionValues;
             foodArray = Object.keys(foodArray).map(key => {
-                let { cal, fat, pro, carbs } = foodArray[key];
-                return {
-                    cal,fat,pro,carbs
-                };
+                if(foodArray[key] !== 0) {
+                    let {cal, fat, pro, carbs} = foodArray[key];
+                    return {
+                        cal, fat, pro, carbs
+                    };
+                }
             });
             totalNutrWeek = foodArray.reduce((a,b) => {
-                console.log(a,b);
-                return ({
-                    cal: a.cal + b.cal,
-                    fat: a.fat + b.fat,
-                    pro: a.pro + b.pro,
-                    carbs: a.carbs + b.carbs,
-                });
+                if(a && b) {
+                    console.log(a, b);
+                    return ({
+                        cal: a.cal + b.cal,
+                        fat: a.fat + b.fat,
+                        pro: a.pro + b.pro,
+                        carbs: a.carbs + b.carbs,
+                    });
+                }
             });
         }
         else {
