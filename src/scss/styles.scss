@@ -581,11 +581,12 @@ body {
 }
 
 .foodItem{
+  position: relative;
   margin: 4px 0;
   background: #fafafa;
   border-radius: 8px;
   .foodItemTitle{
-    padding:8px 12px 8px 2px;
+    padding:8px 24px 8px 8px;
     overflow: hidden;
     white-space: nowrap;
     border-radius: 8px;
@@ -595,6 +596,7 @@ body {
     font: bold 11px "Montserrat";
     .foodItemDel{
       display:none;
+      z-index: 1;
     }
     &:hover>.foodItemDel{
       display: block;
@@ -607,6 +609,12 @@ body {
         color: #f44336;
       }
     }
+  }
+  .foodItemQty {
+    position: absolute;
+    right: 0;
+    padding: 0 20px 0 2px;
+    background: #fafafa;
   }
 }
 
