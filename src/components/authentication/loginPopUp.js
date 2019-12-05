@@ -33,6 +33,7 @@ export default class LoginPopUp extends React.Component {
             })
             .catch(error => {
                 this.setState({ error });
+                console.log(error);
             })
     }
 

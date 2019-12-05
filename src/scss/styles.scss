@@ -709,6 +709,7 @@ body {
 
 .results{
   display: flex;
+  flex-direction: row;
 }
 
 .profile {
@@ -758,7 +759,7 @@ body {
 
 .plan{
   //position: center;
-  margin-left: 25%;
+  margin: auto;
   width: 50%;
   text-align: center;
   justify-content: center;
