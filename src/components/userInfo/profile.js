@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
+import {db} from '../firebase/firebase';
 import Avatar from '../../images/avatar.svg';
 import { RadioGroup, Select } from 'react-materialize';
 

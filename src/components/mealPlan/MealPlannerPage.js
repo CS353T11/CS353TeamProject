@@ -3,6 +3,9 @@ import SearchBar from './searchBar';
 import WeekPlan from './weekPlan';
 import NutriScore from './nutriScore';
 import DragDropBox from "./DragDropBox";
+import firebase from '../firebase/firebase';
+import {db,mealPlan} from '../firebase/firebase';
+import {addMealPlanDoc} from "../firebase/DbObjects";
 // import DragDropTest from './DragDropTest';
 // import InitialBox from "./testY";
 
@@ -10,6 +13,7 @@ export default class MealPlannerPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            uid:"",
             rowcount: 0,
             mealplansaved: false,
             creationcheck: false,
@@ -40,10 +44,34 @@ export default class MealPlannerPage extends React.Component {
         this.getTotalNutr = this.getTotalNutr.bind(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // var user = firebase.auth().currentUser;
+        // if(user){
+        //     prevState.uid=user.uid;
+        // }
+
+    }
+
     async componentDidMount() {
         await this.addRow();
         await this.addRow();
         await this.addRow();
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                let userID=user.uid;
+                this.setState({ uid:userID});
+                console.log("User:"+userID+" is logged in.");
+
+                mealPlan.doc(userID).get()
+                    .then(doc => {
+                        if(doc.exists){
+                            console.log("Retrieving Meal Plan...");
+                            this.saveMealplan();
+                        }
+
+                    })
+            }
+        })
         //Retrieve from the database if the user already has a mealplan
     }
 
@@ -109,8 +137,26 @@ export default class MealPlannerPage extends React.Component {
 
     saveMealplan(){
         this.setState({mealplansaved: true});
-
         //Here we should do the thing with the database
+    }
+
+    //for some reason only arrow function works here...
+    createMealPlan=e=>{
+        this.setState({creationcheck: true});
+        if (this.state.uid!=="") {
+            let userID=this.state.uid;
+            //console.log("MY BOY -->" +userID);
+
+            mealPlan.doc(userID).get()
+                .then(doc => {
+                    if(doc.exists){
+                        console.log("huh...a meal plan already exists...");
+                    }else{
+                        console.log("creating meal plan for"+userID);
+                        addMealPlanDoc(userID);
+                    }
+                })
+        }
     }
 
     async deleteMealplan(){
@@ -176,7 +222,7 @@ export default class MealPlannerPage extends React.Component {
                             <p>3. Let our app calculate for you the total nutritional values.</p>
                             <p>Then, confirm your planned meals or edit them with your actual intake to see your real
                             values.</p>
-                            <span className="btn-login" onClick={()=>this.setState({creationcheck: true})}>
+                            <span className="btn-login" onClick={this.createMealPlan}>
                                 Create your mealplan
                             </span>
                         </div>
@@ -187,7 +233,6 @@ export default class MealPlannerPage extends React.Component {
     }
 
     render() {
-        //console.log(this);
         return (
             this.createProcess()
         );

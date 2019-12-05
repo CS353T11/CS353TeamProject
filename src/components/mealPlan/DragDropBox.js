@@ -67,7 +67,6 @@ export default class DragDropTest extends React.Component {
 	};
 
 	groupFoodList(){
-
 		if(this.state.foodList.length > 0) {
 			//Groups the food by label
 			let grpFood = this.state.foodList.reduce((acc, cv) => {

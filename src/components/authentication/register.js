@@ -1,5 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export default class Register extends React.Component {
     state = {
@@ -24,6 +26,13 @@ export default class Register extends React.Component {
                 firebase.auth()
                     .createUserWithEmailAndPassword(email, password)
                     .then(() => {
+                        const MySwal = withReactContent(Swal);
+                        MySwal.fire({
+                            icon: 'success',
+                            title: 'Account create successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                         this.props.history.push('/');
                     })
                     .catch(error => {
@@ -37,7 +46,7 @@ export default class Register extends React.Component {
         }
         console.log(this.state.error)
     }
-//eafasfsdf
+
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
