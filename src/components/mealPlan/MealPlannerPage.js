@@ -16,7 +16,7 @@ export default class MealPlannerPage extends React.Component {
             uid:"",
             rowcount: 0,
             mealplansaved: false,
-            creationcheck: false,
+            creationcheck: '',
             totalNutrPlan:  {
                 kcal: 0,
                 prots: 0,
@@ -56,7 +56,7 @@ export default class MealPlannerPage extends React.Component {
         await this.addRow();
         await this.addRow();
         await this.addRow();
-        firebase.auth().onAuthStateChanged(user => {
+        await firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 let userID=user.uid;
                 this.setState({ uid:userID});
@@ -66,6 +66,7 @@ export default class MealPlannerPage extends React.Component {
                     .then(doc => {
                         if(doc.exists){
                             console.log("Retrieving Meal Plan...");
+                            this.setState({creationcheck:true});
                             this.saveMealplan();
                         }
 
@@ -200,7 +201,7 @@ export default class MealPlannerPage extends React.Component {
             )
         }
         else {
-            if(this.state.creationcheck == true){
+            if(this.state.creationcheck === true){
                 return (
                     <div className="view">
                         <SearchBar/>
@@ -215,7 +216,7 @@ export default class MealPlannerPage extends React.Component {
                     </div>
                 )
             }
-            else{
+            else if(this.state.creationcheck === false){
                 return (
                     <div className="view create-help">
                         <div className="help-pic">
@@ -232,6 +233,13 @@ export default class MealPlannerPage extends React.Component {
                                 Create your mealplan
                             </span>
                         </div>
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div className="view create-help">
+                        LOADING
                     </div>
                 )
             }

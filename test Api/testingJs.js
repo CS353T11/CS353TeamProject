@@ -1,3 +1,4 @@
+import {db} from "../src/components/firebase/firebase";
 
 $(document).ready(function() {
     $("#woee").text("Press Button to get request food api");
@@ -140,14 +141,11 @@ function testy(food){
         alert( "Load was performed.");
     });
 }
-
+import firebase from "../src/components/firebase/firebase";
 function testFire(){
     alert("doing the roar");
-    const app=firebase.app();
-    const db=firebase.firestore();
 
     const testie=db.collection("MealPlan").doc("test");
-
     testie.get()
         .then(doc => {
             const data = doc.data();
