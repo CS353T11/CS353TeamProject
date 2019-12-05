@@ -11,6 +11,7 @@ import Goals from './components/mealPlan/goals';
 import Profile from './components/userInfo/profile';
 import EditProfile from './components/userInfo/editProfile';
 import Register from './components/authentication/register';
+import ChangePassword from './components/userInfo/changePassword'
 
 //all the components have moved to components directory, you can find the path there
 
@@ -46,6 +47,7 @@ export default class App extends React.Component {
                     <Route path='/profile' component={Profile}/>
                     <Route path='/edit_profile' component={EditProfile}/>
                     <Route path='/register' component={Register}/>
+                    <Route path='/change_password' component={ChangePassword}/>
                 </Switch>
                 <Footer/>
             </BrowserRouter>

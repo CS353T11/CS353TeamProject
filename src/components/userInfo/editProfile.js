@@ -1,11 +1,12 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
-import Avatar from '../../images/avatar.svg';
+import SideBar from './sideBar'
 import { RadioGroup, Select } from 'react-materialize';
 
 export default class EditProfile extends React.Component {
     state = {
         user: null,
+        email:'',
         name: '',
         age: '',
         gender: null,
@@ -26,8 +27,7 @@ export default class EditProfile extends React.Component {
             if (user) {
                 this.setState({ user })
                 let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
-                    this.setState((preState) => ({ ...preState.user, ...doc.data() })
-                    )
+                    this.setState({ email:user.email, user, ...doc.data() })
                 }).then(this.props.history.push('/edit_profile'));
             } else {
                 this.props.history.push('/');
@@ -39,7 +39,7 @@ export default class EditProfile extends React.Component {
         e.preventDefault()
         const userId = this.state.user.uid;
         const timestamp = new Date().toLocaleString();
-        const { name, age, gender, height, weight, activityLevel } = this.state;
+        const { name, age, gender, height, weight, activityLevel} = this.state;
         //console.log(this.state)
         firebase.firestore().collection('profiles').doc(userId)
             .set({
@@ -50,24 +50,17 @@ export default class EditProfile extends React.Component {
                 weight,
                 activityLevel,
                 timestamp: timestamp,
-            }).then(this.props.history.push('/profile')).catch(error => {
+            }).catch(error => {
                 this.setState({ error })
             })
     }
 
     render() {
         //console.log(this.state)
-        const { name, age, gender, height, weight, activityLevel, } = this.state;
+        const { name, age, gender, height, weight, activityLevel, email} = this.state;
         return (
             <div className="profile">
-                <div className="user-details">
-                    <div className="profile-id">
-                        <img src={Avatar} alt="avatar"></img><br></br>
-                        <h1 className="title"></h1><h1 className="bold">{name}</h1>
-                        <div><b className="bold">email</b></div>
-                        <div><b className="bold">password</b></div>
-                    </div>
-                </div>
+                <SideBar name={name} email={email}/>
                 <div className="extra-details">
                     <form onSubmit={this.handleSubmit} className="form">
                         <div className="hdr">User Details</div>

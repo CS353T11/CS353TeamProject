@@ -1,11 +1,11 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
-import Avatar from '../../images/avatar.svg';
-import { NavLink } from 'react-router-dom';
+import SideBar from './sideBar';
 
 export default class Profile extends React.Component {
     state = {
         user: null,
+        email:'',
         name: '',
         age: '',
         gender: null,
@@ -18,10 +18,9 @@ export default class Profile extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.setState({ user })
-                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
-                    this.setState((preState) => ({ ...preState.user, ...doc.data() })
-                    )
+                //this.setState({ user })
+                firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                    this.setState({ email:user.email, user, ...doc.data() })
                 });
             } else {
                 this.props.history.push('/');
@@ -30,19 +29,10 @@ export default class Profile extends React.Component {
     }
 
     render() {
-        //console.log(this.state)
-        const { name, age, gender, height, weight, activityLevel, } = this.state;
+        const { name, age, gender, height, weight, activityLevel, email } = this.state;
         return (
             <div className="profile">
-                <div className="user-details">
-                    <div className="profile-id">
-                        <img src={Avatar} alt="avatar"></img><br></br>
-                        <h1 className="title"></h1><h1 className="bold">{name}</h1>
-                        <div><b className="bold">email</b></div>
-                        <div><b className="bold">password</b></div>
-                        <NavLink to='/edit_profile'>edit details</NavLink>
-                    </div>
-                </div>
+                <SideBar name={name} email={email}/>
                 <div className="extra-details">
                         <div className="hdr">User Details</div>
                         <div className="table">
