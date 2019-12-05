@@ -107,7 +107,7 @@ export default class Goals extends React.Component {
                             <option value="keto">Ketogenic</option>
                         </Select>
                     </div>
-                </div>++++++
+                </div>
                 <div className="plan">
 
                     <div>Your daily calorie intake: {this.state.dietCalc}</div>
