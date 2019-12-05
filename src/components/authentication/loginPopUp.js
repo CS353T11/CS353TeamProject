@@ -84,8 +84,12 @@ export default class LoginPopUp extends React.Component {
                             <label className="label">Password:</label>
                             <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
                             <br></br>
+                            <div>
+                                {this.state.error ? <p style={{color:"red"}}>{this.state.error.message}</p> : null}
+                            </div>
                             <p className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</p>
                             <button type="submit" className="btn-login" >LOGIN</button>
+                            
                         </form>
                     </div>)
                     }
