@@ -2,6 +2,8 @@ import React from 'react';
 import {TextInput} from 'react-materialize';
 import axios from 'axios';
 import SearchResultTile from "./SearchResultTile";
+import firebase from '../firebase/firebase';
+import {db,mealPlan} from '../firebase/firebase';
 export default class SearchBar extends React.Component {
 
     constructor(props){
@@ -24,7 +26,25 @@ export default class SearchBar extends React.Component {
 		})
 	}
 
-	//Rounds a number to only "exp" decimals :
+	componentDidMount() {
+        var user = firebase.auth().currentUser;
+        if (user) {
+            //console.log(user.uid);
+        } else {
+            // No user is signed in.
+        }
+
+        // mealPlan.doc('sendTest').get()
+        //     .then(doc => {
+        //         if(doc.exists){
+        //             console.log("weee");
+        //         }else{
+        //             console.log("uuuuuu");
+        //         }
+        //     })
+    }
+
+    //Rounds a number to only "exp" decimals :
     // https://stackoverflow.com/questions/1726630/formatting-a-number-with-exactly-two-decimals-in-javascript
 	round = (value, exp) => {
         if (typeof exp === 'undefined' || +exp === 0)

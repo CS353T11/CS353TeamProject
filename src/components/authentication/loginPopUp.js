@@ -1,8 +1,11 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 import { Modal } from 'react-materialize';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export default class LoginPopUp extends React.Component {
+
     state = {
         email: '',
         password: '',
@@ -18,7 +21,7 @@ export default class LoginPopUp extends React.Component {
 
     //handle the submit
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const { email, password } = this.state;
         firebase.auth()
             .signInWithEmailAndPassword(email, password)
@@ -29,10 +32,19 @@ export default class LoginPopUp extends React.Component {
                     error: null,
                     forget: false
                 });
+                const MySwal = withReactContent(Swal);
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Logged In',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                //TODO: for a smoother transition for closing, change props.history with a call to close modal
                 this.props.history.push('/');
             })
             .catch(error => {
                 this.setState({ error });
+                console.log(error);
             })
     }
 
@@ -49,6 +61,13 @@ export default class LoginPopUp extends React.Component {
                     error: null,
                     forget: false
                 });
+                const MySwal = withReactContent(Swal);
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Reset password email sent',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 this.props.history.push('/');
             })
             .catch(error => {

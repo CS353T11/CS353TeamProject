@@ -4,6 +4,7 @@ import FoodItem from "./FoodItem";
 export default class DragDropTest extends React.Component {
 	constructor(props) {
 		super(props);
+		//TODO:Calculate nutrition for entire dropBox
 		this.state = {
 			foodList: [],
 			totalNutr: {
@@ -66,7 +67,6 @@ export default class DragDropTest extends React.Component {
 	};
 
 	groupFoodList(){
-		let totalNutr;
 		if(this.state.foodList.length > 0) {
 			//Groups the food by label
 			let grpFood = this.state.foodList.reduce((acc, cv) => {
@@ -99,7 +99,7 @@ export default class DragDropTest extends React.Component {
 			console.log(grpFood);
 
 			//Now we calculate total nutrition
-			totalNutr = grpFood.reduce((a,b) => {
+			let totalNutr = grpFood.reduce((a,b) => {
 				return {
 					cal: a.cal + b.cal,
 					fat: a.fat + b.fat,
@@ -115,16 +115,11 @@ export default class DragDropTest extends React.Component {
 				foodList: grpFood,
 				totalNutr: totalNutr,
 			})
+
+			console.log(this.props);
+			this.props.getTotalNutr(totalNutr, this.props.index);
+
 		}
-		else {
-			totalNutr = {cal: 0, pro: 0, fat: 0, carbs: 0};
-			this.setState({
-				foodList: [],
-				totalNutr: totalNutr,
-			})
-		}
-		console.log(this.props);
-		this.props.getTotalNutr(totalNutr, this.props.index);
 	}
 
 	render() {
@@ -142,13 +137,12 @@ export default class DragDropTest extends React.Component {
 								obj={obj}
 								index={index}
 								onDel={this.targetDel}
-								key={this.props.index+"food"+index}
 							/>
 						);
 					})
 					:
 					<ul>
-						<li >Empty</li>
+						<li>Empty</li>
 					</ul>
 				}
 			</td>
