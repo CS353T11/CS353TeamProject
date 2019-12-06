@@ -28,7 +28,7 @@ export default class EditProfile extends React.Component {
                 this.setState({ user })
                 let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
                     this.setState({ email:user.email, user, ...doc.data() })
-                }).then(this.props.history.push('/edit_profile'));
+                });
             } else {
                 this.props.history.push('/');
             }
@@ -50,7 +50,7 @@ export default class EditProfile extends React.Component {
                 weight,
                 activityLevel,
                 timestamp: timestamp,
-            }).catch(error => {
+            }).then(this.props.history.push('/profile')).catch(error => {
                 this.setState({ error })
             })
     }
