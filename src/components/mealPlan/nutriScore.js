@@ -73,6 +73,7 @@ export default class NutriScore extends React.Component {
     }
 
     render() {
+        const { calories, carbs, protein, fats} = this.state;
         return (
             <div className="nutriscore">
                 <h3 className="title">NutriScore</h3>

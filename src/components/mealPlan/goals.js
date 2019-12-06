@@ -12,7 +12,7 @@ export default class Goals extends React.Component {
         weight: '',
         activityLevel: '',
         error: '',
-        dietCalc:'',
+        diet:'',
         calories: '',
         carbs: '',
         fats: '',
@@ -41,41 +41,46 @@ export default class Goals extends React.Component {
         let carb=0;
         let p=0;
         let f=0;
-        if(e.target.value=="maintain"){
+        let diet="";
+        if(e.target.value=="Maintain weight"){
             this.setState({dietCalc:this.getCalculateResult()})
             c=this.getCalculateResult()
             carb = c*0.155;
             p=c*0.025;
             f=c*0.035;
+            diet = e.target.value;
         }
-        else if(e.target.value=="loose"){
+        else if(e.target.value=="Lose weight"){
             this.setState({dietCalc:this.getCalculateResult()*.8})
             c=this.getCalculateResult()*0.8
             carb = c*0.155;
             p=c*0.025;
             f=c*0.035;
+            diet = e.target.value;
         }
-        else if(e.target.value=="gain"){
+        else if(e.target.value=="Gain weight"){
             this.setState({dietCalc:this.getCalculateResult()*1.2})
             c=this.getCalculateResult()*1.2
             carb = c*0.155;
             p=c*0.025;
             f=c*0.035;
-
+            diet = e.target.value;
         }
-        else if(e.target.value=="protein"){
+        else if(e.target.value=="High Protein diet"){
             this.setState({dietCalc:this.getCalculateResult()*1.1})
             c=this.getCalculateResult()*1.1
             carb = c*0.13;
             p=c*0.075;
             f=c*0.035;
+            diet = e.target.value;
         }
-        else if(e.target.value=="ketogenic"){
+        else if(e.target.value=="Ketogenic diet"){
             this.setState({dietCalc:this.getCalculateResult()*0.9})
             c=this.getCalculateResult()*0.9
             carb = c*0.02;
             p=c*0.04;
             f=c*0.085;
+            diet = e.target.value;
         }
         console.log(c)
         this.setState({dietCalc:c})
@@ -85,6 +90,7 @@ export default class Goals extends React.Component {
         //console.log(this.state)
         firebase.firestore().collection('profiles').doc(userId)
             .update({
+                diet: diet,
                 calories: Math.round(c),
                 carbs:Math.round(carb),
                 protein:Math.round(p),
@@ -125,7 +131,7 @@ export default class Goals extends React.Component {
     }
 
     render() {
-        const { calories, carbs, protein, fats} = this.state;
+        const { diet, calories, carbs, protein, fats} = this.state;
         return (
             <div className="results">
                 <div className="user-details">
@@ -133,38 +139,41 @@ export default class Goals extends React.Component {
                     <br/>
                         <Select id="dietCalc"
                             onChange={this.handleChange}
+                                //window.location.reload();
                             options={{
                                 classes: '',
                                 dropdownOptions: {alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250}
                             }} value="">
                             <option disabled value="">Diet Plan</option>
-                            <option value="maintain">Maintain Weight</option>
-                            <option value="loose">Loose Weight</option>
-                            <option value="gain">Gain Weight</option>
-                            <option value="protein">High Protein</option>
-                            <option value="ketogenic">Ketogenic</option>
+                            <option value="Maintain weight">Maintain Weight</option>
+                            <option value="Lose weight">Lose Weight</option>
+                            <option value="Gain weight">Gain Weight</option>
+                            <option value="High Protein diet">High Protein</option>
+                            <option value="Ketogenic diet">Ketogenic</option>
                         </Select>
                     </div>
                 </div>
                 <div className="plan">
-
-
                     <div className="table">
+                        <div className="row">
+                            <div className="cell">Diet:</div>
+                            <div className="cell">{diet}</div>
+                        </div>
                         <div className="row">
                             <div className="cell">Calories:</div>
                             <div className="cell">{calories}</div>
                         </div>
                         <div className="row">
                             <div className="cell">Carbs:</div>
-                            <div className="cell">{carbs}</div>
+                            <div className="cell">{carbs}g</div>
                         </div>
                         <div className="row">
                             <div className="cell">Protein:</div>
-                            <div className="cell">{protein}</div>
+                            <div className="cell">{protein}g</div>
                         </div>
                         <div className="row">
                             <div className="cell">Fats:</div>
-                            <div className="cell">{fats}</div>
+                            <div className="cell">{fats}g</div>
                         </div>
 
                     </div>
