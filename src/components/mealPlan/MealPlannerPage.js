@@ -71,7 +71,9 @@ export default class MealPlannerPage extends React.Component {
 
                     })
             }
+
         })
+
         //Retrieve from the database if the user already has a mealplan
     }
 
