@@ -125,6 +125,7 @@ export default class Goals extends React.Component {
     }
 
     render() {
+        const { calories, carbs, protein, fats} = this.state;
         return (
             <div className="results">
                 <div className="user-details">
@@ -146,6 +147,27 @@ export default class Goals extends React.Component {
                     </div>
                 </div>
                 <div className="plan">
+
+
+                    <div className="table">
+                        <div className="row">
+                            <div className="cell">Calories:</div>
+                            <div className="cell">{calories}</div>
+                        </div>
+                        <div className="row">
+                            <div className="cell">Carbs:</div>
+                            <div className="cell">{carbs}</div>
+                        </div>
+                        <div className="row">
+                            <div className="cell">Protein:</div>
+                            <div className="cell">{protein}</div>
+                        </div>
+                        <div className="row">
+                            <div className="cell">Fats:</div>
+                            <div className="cell">{fats}</div>
+                        </div>
+
+                    </div>
 
                     <div>Your daily calorie intake: {this.state.dietCalc}</div>
 
