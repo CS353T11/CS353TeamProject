@@ -32,7 +32,6 @@ export default class NutriScore extends React.Component {
         var prots = (this.props.actual_values.prots/this.props.planned_values.prots)*100;
         var carbs = (this.props.actual_values.carbs/this.props.planned_values.carbs)*100;
         var fats = (this.props.actual_values.fats/this.props.planned_values.fats)*100;
-        console.log(kcal);
 
         document.getElementById("kcalbar").style.width= kcal + '%';
         document.getElementById("protsbar").style.width= prots + '%';
