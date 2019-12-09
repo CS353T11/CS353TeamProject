@@ -63,6 +63,8 @@ export default class MealPlannerPage extends React.Component {
                             console.log("Retrieving Meal Plan...");
                             this.setState({creationcheck:true});
                             this.saveMealplan();
+                        }else {
+                            this.setState({creationcheck:false});
                         }
 
                     })
