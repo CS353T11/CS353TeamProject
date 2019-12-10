@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 import SideBar from './sideBar';
-
+import Achievements from './achievements'
 export default class Profile extends React.Component {
     state = {
         user: null,
@@ -33,38 +33,37 @@ export default class Profile extends React.Component {
         return (
             <div className="profile">
                 <SideBar name={name} email={email}/>
-                <div className="extra-details">
-                    <div className="hdr">User Details</div>
+                <div className="profile-details">
+                    <h3 className="title">User Details</h3>
+
                     <div className="table">
                         <div className="row">
-                            <div className="cell">Name:</div>
+                            <div className="cell bold">Name:</div>
                             <div className="cell">{name}</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Age:</div>
+                            <div className="cell bold">Age:</div>
                             <div className="cell">{age}</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Gender:</div>
+                            <div className="cell bold">Gender:</div>
                             <div className="cell">{gender}</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Height (cm):</div>
+                            <div className="cell bold">Height (cm):</div>
                             <div className="cell">{height}</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Weight (kg):</div>
-                            <div className="cell">{weight}</div>
+                            <div className="cell bold">Weight (kg):</div>
+                            <div className="cell ">{weight}</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Activity level:</div>
+                            <div className="cell bold">Activity level:</div>
                             <div className="cell">{activityLevel}</div>
                         </div>
                     </div>
                 </div>
-                <div className="achievements">
-                    Achievements
-                </div>
+                <Achievements/>
             </div>
         );
     }

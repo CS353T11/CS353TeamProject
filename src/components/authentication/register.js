@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import {NavLink} from "react-router-dom";
 
 export default class Register extends React.Component {
     state = {
@@ -72,7 +73,7 @@ export default class Register extends React.Component {
                             <input required className="input" type="password" id="confirmPassword" name="confirmPassword" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
                             <br></br>
                             {/*<a className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</a>*/}
-                            <button type="submit" className="btn-login" >REGISTER</button>
+                            <button NavLink to='../homeview' type="submit" className="btn-login" >REGISTER</button>
                             <br></br>
                             {this.state.error ? <p>{this.state.error.message}</p> : null}
                         </form>

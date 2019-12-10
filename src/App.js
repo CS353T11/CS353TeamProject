@@ -45,9 +45,9 @@ export default class App extends React.Component {
                     <Route path='/recipes' component={HomeView} />
                     <Route path='/goals' component={Goals} />
                     <Route path='/profile' component={Profile}/>
-                    <Route path='/edit_profile' component={EditProfile}/>
+                    <Route path='/edit-profile' component={EditProfile}/>
                     <Route path='/register' component={Register}/>
-                    <Route path='/change_password' component={ChangePassword}/>
+                    <Route path='/edit-pwd' component={ChangePassword}/>
                 </Switch>
                 <Footer/>
             </BrowserRouter>

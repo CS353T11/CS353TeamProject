@@ -148,7 +148,7 @@ export default class DragDropTest extends React.Component {
 					})
 					:
 					<ul>
-						<li >Empty</li>
+						<li>Add Item</li>
 					</ul>
 				}
 			</td>

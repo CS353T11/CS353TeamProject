@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 import SideBar from './sideBar'
-
+import Achievements from './achievements'
 export default class ChangePassword extends React.Component {
     state = {
         user: null,
@@ -24,7 +24,10 @@ export default class ChangePassword extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.setState({ email: user.email, user })
+                this.setState({ user })
+                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                    this.setState({ email:user.email, user, ...doc.data() })
+                });
             } else {
                 this.props.history.push('/');
             }
@@ -84,7 +87,7 @@ export default class ChangePassword extends React.Component {
         const { oldPassword, newPassword, confirmNewPassword, name, email, newEmail } = this.state;
         return (
             <div className="profile">
-                <SideBar name={name} email={email} />
+                <SideBar name={name} email={email} path="/edit-pwd" />
                 <div className="extra-details">
                     <form onSubmit={this.handleSubmit} className="form">
                         <div className="hdr">Change password</div>
@@ -115,6 +118,7 @@ export default class ChangePassword extends React.Component {
                         </div>
                     </form>
                 </div>
+                <Achievements/>
             </div>
         );
     }
