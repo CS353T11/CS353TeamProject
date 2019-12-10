@@ -675,7 +675,7 @@ body, input, select, button {
   flex-direction: column;
   background-color: $primaryColor-s1;
   color: black;
-  width: 300px;
+  min-width: 26%;
   padding: 48px 24px 24px;
   min-height: 100%;
   text-align: center;
@@ -702,6 +702,7 @@ body, input, select, button {
 }
 
 .profile-details {
+  width: 44%;
   padding: 48px;
   .title {
     font: bold 32px $sans-serif;
@@ -762,7 +763,8 @@ body, input, select, button {
 .profile-achievements {
   display: flex;
   flex-direction: column;
-  padding: 48px;
+  width: 30%;
+  padding: 48px 48px 48px 0;
   .title {
     font: bold 32px $sans-serif;
     margin-bottom: 24px;
