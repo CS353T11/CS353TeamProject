@@ -135,8 +135,8 @@
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
-body {
-  font-family: $sans-serif;
+body, input, select, button {
+  font-family: $sans-serif !important;
 }
 
 .header {
@@ -169,7 +169,6 @@ body {
   padding: 48px 96px 48px 96px;
   min-height: calc(100vh - 128px);
 }
-
 .footer {
   display: flex;
   height: 256px;
@@ -289,21 +288,6 @@ body {
     text-decoration: underline;
     margin: 8px 0 16px;
     cursor: pointer;
-  }
-}
-
-.submit {
-  padding: 8px 24px;
-  border: 1px solid black;
-  font-weight: bold;
-  display: flex;
-  text-decoration: none;
-  justify-content: center;
-  &:hover {
-    background-color: black;
-    color: white;
-    transition: 0.1s;
-    font-weight: 700;
   }
 }
 
@@ -485,13 +469,14 @@ body {
   background: lightgray;
   th, td {
     text-align: center;
+    font-size: 14px;
   }
   td.dropBox {
     background: white;
     border: 4px solid lightgray;
     border-radius: 12px;
     min-height: 64px;
-    height: 52px;
+    height: 78px;
     padding: 4px;
     max-width: 50px;
     width: 14%;
@@ -680,40 +665,113 @@ body {
   }
 }
 
-.user-details {
+.profile {
+  display: flex;
+  min-height: calc(100vh - 80px);
+}
+.profile-sidebar {
   position: relative;
-  background-color: $primaryColor;
+  display: flex;
+  flex-direction: column;
+  background-color: $primaryColor-s1;
   color: black;
   width: 300px;
-  height: 600px;
+  padding: 48px 24px 24px;
+  min-height: 100%;
+  text-align: center;
+  align-items: center;
+  .name {
+    margin: 8px 0 8px;
+    font: bold 20px $sans-serif;
+  }
+  .email {
+    margin: 0 0 48px;
+    font: 18px $sans-serif;
+  }
+  .edit-pwd {
+    font: 16px $sans-serif;
+    text-decoration: underline;
+    &:hover {
+      color: white;
+    }
+  }
+  .edit-dets {
+    width: 156px;
+    margin-bottom: 8px;
+  }
 }
 
-.profile-id {
-  position: relative;
-  //background-color: #6bfa6b;
-  color: white;
-  width: 300px;
-  height: 350px;
-  justify-content: center;
-  text-align: center;
-  padding: 15%;
+.profile-details {
+  padding: 48px;
+  .title {
+    font: bold 32px $sans-serif;
+    margin-bottom: 24px;
+  }
+  .table {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    text-align: left;
+  }
+  .row {
+    display: flex;
+    width: auto;
+    clear: both;
+  }
+  .cell {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 48px;
+    &.bold {
+    font-weight: bold;
+    }
+    div.input-field.col {
+      padding: 0;
+      width: 100%;
+    }
+    ul.dropdown-content {
+      li > span {
+        color: black !important;
+      }
+      li.selected > span {
+        color: $primaryColor !important;
+        font-weight: bold;
+      }
+      li.disabled > span {
+        color: gray !important;
+      }
+    }
+    input, select {
+      min-width: 100%;
+      height: 40px;
+      margin:0;
+      padding: 0;
+      &:focus {
+        border-bottom: 1px solid $primaryColor !important;
+        -webkit-box-shadow: 0 1px 0 0 $primaryColor !important;
+        box-shadow: 0 1px 0 0 $primaryColor !important;
+      }
+    }
+  }
+  .submit {
+    -webkit-appearance: none;
+  }
 }
 
-.extra-details{
-  position: relative;
-  width: 50%;
-  text-align: center;
-  justify-content: center;
-  padding: 10px;
+.profile-achievements {
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+  .title {
+    font: bold 32px $sans-serif;
+    margin-bottom: 24px;
+  }
 }
 
 .results{
   display: flex;
   flex-direction: row;
-}
-
-.profile {
-  display: flex;
 }
 
 .register-form {
@@ -729,33 +787,7 @@ body {
   font: bold 32px $sans-serif;
 }
 
-.table {
-  display: table;
-  width: auto;
-  border-spacing: 5px;
-  margin-left: 15%;
-  text-align: left;
-}
-.row {
-  display: table-row;
-  width: auto;
-  clear: both;
-}
-.cell {
-  float: left;
-  display: table-column;
-  width: 200px;
-}
 
-.achievements {
-  position: relative;
-  margin-right: 0;
-  padding: 10px;
-}
-
-.hdr {
-  font-size: x-large;
-}
 
 .plan{
   //position: center;
