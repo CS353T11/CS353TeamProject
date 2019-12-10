@@ -1,3 +1,5 @@
+//sd
+
 import React from 'react';
 import avatar from '../../images/profile.svg';
 import { NavLink } from 'react-router-dom';
@@ -33,12 +35,12 @@ export default class SideBar extends React.Component {
         //console.log(this.state)
         const { name,email } = this.props;
         return (
-                <div className="profile-sidebar">
-                    <img src={avatar} alt="avatar"></img>
-                    <h4 className="name">{name}</h4>
-                    <span className="email">{email}</span>
+            <div className="profile-sidebar">
+                <img src={avatar} alt="avatar"></img>
+                <h4 className="name">{name}</h4>
+                <span className="email">{email}</span>
 
-                    {this.handleButtons()}
-                </div>
-                )}
+                {this.handleButtons()}
+            </div>
+        )}
 }
