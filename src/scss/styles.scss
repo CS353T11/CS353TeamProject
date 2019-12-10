@@ -728,6 +728,7 @@ body, input, select, button {
     width: 200px;
     height: 48px;
     &.bold {
+      width: 180px;
       font-weight: bold;
     }
     div.input-field.col {
