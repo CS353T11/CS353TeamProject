@@ -702,8 +702,11 @@ body, input, select, button {
 }
 
 .profile-details {
+  display: flex;
+  flex-direction: column;
   width: 44%;
   padding: 48px;
+  align-items: start;
   .title {
     font: bold 32px $sans-serif;
     margin-bottom: 24px;
@@ -725,7 +728,8 @@ body, input, select, button {
     width: 200px;
     height: 48px;
     &.bold {
-    font-weight: bold;
+      width: 180px;
+      font-weight: bold;
     }
     div.input-field.col {
       padding: 0;
@@ -756,7 +760,12 @@ body, input, select, button {
     }
   }
   .submit {
-    -webkit-appearance: none;
+    background: transparent;
+    width: 200px;
+    margin-left: auto;
+    &:hover {
+      background: black;
+    }
   }
 }
 

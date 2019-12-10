@@ -52,8 +52,8 @@ export default class EditProfile extends React.Component {
                 activityLevel,
                 timestamp: timestamp,
             }).then(this.props.history.push('/profile')).catch(error => {
-                this.setState({ error })
-            })
+            this.setState({ error })
+        })
     }
 
     render() {
@@ -87,19 +87,19 @@ export default class EditProfile extends React.Component {
                                         //     classes: '',
                                         //     dropdownOptions: { alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250 }
                                         // }}
-                                        value={gender?gender:""}>
+                                            value={gender?gender:""}>
                                         <option
                                             disabled
                                             value=""
                                         >
                                             Gender
-                                            </option>
+                                        </option>
                                         <option value="Male">
                                             Male
-                                            </option>
+                                        </option>
                                         <option value="Female">
                                             Female
-                                            </option>
+                                        </option>
                                     </Select>
                                 </div>
                             </div>
@@ -124,28 +124,28 @@ export default class EditProfile extends React.Component {
                                         //     classes: '',
                                         //     dropdownOptions: { alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250 }
                                         // }}
-                                        value={activityLevel?activityLevel:""}>
+                                            value={activityLevel?activityLevel:""}>
                                         <option
                                             disabled
                                             value=""
                                         >
                                             Activity Level
-                                            </option>
+                                        </option>
                                         <option value="Low">
                                             Low
-                                            </option>
+                                        </option>
                                         <option value="Moderate">
                                             Moderate
-                                            </option>
+                                        </option>
                                         <option value="High">
                                             High
-                                            </option>
+                                        </option>
                                     </Select>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <a type="submit" className="btn-login submit">Submit</a>
+                            <button type="submit" className="btn-login submit">Submit</button>
                             <div>
                                 {this.state.error ? <p>{this.state.error.message}</p> : null}
                             </div>
