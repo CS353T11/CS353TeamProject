@@ -5,7 +5,7 @@ import NutriScore from './nutriScore';
 import DragDropBox from "./DragDropBox";
 import firebase from '../firebase/firebase';
 import {db,mealPlan} from '../firebase/firebase';
-import {addMealPlanDoc} from "../firebase/DbObjects";
+import {addMealPlanDoc, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
 // import DragDropTest from './DragDropTest';
 // import InitialBox from "./testY";
 
@@ -14,7 +14,7 @@ export default class MealPlannerPage extends React.Component {
         super(props);
         this.state = {
             uid:"",                     /* User ID*/
-            rowcount: 0,                /* Number of rows*/
+            rowcount: 1,                /* Number of rows*/
             mealplansaved: false,       /* Checks if the plan is being created or it's already saved*/
             creationcheck: '',          /* Checks if the user ever created a plan or if its their first*/
             totalNutrPlan:  {           /* Nutrition values for the created plan */
@@ -36,12 +36,23 @@ export default class MealPlannerPage extends React.Component {
                 fats: 80*7,
             },
             nutritionValues: [],        /* Array with nutrition values for every tile */
+            cachedMeals:{
+                monday:{},
+                tuesday:{},
+                wednesday:{},
+                thursday:{},
+                friday:{},
+                saturday:{},
+                sunday:{}
+            },
             rows: [],                   /* Html rows */
+            tilesCached:false,
         };
         this.addRow = this.addRow.bind(this);
         this.saveMealplan = this.saveMealplan.bind(this);
         this.deleteMealplan = this.deleteMealplan.bind(this);
         this.getTotalNutr = this.getTotalNutr.bind(this);
+        this.cacheTile=this.cacheTile.bind(this);
     }
 
     /*
@@ -76,13 +87,13 @@ export default class MealPlannerPage extends React.Component {
     }
 
     /*
-    This function is used whenever we add a new item to the mealplan. It will get the nutriotion of that tile and update
+    This function is used whenever we add a new item to the mealplan. It will get the nutrition of that tile and update
      */
     async getTotalNutr(tileNutr, key){
         let totalNutrWeek;
 
         if(tileNutr){
-            console.log("TILE NUTR:")
+            console.log("TILE NUTR:");
             console.log(tileNutr);
 
             this.state.nutritionValues[key] = tileNutr;
@@ -115,8 +126,9 @@ export default class MealPlannerPage extends React.Component {
             totalNutrWeek = tileNutr;
         }
 
+        console.log("!Nutrition per day & row");
         console.log(this.state.nutritionValues);
-        console.log("total");
+        console.log("!Total Nutrition Calc");
         console.log(totalNutrWeek);
 
         this.setState(
@@ -130,17 +142,33 @@ export default class MealPlannerPage extends React.Component {
         });
     }
 
+    //could be combined into getTotalNutr, but would need to loop through every array item in each cell so possibly
+    //just as if not faster to have seperate methods, 'getTotalNutr' and 'cacheTile' for retrieving the
+    //total nutrition and descriptions of foods respectively in each tile.
+    async cacheTile(grpFood, key){
+        let split=key.split(":");
+        let day=split[0];
+        let meal=split[1];
+        if(grpFood){
+            let cachedMealsDay=this.state.cachedMeals[day];
+            Object.assign(cachedMealsDay,{[meal]:grpFood});
+            this.state.cachedMeals[day]=cachedMealsDay;
+            //console.warn(this.state.cachedMeals);
+        }
+        this.setState({tilesCached: true});
+    }
+
     addRow() {
-        let rowkey = "row"+this.state.rowcount;
+        let rowkey = "meal"+this.state.rowcount;
         let joined = this.state.rows.concat(
             <tr key={rowkey}>
-                <DragDropBox index={rowkey + "mon"} getTotalNutr={this.getTotalNutr}/>
-                <DragDropBox index={rowkey + "tue"} getTotalNutr={this.getTotalNutr}/>
-                <DragDropBox index={rowkey + "wed"} getTotalNutr={this.getTotalNutr}/>
-                <DragDropBox index={rowkey + "thu"} getTotalNutr={this.getTotalNutr}/>
-                <DragDropBox index={rowkey + "fri"} getTotalNutr={this.getTotalNutr}/>
-                <DragDropBox index={rowkey + "sat"} getTotalNutr={this.getTotalNutr}/>
-                <DragDropBox index={rowkey + "sun"} getTotalNutr={this.getTotalNutr}/>
+                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
             </tr>
         );
         this.setState({ rows: joined,
@@ -149,7 +177,7 @@ export default class MealPlannerPage extends React.Component {
 
     async removeRow() {
         let newRows = this.state.rows;
-        let rowkey = "row"+(this.state.rowcount-1);
+        let rowkey = "meal"+(this.state.rowcount-1);
         let newNutritionValues = [];
         let index;
 
@@ -213,8 +241,16 @@ export default class MealPlannerPage extends React.Component {
     }
 
     saveMealplan(){
+        //TODO: Save 'actual items' when they are added vs an explicity save button for changing template/diet
         this.setState({mealplansaved: true});
-        //Here we should do the thing with the database
+
+        //has tiles been chached?
+        if(this.state.tilesCached===false){
+            console.warn("There is no items to save in your meal plan");
+        }else{
+            let userID=this.state.uid;
+            saveMealPlanTemplate(userID,this.state.cachedMeals);
+        }
     }
 
     //for some reason only arrow function works here...
@@ -238,7 +274,7 @@ export default class MealPlannerPage extends React.Component {
 
     async deleteMealplan(){
         await this.setState({
-            rowcount: 0,
+            rowcount: 1,
             mealplansaved: false,
             creationcheck: true,
             totalNutrPlan:  {
@@ -317,7 +353,7 @@ export default class MealPlannerPage extends React.Component {
     }
 
     render() {
-        console.log(this);
+       // console.log(this);
         return (
             this.createProcess()
         );
