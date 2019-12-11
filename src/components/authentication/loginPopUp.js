@@ -3,6 +3,7 @@ import firebase from '../firebase/firebase';
 import { Modal } from 'react-materialize';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import {NavLink} from "react-router-dom";
 
 export default class LoginPopUp extends React.Component {
 
@@ -106,6 +107,8 @@ export default class LoginPopUp extends React.Component {
                                 {this.state.error ? <p style={{color:"red"}}>{this.state.error.message}</p> : null}
                             </div>
                             <p className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</p>
+                            {/*{this.state.user ? null : <NavLink className="forgot" to='/register'>create an account</NavLink>}*/}
+                            {this.state.user ? null : <NavLink className="forgot" to='/register'>create an account</NavLink>}
                             <button type="submit" className="btn-login" >LOGIN</button>
                             
                         </form>
