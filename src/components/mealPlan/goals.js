@@ -42,6 +42,9 @@ export default class Goals extends React.Component {
         let p=0;
         let f=0;
         let diet="";
+        this.setState({
+            [e.target.id]: e.target.value
+        })
         if(e.target.value=="Maintain weight"){
             this.setState({dietCalc:this.getCalculateResult()})
             c=this.getCalculateResult()
@@ -98,6 +101,12 @@ export default class Goals extends React.Component {
             }).catch(error => {
             this.setState({ error })
         })
+        let profileRef = firebase.firestore().collection('profiles').doc(userId).get().then(doc => {
+            //console.log(doc.data())
+            this.setState((preState) => ({ ...preState.user, ...doc.data() })
+            )
+            //console.log(this.state)
+        });
     }
 
     getCalculateResult(){
@@ -133,63 +142,46 @@ export default class Goals extends React.Component {
     render() {
         const { diet, calories, carbs, protein, fats} = this.state;
         return (
-            <div className="results">
-                <div className="user-details">
-                    <div className="diet">
-                    <br/>
-                        <Select id="dietCalc"
-                            onChange={this.handleChange}
-                                //window.location.reload();
-                            options={{
-                                classes: '',
-                                dropdownOptions: {alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250}
-                            }} value="">
-                            <option disabled value="">Diet Plan</option>
-                            <option value="Maintain weight">Maintain Weight</option>
-                            <option value="Lose weight">Lose Weight</option>
-                            <option value="Gain weight">Gain Weight</option>
-                            <option value="High Protein diet">High Protein</option>
-                            <option value="Ketogenic diet">Ketogenic</option>
-                        </Select>
-                    </div>
-                </div>
-                <div className="plan">
+                <div className="profile-details goals">
+                    <h3 className="title">Nutrition</h3>
                     <div className="table">
+                            <div className="cell input">
+                                <Select id="dietCalc"
+                                        onChange={this.handleChange}
+                                    //window.location.reload();
+                                        options={{
+                                            classes: '',
+                                            dropdownOptions: {alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250}
+                                        }} value="">
+                                    <option disabled value="">Diet Plan</option>
+                                    <option value="Maintain weight"  onChange={this.handleChange}>Maintain Weight</option>
+                                    <option value="Lose weight"  onChange={this.handleChange}>Lose Weight</option>
+                                    <option value="Gain weight"  onChange={this.handleChange}>Gain Weight</option>
+                                    <option value="High Protein diet"  onChange={this.handleChange}>High Protein</option>
+                                    <option value="Ketogenic diet"  onChange={this.handleChange}>Ketogenic</option>
+                                </Select>
+                            </div>
                         <div className="row">
-                            <div className="cell">Diet:</div>
-                            <div className="cell">{diet}</div>
+                            <div className="cell bold">Diet:</div>
+                            <div className="cell"  onChange={this.handleChange}>{diet}</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Calories:</div>
-                            <div className="cell">{calories}</div>
+                            <div className="cell bold">Calories:</div>
+                            <div className="cell"  onChange={this.handleChange}>{calories} kcal</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Carbs:</div>
-                            <div className="cell">{carbs}g</div>
+                            <div className="cell bold">Carbs:</div>
+                            <div className="cell"  onChange={this.handleChange}>{carbs} g</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Protein:</div>
-                            <div className="cell">{protein}g</div>
+                            <div className="cell bold">Protein:</div>
+                            <div className="cell"  onChange={this.handleChange}>{protein} g</div>
                         </div>
                         <div className="row">
-                            <div className="cell">Fats:</div>
-                            <div className="cell">{fats}g</div>
+                            <div className="cell bold">Fats:</div>
+                            <div className="cell"  onChange={this.handleChange}>{fats} g</div>
                         </div>
-
                     </div>
-
-                    <div>Your daily calorie intake: {this.state.dietCalc}</div>
-
-                    <br/><br/><br/>
-                    THIS IS THE CALCULATIONS FOR THE CALORIC INTAKE
-                    <br/>
-                    where for an average person consuming 2000 calories, 310g carbs, 50g of proteins and 70 g of fat is recommended
-                    cal*0.155 = carbs
-                    cal*0.025 = protein
-                    cal*0.035 = fat
-
-
-                </div>
             </div>
         );
     }

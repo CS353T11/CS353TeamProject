@@ -705,8 +705,21 @@ body, input, select, button {
   display: flex;
   flex-direction: column;
   width: 44%;
-  padding: 48px;
+  padding: 48px 0 48px 48px;
   align-items: start;
+  &.goals {
+    width: 30%;
+    padding: 48px 48px 48px 0;
+    .cell{
+      width: 150px;
+      &.bold{
+        width: 150px;
+      }
+      &.input {
+        align-self: flex-start;
+      }
+    }
+  }
   .title {
     font: bold 32px $sans-serif;
     margin-bottom: 24px;
@@ -714,7 +727,7 @@ body, input, select, button {
   .table {
     display: flex;
     flex-direction: column;
-    width: auto;
+    width: 300px;
     text-align: left;
   }
   .row {
@@ -766,17 +779,6 @@ body, input, select, button {
     &:hover {
       background: black;
     }
-  }
-}
-
-.profile-achievements {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  padding: 48px 48px 48px 0;
-  .title {
-    font: bold 32px $sans-serif;
-    margin-bottom: 24px;
   }
 }
 

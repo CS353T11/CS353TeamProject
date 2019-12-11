@@ -2,7 +2,8 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 import SideBar from './sideBar';
-import Achievements from './achievements'
+import Achievements from './achievements';
+import Diet from '../mealPlan/goals';
 export default class Profile extends React.Component {
     state = {
         user: null,
@@ -51,12 +52,12 @@ export default class Profile extends React.Component {
                             <div className="cell">{gender}</div>
                         </div>
                         <div className="row">
-                            <div className="cell bold">Height (cm):</div>
-                            <div className="cell">{height}</div>
+                            <div className="cell bold">Height:</div>
+                            <div className="cell">{height} cm</div>
                         </div>
                         <div className="row">
-                            <div className="cell bold">Weight (kg):</div>
-                            <div className="cell ">{weight}</div>
+                            <div className="cell bold">Weight:</div>
+                            <div className="cell ">{weight} kg</div>
                         </div>
                         <div className="row">
                             <div className="cell bold">Activity level:</div>
@@ -64,7 +65,7 @@ export default class Profile extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Achievements/>
+                <Diet/>
             </div>
         );
     }
