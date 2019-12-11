@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginPopUP from '../authentication/loginPopUp';
+import About from '../home/aboutUs';
 
 export default class LoggedOutHeader extends React.Component {
     render() {
@@ -16,7 +17,7 @@ export default class LoggedOutHeader extends React.Component {
                     <NavLink to='/register'>Profile</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/about'>About Us</NavLink>
+                    <NavLink to='/About'>About Us</NavLink>
                 </span>
                 <span className="header-login">
                     <LoginPopUP />

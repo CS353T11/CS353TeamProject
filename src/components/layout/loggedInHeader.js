@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase'
 import { NavLink } from 'react-router-dom';
+import About from '../home/aboutUs';
 
 export default class LoggedInHeader extends React.Component {
     state = {
@@ -27,7 +28,7 @@ export default class LoggedInHeader extends React.Component {
                     <NavLink to='/profile'>Profile</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/about'>About Us</NavLink>
+                    <NavLink to='/About'>About Us</NavLink>
                 </span>
                 <span className="header-login">
                     <a href="/#" className="btn-login"  onClick={this.logOutUser}>LOG OUT</a>
