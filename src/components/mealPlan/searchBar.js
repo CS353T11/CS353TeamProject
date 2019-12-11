@@ -12,6 +12,7 @@ export default class SearchBar extends React.Component {
 			searchTerm: '',
 			results: '',
             qtyGrams: 100,
+            lastSearch: '',
 		}
     }
 
@@ -66,7 +67,7 @@ export default class SearchBar extends React.Component {
     }
 
      keyPressed = async (event) => {
-        if (event.key === "Enter" || event.type === "click") {
+        if ((event.key === "Enter" || event.type === "click") && this.state.lastSearch !== this.state.searchTerm) {
             document.body.style.cursor = "progress";
 			let urlFood=encodeURI(this.state.searchTerm);
             //making a hard coded post request for an apple
@@ -89,14 +90,14 @@ export default class SearchBar extends React.Component {
             //stops from setting state when user inputs empty string
             if(results !== "Error 400"){
                 this.setState({
-                    results: results
+                    results: results,
+                    lastSearch: this.state.searchTerm,
                 })
                 document.body.style.cursor = "default";
             }else{
                 console.log("Empty Search Parameters!");
                 document.body.style.cursor = "default";
             }
-
         }
     }
 
