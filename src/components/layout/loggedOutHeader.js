@@ -11,9 +11,6 @@ export default class LoggedOutHeader extends React.Component {
                     <NavLink to='/'><b className="bold">plan</b>my.ml</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/'>Home</NavLink>
-                </span>
-                <span className="header-link">
                     <NavLink to='/register'>Meal Plans</NavLink>
                 </span>
                 <span className="header-link">
