@@ -7,7 +7,7 @@ import { RadioGroup, Select } from 'react-materialize';
 export default class EditProfile extends React.Component {
     state = {
         user: null,
-        email:'',
+        email: '',
         name: '',
         age: '',
         gender: null,
@@ -28,7 +28,7 @@ export default class EditProfile extends React.Component {
             if (user) {
                 this.setState({ user })
                 let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
-                    this.setState({ email:user.email, user, ...doc.data() })
+                    this.setState({ email: user.email, user, ...doc.data() })
                 });
             } else {
                 this.props.history.push('/');
@@ -40,28 +40,32 @@ export default class EditProfile extends React.Component {
         e.preventDefault()
         const userId = this.state.user.uid;
         const timestamp = new Date().toLocaleString();
-        const { name, age, gender, height, weight, activityLevel} = this.state;
-        //console.log(this.state)
-        firebase.firestore().collection('profiles').doc(userId)
-            .set({
-                name,
-                age,
-                height,
-                gender,
-                weight,
-                activityLevel,
-                timestamp: timestamp,
-            }).then(this.props.history.push('/profile')).catch(error => {
-            this.setState({ error })
-        })
+        const { name, age, gender, height, weight, activityLevel } = this.state;
+        if (Number(age) > 150 || Number(age) < 0) {
+            this.setState({ error: { message: 'Invalid age' } });
+        } else {
+            firebase.firestore().collection('profiles').doc(userId)
+                .set({
+                    name,
+                    age,
+                    height,
+                    gender,
+                    weight,
+                    activityLevel,
+                    timestamp: timestamp,
+                }).then(this.props.history.push('/profile')).catch(error => {
+                    this.setState({ error })
+                })
+        }
     }
 
     render() {
         //console.log(this.state)
-        const { name, age, gender, height, weight, activityLevel, email} = this.state;
+        const fixName = this.state.name;
+        const { name, age, gender, height, weight, activityLevel, email } = this.state;
         return (
             <div className="profile">
-                <SideBar name={name} email={email} path="/edit-profile"/>
+                <SideBar name={name} email={email} path="/edit-profile" />
                 <div className="profile-details">
                     <h3 className="title">User Details</h3>
                     <form onSubmit={this.handleSubmit}>
@@ -69,13 +73,13 @@ export default class EditProfile extends React.Component {
                             <div className="row">
                                 <div className="cell bold">Name:</div>
                                 <div className="cell">
-                                    <input id="name" required className="input" type="text" placeholder="Name" onChange={this.handleChange} value={name}></input>
+                                    <input id="name" required className="input" type="text" placeholder="Name" onChange={this.handleChange} value={fixName}></input>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="cell bold">Age:</div>
                                 <div className="cell">
-                                    <input id="age" required className="input" type="text" placeholder="Age" onChange={this.handleChange} value={age}></input>
+                                    <input id="age" required className="input" type="number" min="0" max="150" placeholder="Age" onChange={this.handleChange} value={age}></input>
                                 </div>
                             </div>
                             <div className="row">
@@ -87,7 +91,7 @@ export default class EditProfile extends React.Component {
                                         //     classes: '',
                                         //     dropdownOptions: { alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250 }
                                         // }}
-                                            value={gender?gender:""}>
+                                        value={gender ? gender : ""}>
                                         <option
                                             disabled
                                             value=""
@@ -106,13 +110,13 @@ export default class EditProfile extends React.Component {
                             <div className="row">
                                 <div className="cell bold">Height (cm):</div>
                                 <div className="cell">
-                                    <input id="height" required className="input" type="text" placeholder="Height" onChange={this.handleChange} value={height}></input>
+                                    <input id="height" required className="input" type="number" min="0" max="300" placeholder="Height" onChange={this.handleChange} value={height}></input>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="cell bold">Weight (kg):</div>
                                 <div className="cell">
-                                    <input id="weight" required className="input" type="text" placeholder="Weight" onChange={this.handleChange} value={weight}></input>
+                                    <input id="weight" required className="input" type="number" min="0" max="200"placeholder="Weight" onChange={this.handleChange} value={weight}></input>
                                 </div>
                             </div>
                             <div className="row">
@@ -124,7 +128,7 @@ export default class EditProfile extends React.Component {
                                         //     classes: '',
                                         //     dropdownOptions: { alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250 }
                                         // }}
-                                            value={activityLevel?activityLevel:""}>
+                                        value={activityLevel ? activityLevel : ""}>
                                         <option
                                             disabled
                                             value=""
@@ -152,7 +156,7 @@ export default class EditProfile extends React.Component {
                         </div>
                     </form>
                 </div>
-                <Achievements/>
+                <Achievements />
             </div>
         );
     }
