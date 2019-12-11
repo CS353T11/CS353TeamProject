@@ -11,7 +11,7 @@ export default class SearchResultTile extends React.Component{
             carbs:this.props. Carbs,
             qty: this.props.Qty
         };
-        var foodJSON=JSON.stringify(foodObj);
+        let foodJSON=JSON.stringify(foodObj);
 
         //NOTE: .setData takes a string argument for data to be passed, hence the JSON.stringify
         e.dataTransfer.setData('foodJSON',foodJSON);
