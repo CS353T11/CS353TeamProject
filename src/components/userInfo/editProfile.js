@@ -15,6 +15,12 @@ export default class EditProfile extends React.Component {
         weight: '',
         activityLevel: '',
         error: '',
+        diet:'',
+        calories: '',
+        carbs: '',
+        fats: '',
+        protein:'',
+
     }
 
     handleChange = (e) => {
@@ -40,7 +46,7 @@ export default class EditProfile extends React.Component {
         e.preventDefault()
         const userId = this.state.user.uid;
         const timestamp = new Date().toLocaleString();
-        const { name, age, gender, height, weight, activityLevel } = this.state;
+        const { name, age, gender, height, weight, activityLevel, diet, calories, carbs, protein, fats} = this.state;
         if (Number(age) > 150 || Number(age) < 0) {
             this.setState({ error: { message: 'Invalid age' } });
         } else {
@@ -52,6 +58,11 @@ export default class EditProfile extends React.Component {
                     gender,
                     weight,
                     activityLevel,
+                    diet,
+                    calories,
+                    carbs,
+                    protein,
+                    fats,
                     timestamp: timestamp,
                 }).then(this.props.history.push('/profile')).catch(error => {
                     this.setState({ error })
@@ -156,7 +167,6 @@ export default class EditProfile extends React.Component {
                         </div>
                     </form>
                 </div>
-                <Achievements />
             </div>
         );
     }

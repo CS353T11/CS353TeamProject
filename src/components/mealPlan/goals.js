@@ -112,29 +112,29 @@ export default class Goals extends React.Component {
     getCalculateResult(){
         if(this.state.gender=='Male')
             if(this.state.activityLevel=='Low'){
-                let c= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.weight) / 2.54)) - (6.8 * Number(this.state.age)))*1.2;
+                let c= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.height) / 2.54)) - (6.8 * Number(this.state.age)))*1.2;
                 return Math.round(c);
             }
             else if(this.state.activityLevel=='Moderate'){
-                let cal= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.weight) / 2.54)) - (6.8 * Number(this.state.age)))*1.55;
+                let cal= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.height) / 2.54)) - (6.8 * Number(this.state.age)))*1.55;
                 return cal;
             }
             else {
-                let cal= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.weight) / 2.54)) - (6.8 * Number(this.state.age)))*1.9;
+                let cal= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.height) / 2.54)) - (6.8 * Number(this.state.age)))*1.9;
                 return cal;
             }
 
         else
         if(this.state.activityLevel=='Low') {
-            let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.weight) / 2.54)) - (4.7 * Number(this.state.age))) * 1.2;
+            let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.height) / 2.54)) - (4.7 * Number(this.state.age))) * 1.2;
             return cal;
         }
         else if(this.state.activityLevel=='Moderate'){
-            let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.weight) / 2.54)) - (4.7 * Number(this.state.age))) * 1.55;
+            let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.height) / 2.54)) - (4.7 * Number(this.state.age))) * 1.55;
             return cal;
         }
         else {
-            let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.weight) / 2.54)) - (4.7 * Number(this.state.age))) * 1.9;
+            let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.height) / 2.54)) - (4.7 * Number(this.state.age))) * 1.9;
             return cal;
         }
     }
