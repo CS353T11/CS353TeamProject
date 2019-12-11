@@ -4,6 +4,7 @@ export default class SearchResultTile extends React.Component{
     dragStart = e =>{
         const foodObj={
             label:this.props.label,
+            foodId:this.props.foodId,
             cal:this.props.Cal,
             fat:this.props.Fat,
             pro:this.props.Pro,

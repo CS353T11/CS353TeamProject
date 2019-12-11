@@ -73,11 +73,11 @@ export default class SearchBar extends React.Component {
             let results= await axios.get("https://api.edamam.com/api/food-database/parser?ingr="
                 +urlFood+"&app_id=9ccfd3ea&app_key=422e0ba66ae6c563f47a9fe391a437f0")
                 .then(function(response){
-                    /*
+
                     console.log("----------Response JSON----------");
                     console.log(response.data);
                     console.log("---------------------------------");
-                    */
+
                     var obj=response.data;
 
                     return obj;
@@ -127,6 +127,7 @@ export default class SearchBar extends React.Component {
                                         draggable="true"
                                         index={index}
                                         label={obj.food.label}
+                                        foodId={obj.food.foodId}
                                         Cal={this.round(obj.food.nutrients.ENERC_KCAL*(this.state.qtyGrams/100), 2)}
                                         Fat={this.round(obj.food.nutrients.FAT*(this.state.qtyGrams/100), 2)}
                                         Carbs={this.round(obj.food.nutrients.CHOCDF*(this.state.qtyGrams/100), 2)}

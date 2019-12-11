@@ -32,6 +32,7 @@ export default class DragDropTest extends React.Component {
 			let foodList = prevState.foodList;
 			let temp = {
 				label: foodObj.label,
+				foodId:foodObj.foodId,
 				cal: foodObj.cal,
 				fat: foodObj.fat,
 				pro: foodObj.pro,
@@ -40,7 +41,7 @@ export default class DragDropTest extends React.Component {
 			};
 			//console.log(temp);
 			foodList.push(temp);
-			console.log(foodList);
+			//console.log(foodList);
 			return {foodList};
 		})
 		//e.target.appendChild(card);
@@ -70,10 +71,11 @@ export default class DragDropTest extends React.Component {
 		if(this.state.foodList.length > 0) {
 			//Groups the food by label
 			let grpFood = this.state.foodList.reduce((acc, cv) => {
-				//If its the first food with that labl that we find, we create an space in the array for it
+				//If its the first food with that label that we find, we create an space in the array for it
 				if (!acc[cv.label]) {
 					acc[cv.label] = {};
 					acc[cv.label].label = cv.label;
+					acc[cv.label].foodId= cv.foodId;
 					acc[cv.label].cal = acc[cv.label].fat = acc[cv.label].pro = acc[cv.label].carbs = acc[cv.label].qty = 0;
 				}
 				//We add up the nutrients of the same label
@@ -89,13 +91,13 @@ export default class DragDropTest extends React.Component {
 
 			//Now we transform it to an array again
 			grpFood = Object.keys(grpFood).map(key => {
-				let { label, cal, fat, pro, carbs, qty } = grpFood[key];
+				let { label, foodId, cal, fat, pro, carbs, qty } = grpFood[key];
 				return {
-					label,cal,fat,pro,carbs,qty
+					label, foodId, cal,fat,pro,carbs,qty
 				};
 			});
 
-			console.log("Grouped:");
+			console.log("!Group In Tile Dropped:");
 			console.log(grpFood);
 
 			//Now we calculate total nutrition
@@ -108,8 +110,8 @@ export default class DragDropTest extends React.Component {
 				}
 			});
 
-			console.log("Total:");
-			console.log(totalNutr);
+			//console.log("!Total In Tile Dropped:");
+			//console.log(totalNutr);
 
 			this.setState({
 				foodList: grpFood,
@@ -123,8 +125,9 @@ export default class DragDropTest extends React.Component {
 				totalNutr: totalNutr,
 			})
 		}
-		console.log(this.props);
-		this.props.getTotalNutr(totalNutr, this.props.index);
+		//console.log(this.props);
+		this.props.getTotalNutr(this.state.totalNutr, this.props.index);
+		this.props.cacheTile(this.state.foodList,this.props.index);
 	}
 
 	render() {
@@ -136,7 +139,7 @@ export default class DragDropTest extends React.Component {
 			>
 				{this.state.foodList[0]?
 					this.state.foodList.map((obj,index) =>{
-						console.log(this.state.foodList);
+						//console.log(this.state.foodList);
 						return(
 							<FoodItem
 								obj={obj}
