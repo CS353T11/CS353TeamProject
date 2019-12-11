@@ -146,22 +146,26 @@ body, input, select, button {
   background-color: $primaryColor;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   .header-brand {
     font: normal 32px $sans-serif;
-    margin-bottom: 4px;
+    margin: 0 64px 4px 0;
     .bold {
       font-weight: bold;
     }
   }
   .header-link {
     font-weight: bold;
+    margin-right: 64px;
     &:hover {
       color: white;
     }
     &:active {
       color: white;
     }
+  }
+  .header-login {
+     margin-left: auto;
   }
 }
 
