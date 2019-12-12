@@ -213,11 +213,13 @@ body, input, select, button {
 .home {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   .home-illustration {
-    min-width: 35%;
-    height: 321px;
-    border: solid black 1px;
+    min-width: 40%;
+    .gif {
+      border: 3px solid black;
+      width: 100%;
+    }
   }
   .home-titles {
     min-width: 65%;
@@ -793,7 +795,6 @@ body, input, select, button {
   display: flex;
   flex-direction: row;
 }
-
 .register {
   display: flex;
   flex-direction: column;
@@ -802,13 +803,9 @@ body, input, select, button {
 .register-form {
 
 }
-
 .register-header {
   font: bold 32px $sans-serif;
 }
-
-
-
 .plan{
   //position: center;
   margin: auto;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import firebase from 'firebase';
+import homepage_gif from '../../images/homepage-gif.gif';
 
 export default class HomeView extends React.Component {
     state = {
@@ -21,7 +22,7 @@ export default class HomeView extends React.Component {
             <div className="view">
                 <div className="home">
                     <div className="home-illustration">
-                        <img alt="cute big img"></img>
+                        <img src={homepage_gif} alt="Homepage Ilustration" className="gif"></img>
                     </div>
                     <div className="home-titles">
                         <h2 className="title">Plan <b className="bold">meals.</b><br />
