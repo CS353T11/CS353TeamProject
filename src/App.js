@@ -34,7 +34,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter >
                 {/* render different header for logged-in user and no-register user */}
                 {this.state.user ? <LoggedInHeader /> : <LoggedOutHeader />}
                 {/* render different body for various route */}

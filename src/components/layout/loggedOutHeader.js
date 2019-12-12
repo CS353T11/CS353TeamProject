@@ -20,7 +20,7 @@ export default class LoggedOutHeader extends React.Component {
                     <NavLink to='/About'>About Us</NavLink>
                 </span>
                 <span className="header-login">
-                    <LoginPopUP />
+                    <LoginPopUP history={this.props.history}/>
                 </span>
             </header>
         );

@@ -47,7 +47,7 @@ export default class ChangePassword extends React.Component {
             })
         }
         if (newPassword.length > 0) {
-            if (newPassword == confirmNewPassword) {
+            if (newPassword === confirmNewPassword) {
                 //this.setState({ error: null })
                 // console.log("try login")
                 // let credential = firebase.auth().currentUser

@@ -3,7 +3,6 @@ import firebase from 'firebase';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import {Select} from "react-materialize";
-import {NavLink} from "react-router-dom";
 
 export default class Register extends React.Component {
     constructor(props){
@@ -37,24 +36,6 @@ export default class Register extends React.Component {
                 firebase.auth()
                     .createUserWithEmailAndPassword(email, password)
                     .then(() => {
-                        // const MySwal = withReactContent(Swal);
-                        // MySwal.fire({
-                        //     icon: 'success',
-                        //     title: 'Account create successfully!',
-                        //     showConfirmButton: false,
-                        //     timer: 1500
-                        // });
-                        // this.props.history.push('/');
-                        // firebase.firestore().collection('profiles').doc(userId)
-                        //     .set({
-                        //             name,
-                        //             age,
-                        //             height,
-                        //             gender,
-                        //             weight,
-                        //             activityLevel,
-                        //         });
-                        //         this.props.history.push('/profile')
                         this.saveUserDetails();
                     })
                     .catch(error => {
@@ -125,19 +106,18 @@ export default class Register extends React.Component {
                             <label className="label">Confirm Password:</label>
                             <input required className="input" type="password" id="confirmPassword" name="confirmPassword" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
                             <label className="label">Name:</label>
-                            <input required className="input" type="text" id="name" name="name" placeholder="Name" onChange={this.handleChange} value={name}></input>
+                            <input required className="input" type="text" id="name" name="name" min="1" max="30" placeholder="Name" onChange={this.handleChange} value={name}></input>
                             <label className="label">Enter Age:</label>
-                            <input required className="input" type="text" id="age" name="age" placeholder="Age" onChange={this.handleChange} value={age}></input>
+                            <input required className="input" id="age" name="age" type="number" min="0" max="150" placeholder="Age" onChange={this.handleChange} value={age}></input>
                             <label className="label">Gender:</label>
                             <Select id="gender" name="gender" onChange={this.handleChange} value={gender ? gender : ""}><option disabled value="">Gender</option><option value="Male">Male</option><option value="Female">Female</option></Select>
                             <label className="label">Height (cm):</label>
-                            <input required className="input" type="text" id="height" name="height" placeholder="Height" onChange={this.handleChange} value={height}></input>
+                            <input required className="input" id="height" name="height" type="number" min="0" max="300" placeholder="Height" onChange={this.handleChange} value={height}></input>
                             <label className="label">Weight (kg):</label>
-                            <input required className="input" type="text" id="weight" name="weight" placeholder="Weight" onChange={this.handleChange} value={weight}></input>
+                            <input required className="input" id="weight" name="weight" type="number" min="0" max="200"placeholder="Weight" onChange={this.handleChange} value={weight}></input>
                             <label className="label">Activity Level:</label>
                             <Select id="activityLevel" onChange={this.handleChange} value={activityLevel ? activityLevel : ""}><option disabled value="">Activity Level</option><option value="Low">Low</option><option value="Moderate">Moderate</option><option value="High">High</option></Select>
                             <br></br>
-                            {/*<a className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</a>*/}
                             <button type="submit" className="btn-login" >REGISTER</button>
                             <br></br>
                             {this.state.error ? <p>{this.state.error.message}</p> : null}
