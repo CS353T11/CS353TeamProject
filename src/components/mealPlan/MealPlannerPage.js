@@ -275,6 +275,12 @@ export default class MealPlannerPage extends React.Component {
         }
     }
 
+    editButton(){
+        this.setState({
+            mealplansaved: false,
+        });
+    }
+
     async deleteMealplan(){
         await this.setState({
             rowcount: 1,
@@ -302,7 +308,7 @@ export default class MealPlannerPage extends React.Component {
                     <SearchBar/>
                     <WeekPlan rows={this.state.rows}/>
                     <div className="mp-settings">
-                        <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
+                        <span className="btn-login edit" onClick={() => this.editButton()}>EDIT</span>
                         <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                     </div>
                     <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>
