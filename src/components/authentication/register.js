@@ -112,8 +112,7 @@ export default class Register extends React.Component {
     render() {
         const { name, age, gender, height, weight, activityLevel} = this.state;
         return (
-            <div className="view">
-                <div className="register">
+            <div className="view register">
                     {/*<h3 className="register-header">Register Member</h3>*/}
                     <div className="register-form">
                         {<h3 className="register-header">Register Member</h3>}
@@ -144,7 +143,6 @@ export default class Register extends React.Component {
                             {this.state.error ? <p>{this.state.error.message}</p> : null}
                         </form>
                     </div>
-                </div>
             </div>
         );
     }
