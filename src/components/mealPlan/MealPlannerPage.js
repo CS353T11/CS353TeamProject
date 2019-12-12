@@ -179,11 +179,13 @@ export default class MealPlannerPage extends React.Component {
         let newRows = this.state.rows;
         let rowkey = "meal"+(this.state.rowcount-1);
         let newNutritionValues = [];
-        let index;
+        let index,i;
 
         console.log(this.state.nutritionValues);
+
+        //This takes out from the list all the items that where in the row we are deleting
         for(index in this.state.nutritionValues){
-            let i = index.slice(0,4);
+            i = index.slice(-5);
             console.log(i,rowkey);
             if(i !== rowkey){
                 newNutritionValues[index] = this.state.nutritionValues[index];
@@ -195,6 +197,7 @@ export default class MealPlannerPage extends React.Component {
         let totalNutrWeek;
         let foodArray = newNutritionValues;
 
+        // We calculate again the nutrition values
         foodArray = Object.keys(foodArray).map(key => {
             if(foodArray[key] !== 0) {
                 let {cal, fat, pro, carbs} = foodArray[key];
