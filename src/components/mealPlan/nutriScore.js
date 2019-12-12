@@ -1,4 +1,5 @@
 import React from 'react'
+import firebase from '../firebase/firebase';
 export default class NutriScore extends React.Component {
     constructor(props){
         super(props);
@@ -21,10 +22,21 @@ export default class NutriScore extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            actual_values: this.props.actual_values,
-            planned_values: this.props.planned_values
-        });
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({ user })
+                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                    //console.log(doc.data())
+                    this.setState((preState) => ({ ...preState.user, ...doc.data() })
+                    )
+                    //console.log(this.state)
+                });
+                //console.log(this.state)
+            } else {
+                this.props.history.push('/');
+            }
+
+        })
     }
 
     async componentDidUpdate() {
@@ -80,7 +92,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="kcalbar"/>
                         <span className="counter">{this.round(this.props.actual_values.kcal,2)}
-                        /{this.state.planned_values.kcal}</span>
+                        /{this.state.calories*7}</span>
                     </div>
                     <div className="subtitle">Calories: </div>
                 </div>
@@ -88,7 +100,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="protsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.prots,2)}
-                        /{this.state.planned_values.prots}</span>
+                        /{this.state.protein*7}</span>
                     </div>
                     <div className="subtitle">Prots: </div>
                 </div>
@@ -96,7 +108,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="carbsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.carbs,2)}
-                        /{this.state.planned_values.carbs}</span>
+                        /{this.state.carbs*7}</span>
                     </div>
                     <div className="subtitle">Carbs: </div>
                 </div>
@@ -104,7 +116,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="fatsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.fats,2)}
-                        /{this.state.planned_values.fats}</span>
+                        /{this.state.fats*7}</span>
                     </div>
                     <div className="subtitle">Fats: </div>
                 </div>
