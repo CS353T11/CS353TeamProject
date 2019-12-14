@@ -45,49 +45,49 @@ export default class Goals extends React.Component {
         this.setState({
             [e.target.id]: e.target.value
         })
-        if(e.target.value=="Maintain weight"){
-            this.setState({dietCalc:this.getCalculateResult()})
-            c=this.getCalculateResult()
+        if(e.target.value==="Maintain weight"){
+            this.setState({dietCalc:this.getCalculateResult()});
+            c=this.getCalculateResult();
             carb = c*0.155;
             p=c*0.025;
             f=c*0.035;
             diet = e.target.value;
         }
-        else if(e.target.value=="Lose weight"){
-            this.setState({dietCalc:this.getCalculateResult()*.8})
-            c=this.getCalculateResult()*0.8
+        else if(e.target.value==="Lose weight"){
+            this.setState({dietCalc:this.getCalculateResult()*.8});
+            c=this.getCalculateResult()*0.8;
             carb = c*0.155;
             p=c*0.025;
             f=c*0.035;
             diet = e.target.value;
         }
-        else if(e.target.value=="Gain weight"){
-            this.setState({dietCalc:this.getCalculateResult()*1.2})
-            c=this.getCalculateResult()*1.2
+        else if(e.target.value==="Gain weight"){
+            this.setState({dietCalc:this.getCalculateResult()*1.2});
+            c=this.getCalculateResult()*1.2;
             carb = c*0.155;
             p=c*0.025;
             f=c*0.035;
             diet = e.target.value;
         }
-        else if(e.target.value=="High Protein diet"){
-            this.setState({dietCalc:this.getCalculateResult()*1.1})
-            c=this.getCalculateResult()*1.1
+        else if(e.target.value==="High Protein diet"){
+            this.setState({dietCalc:this.getCalculateResult()*1.1});
+            c=this.getCalculateResult()*1.1;
             carb = c*0.13;
             p=c*0.075;
             f=c*0.035;
             diet = e.target.value;
         }
-        else if(e.target.value=="Ketogenic diet"){
-            this.setState({dietCalc:this.getCalculateResult()*0.9})
-            c=this.getCalculateResult()*0.9
+        else if(e.target.value==="Ketogenic diet"){
+            this.setState({dietCalc:this.getCalculateResult()*0.9});
+            c=this.getCalculateResult()*0.9;
             carb = c*0.02;
             p=c*0.04;
             f=c*0.085;
             diet = e.target.value;
         }
-        console.log(c)
-        this.setState({dietCalc:c})
-        console.log(this.state.dietCalc)
+        console.log(c);
+        this.setState({dietCalc:c});
+        console.log(this.state.dietCalc);
         const userId = this.state.user.uid;
         const { calories, carbs, protein, fats} = this.state;
         //console.log(this.state)
@@ -110,12 +110,12 @@ export default class Goals extends React.Component {
     }
 
     getCalculateResult(){
-        if(this.state.gender=='Male')
-            if(this.state.activityLevel=='Low'){
+        if(this.state.gender==='Male')
+            if(this.state.activityLevel==='Low'){
                 let c= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.height) / 2.54)) - (6.8 * Number(this.state.age)))*1.2;
                 return Math.round(c);
             }
-            else if(this.state.activityLevel=='Moderate'){
+            else if(this.state.activityLevel==='Moderate'){
                 let cal= (66 + (6.3*( Number(this.state.weight) * 2.205)) + (12.9 * (Number(this.state.height) / 2.54)) - (6.8 * Number(this.state.age)))*1.55;
                 return cal;
             }
@@ -125,11 +125,11 @@ export default class Goals extends React.Component {
             }
 
         else
-        if(this.state.activityLevel=='Low') {
+        if(this.state.activityLevel==='Low') {
             let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.height) / 2.54)) - (4.7 * Number(this.state.age))) * 1.2;
             return cal;
         }
-        else if(this.state.activityLevel=='Moderate'){
+        else if(this.state.activityLevel==='Moderate'){
             let cal = (665 + (4.3 * (Number(this.state.weight) * 2.205)) + (4.7 * (Number(this.state.height) / 2.54)) - (4.7 * Number(this.state.age))) * 1.55;
             return cal;
         }

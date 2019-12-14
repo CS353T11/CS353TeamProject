@@ -55,35 +55,32 @@ export default class MealPlannerPage extends React.Component {
         this.cacheTile=this.cacheTile.bind(this);
     }
 
-    /*
-    To comment
-     */
     async componentDidMount() {
-        await this.addRow();
-        await this.addRow();
-        await this.addRow();
         await firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 let userID=user.uid;
                 this.setState({ uid:userID});
                 console.log("User:"+userID+" is logged in.");
 
-                mealPlan.doc(userID).get()
+                /*Retrieve from the database if the user already has a mealplan*/
+                mealPlan.doc(userID).collection("Template").doc("default").get()
                     .then(doc => {
                         if(doc.exists){
+                            this.setState({creationcheck:true}); //MealPlan was already created
                             console.log("Retrieving Meal Plan...");
-                            this.setState({creationcheck:true});
+                            console.log("MealPlan",doc.data());
+                            this.state.cachedMeals=doc.data();
                             this.saveMealplan();
+                            this.addRow();
+                            this.addRow();
+                            this.addRow();
                         }else {
                             this.setState({creationcheck:false});
                         }
 
                     })
             }
-
         })
-
-        //Retrieve from the database if the user already has a mealplan
     }
 
     /*
@@ -93,8 +90,8 @@ export default class MealPlannerPage extends React.Component {
         let totalNutrWeek;
 
         if(tileNutr){
-            console.log("TILE NUTR:");
-            console.log(tileNutr);
+            /*console.log("TILE NUTR:");
+            console.log(tileNutr);*/
 
             this.state.nutritionValues[key] = tileNutr;
             ++this.state.nutritionValues.length;
@@ -126,10 +123,10 @@ export default class MealPlannerPage extends React.Component {
             totalNutrWeek = tileNutr;
         }
 
-        console.log("!Nutrition per day & row");
-        console.log(this.state.nutritionValues);
-        console.log("!Total Nutrition Calc");
-        console.log(totalNutrWeek);
+        // console.log("!Nutrition per day & row");
+        // console.log(this.state.nutritionValues);
+        // console.log("!Total Nutrition Calc");
+        // console.log(totalNutrWeek);
 
         this.setState(
             {nutritionValues: this.state.nutritionValues,
@@ -160,15 +157,16 @@ export default class MealPlannerPage extends React.Component {
 
     addRow() {
         let rowkey = "meal"+this.state.rowcount;
+        //console.log(this.state.cachedMeals.tuesday["meal1"]);
         let joined = this.state.rows.concat(
             <tr key={rowkey}>
-                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.monday[rowkey]}/>
+                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.tuesday[rowkey]}/>
+                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.wednesday[rowkey]}/>
+                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.thursday[rowkey]}/>
+                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.friday[rowkey]}/>
+                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.saturday[rowkey]}/>
+                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.sunday[rowkey]}/>
             </tr>
         );
         this.setState({ rows: joined,
@@ -247,12 +245,12 @@ export default class MealPlannerPage extends React.Component {
         //TODO: Save 'actual items' when they are added vs an explicity save button for changing template/diet
         this.setState({mealplansaved: true});
 
-        //has tiles been chached?
-        if(this.state.tilesCached===false){
-            console.warn("There is no items to save in your meal plan");
-        }else{
+        //has tiles been cached?
+        if(this.state.tilesCached){
             let userID=this.state.uid;
             saveMealPlanTemplate(userID,this.state.cachedMeals);
+        }else{
+            //console.warn("There is no items to save in your meal plan");
         }
     }
 

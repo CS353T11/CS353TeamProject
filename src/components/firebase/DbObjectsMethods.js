@@ -1,6 +1,6 @@
-import React from 'react';
-import firebase from '../firebase/firebase';
-import {db,mealPlan} from '../firebase/firebase';
+//import React from 'react';
+// firebase from '../firebase/firebase';
+import {mealPlan} from '../firebase/firebase';
 export const mealPlanOBJTemplate={
     monday:{
         "meal1":[{

@@ -8,7 +8,7 @@ export default class SearchResultTile extends React.Component{
             cal:this.props.Cal,
             fat:this.props.Fat,
             pro:this.props.Pro,
-            carbs:this.props. Carbs,
+            carbs:this.props.Carbs,
             qty: this.props.Qty
         };
         var foodJSON=JSON.stringify(foodObj);

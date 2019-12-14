@@ -18,9 +18,22 @@ export default class DragDropTest extends React.Component {
 				pro: "",
 				carbs: "",
 				qty: 0
-			}
+			},
+			boxEmpty:true
 		};
+		if(this.props.foodObjProp!==undefined && this.props.foodObjProp.length !==0){
+			this.state.foodList=this.props.foodObjProp;
+			/*console.log("One food item goes here...",this.state.foodList);*/
+			this.state.boxEmpty=false;
+		}
 		this.targetDel=this.targetDel.bind(this);
+	}
+
+	componentDidMount(){
+		//only groups food when dropBox has food saved in it
+		if(this.state.boxEmpty===false){
+			this.groupFoodList();
+		}
 	}
 
 	drop = async e => {
@@ -66,7 +79,7 @@ export default class DragDropTest extends React.Component {
 		this.groupFoodList();
 	};
 
-	groupFoodList(){
+	async groupFoodList(){
 		let totalNutr;
 		if(this.state.foodList.length > 0) {
 			//Groups the food by label
@@ -97,8 +110,8 @@ export default class DragDropTest extends React.Component {
 				};
 			});
 
-			console.log("!Group In Tile Dropped:");
-			console.log(grpFood);
+			// console.log("!Group In Tile Dropped:");
+			// console.log(grpFood);
 
 			//Now we calculate total nutrition
 			totalNutr = grpFood.reduce((a,b) => {
@@ -110,24 +123,22 @@ export default class DragDropTest extends React.Component {
 				}
 			});
 
-			//console.log("!Total In Tile Dropped:");
-			//console.log(totalNutr);
-
-			this.setState({
+			await this.setState({
 				foodList: grpFood,
 				totalNutr: totalNutr,
 			})
+			this.props.getTotalNutr(this.state.totalNutr, this.props.index);
+			this.props.cacheTile(this.state.foodList,this.props.index);
 		}
 		else {
 			totalNutr = {cal: 0, pro: 0, fat: 0, carbs: 0};
-			this.setState({
+			await this.setState({
 				foodList: [],
 				totalNutr: totalNutr,
 			})
+			this.props.getTotalNutr(this.state.totalNutr, this.props.index);
+			this.props.cacheTile(this.state.foodList,this.props.index);
 		}
-		//console.log(this.props);
-		this.props.getTotalNutr(this.state.totalNutr, this.props.index);
-		this.props.cacheTile(this.state.foodList,this.props.index);
 	}
 
 	render() {
@@ -139,7 +150,7 @@ export default class DragDropTest extends React.Component {
 			>
 				{this.state.foodList[0]?
 					this.state.foodList.map((obj,index) =>{
-						//console.log(this.state.foodList);
+						/*console.log("rendering...",this.state.foodList);*/
 						return(
 							<FoodItem
 								obj={obj}
