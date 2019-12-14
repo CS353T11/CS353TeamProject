@@ -94,35 +94,61 @@ export default class Register extends React.Component {
         const { name, age, gender, height, weight, activityLevel} = this.state;
         return (
             <div className="view register">
-                    {/*<h3 className="register-header">Register Member</h3>*/}
-                    <div className="register-form">
-                        {<h3 className="register-header">Register Member</h3>}
-                        <br></br><br></br>
+                    <h3 className="register-header">Register Member</h3>
                         <form onSubmit={this.handleSubmit} className="form">
-                            <label className="label">Email: </label>
-                            <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
-                            <label className="label">Password:</label>
-                            <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
-                            <label className="label">Confirm Password:</label>
-                            <input required className="input" type="password" id="confirmPassword" name="confirmPassword" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
-                            <label className="label">Name:</label>
-                            <input required className="input" type="text" id="name" name="name" min="1" max="30" placeholder="Name" onChange={this.handleChange} value={name}></input>
-                            <label className="label">Enter Age:</label>
-                            <input required className="input" id="age" name="age" type="number" min="0" max="150" placeholder="Age" onChange={this.handleChange} value={age}></input>
-                            <label className="label">Gender:</label>
-                            <Select id="gender" name="gender" onChange={this.handleChange} value={gender ? gender : ""}><option disabled value="">Gender</option><option value="Male">Male</option><option value="Female">Female</option></Select>
-                            <label className="label">Height (cm):</label>
-                            <input required className="input" id="height" name="height" type="number" min="0" max="300" placeholder="Height" onChange={this.handleChange} value={height}></input>
-                            <label className="label">Weight (kg):</label>
-                            <input required className="input" id="weight" name="weight" type="number" min="0" max="200"placeholder="Weight" onChange={this.handleChange} value={weight}></input>
-                            <label className="label">Activity Level:</label>
-                            <Select id="activityLevel" onChange={this.handleChange} value={activityLevel ? activityLevel : ""}><option disabled value="">Activity Level</option><option value="Low">Low</option><option value="Moderate">Moderate</option><option value="High">High</option></Select>
-                            <br></br>
-                            <button type="submit" className="btn-login" >REGISTER</button>
-                            <br></br>
-                            {this.state.error ? <p>{this.state.error.message}</p> : null}
+                            <div className="register-form">
+                                <div className="form1">
+                                    <p for="email">Email: </p>
+                                    <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
+
+
+                                    <p className="label" for="password">Password:</p>
+                                    <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
+
+                                    <p className="label">Confirm Password:</p>
+                                    <input required className="input" type="password" id="confirmPassword" name="confirmPassword" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
+
+                                    <p className="label">Name:</p>
+                                    <input required className="input" type="text" id="name" name="name" min="1" max="30" placeholder="Name" onChange={this.handleChange} value={name}></input>
+                                </div>
+                                <div className="form2">
+                                    <p className="label">Age:</p>
+                                    <input required className="input" id="age" name="age" type="number" min="0" max="150" placeholder="Age" onChange={this.handleChange} value={age}></input>
+
+                                    <Select id="gender" name="gender" onChange={this.handleChange} value={gender ? gender : ""}><option disabled value="">Gender</option><option value="Male">Male</option><option value="Female">Female</option></Select>
+
+                                    <div className="height-weight">
+                                        <div className="height">
+                                            <input required className="input" id="height"
+                                                   name="height" type="number" min="0" max="300"
+                                                   placeholder="Height" onChange={this.handleChange}
+                                                   value={height}>
+                                            </input>
+                                            <p>cm</p>
+                                        </div>
+                                        <div className="weight">
+                                            <input required className="input" id="weight" name="weight"
+                                                   type="number" min="0" max="200"placeholder="Weight"
+                                                   onChange={this.handleChange} value={weight}>
+                                            </input>
+                                            <p>Kg</p>
+                                        </div>
+                                    </div>
+
+                                    <Select id="activityLevel" onChange={this.handleChange} value={activityLevel ? activityLevel : ""}>
+                                        <option disabled value="">Activity Level</option>
+                                        <option value="Low">Low</option><option value="Moderate">Moderate</option>
+                                        <option value="High">High</option>
+                                    </Select>
+                                </div>
+                            </div>
+                            <div className="submit-box">
+                                <button type="submit" className="btn-login" >REGISTER</button>
+                                {this.state.error ? <p className="alert">{this.state.error.message}</p> : null}
+                            </div>
                         </form>
-                    </div>
+
+
             </div>
         );
     }

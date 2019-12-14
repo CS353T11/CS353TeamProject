@@ -217,20 +217,10 @@ body, input, select, button {
   .home-illustration {
     min-width: 40%;
     position: relative;
-    &:after {
-      content: '';
-      min-width: 2px;
-      min-height: calc(100% - 3px);
-      background: black;
-      position: absolute;
-      right: -1px;
-      top: 0;
-    }
     .gif {
       border: 4px solid black;
-      border-right: 3px solid black;
       box-sizing: border-box;
-      width: 101%;
+      width: 100%;
     }
   }
   .home-titles {
@@ -765,22 +755,8 @@ body, input, select, button {
       width: 180px;
       font-weight: bold;
     }
-    div.input-field.col {
-      padding: 0;
-      width: 100%;
-    }
-    ul.dropdown-content {
-      li > span {
-        color: black !important;
-      }
-      li.selected > span {
-        color: $primaryColor !important;
-        font-weight: bold;
-      }
-      li.disabled > span {
-        color: gray !important;
-      }
-    }
+
+
     input, select {
       min-width: 100%;
       height: 40px;
@@ -807,17 +783,82 @@ body, input, select, button {
   display: flex;
   flex-direction: row;
 }
+
+//Fix for the materialize select input
+div.input-field.col {
+  padding: 0;
+  width: 100%;
+  ul.dropdown-content {
+    li > span {
+      color: black !important;
+    }
+    li.selected > span {
+      color: $primaryColor !important;
+      font-weight: bold;
+    }
+    li.disabled > span {
+      color: gray !important;
+    }
+  }
+}
+
 .register {
   display: flex;
   flex-direction: column;
+  input, select {
+    width: 100%;
+    height: 32px !important;
+    margin:0;
+    margin: 0 0 32px 0 !important;
+    &:focus {
+      border-bottom: 1px solid $primaryColor !important;
+      -webkit-box-shadow: 0 1px 0 0 $primaryColor !important;
+      box-shadow: 0 1px 0 0 $primaryColor !important;
+    }
+  }
+  .submit-box {
+    display: flex;
+    align-items: center;
+    .alert {
+      background: $primaryColor;
+      margin-left: 32px;
+    }
+    .btn-login {
+      background: transparent;
+      width: 172px;
+      &:hover {
+        background: black;
+      }
+    }
+  }
+  .register-form {
+    padding: 24px 0 0;
+    display: flex;
+    justify-content: space-between;
+    .form1, .form2 {
+      width: 40%;
 
+    }
+    .height-weight {
+      display: flex;
+      justify-content: space-between;
+      .height, .weight {
+        display: flex;
+        align-items: start;
+        margin-top: 16px;
+        width: 40%;
+        p {
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+  .register-header {
+    font: bold 32px $sans-serif;
+  }
 }
-.register-form {
 
-}
-.register-header {
-  font: bold 32px $sans-serif;
-}
+
 .plan{
   //position: center;
   margin: auto;
