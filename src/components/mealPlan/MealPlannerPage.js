@@ -6,6 +6,8 @@ import DragDropBox from "./DragDropBox";
 import firebase from '../firebase/firebase';
 import {db,mealPlan} from '../firebase/firebase';
 import {addMealPlanDoc, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
+import loadingSvg from '../../images/loading.svg';
+import homepage_gif from "../../images/homepage-gif.gif";
 // import DragDropTest from './DragDropTest';
 // import InitialBox from "./testY";
 
@@ -352,7 +354,7 @@ export default class MealPlannerPage extends React.Component {
             else {
                 return (
                     <div className="view create-help">
-                        LOADING
+                        <img src={loadingSvg} alt="Loading..." className="loadingSvg"/>
                     </div>
                 )
             }

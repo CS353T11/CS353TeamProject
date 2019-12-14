@@ -22,7 +22,7 @@ export default class HomeView extends React.Component {
             <div className="view">
                 <div className="home">
                     <div className="home-illustration">
-                        <img src={homepage_gif} alt="Homepage Ilustration" className="gif"></img>
+                        <img src={homepage_gif} alt="Homepage Ilustration" className="gif"/>
                     </div>
                     <div className="home-titles">
                         <h2 className="title">Plan <b className="bold">meals.</b><br />
