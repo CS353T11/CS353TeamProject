@@ -68,16 +68,15 @@ export default class MealPlannerPage extends React.Component {
 
                     this.setState({
                         totalNutrRecomended:  {     /* Nutrition values for the the recommended diet depending on user data */
-                            kcal: user_info.calories*7,
-                            prots:  user_info.protein*7,
-                            carbs:  user_info.carbs*7,
-                            fats:  user_info.fats*7,
+                            kcal: (user_info.calories*7),
+                            prots:  (user_info.protein*7),
+                            carbs:  (user_info.carbs*7),
+                            fats:  (user_info.fats*7),
                         },
                     });
 
-                    //console.log(this.state)
                 });
-                console.log(this.state)
+                //console.log(this.state)
 
                 /*Retrieve from the database if the user already has a mealplan*/
                 mealPlan.doc(userID).collection("Template").doc("default").get()

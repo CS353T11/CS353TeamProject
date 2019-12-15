@@ -27,7 +27,7 @@ export default class NutriScore extends React.Component {
         var carbs = (this.props.actual_values.carbs/this.props.planned_values.carbs)*100;
         var fats = (this.props.actual_values.fats/this.props.planned_values.fats)*100;
 
-        console.log(kcal, prots,carbs,fats);
+        //console.log(kcal, prots,carbs,fats);
 
         document.getElementById("kcalbar").style.width= kcal + '%';
         document.getElementById("protsbar").style.width= prots + '%';
@@ -75,7 +75,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="kcalbar"/>
                         <span className="counter">{this.round(this.props.actual_values.kcal,2)}
-                        /{this.props.planned_values.kcal*7}</span>
+                        /{this.props.planned_values.kcal}</span>
                     </div>
                     <div className="subtitle">Calories: </div>
                 </div>
@@ -83,7 +83,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="protsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.prots,2)}
-                        /{this.props.planned_values.prots*7}</span>
+                        /{this.props.planned_values.prots}</span>
                     </div>
                     <div className="subtitle">Prots: </div>
                 </div>
@@ -91,7 +91,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="carbsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.carbs,2)}
-                        /{this.props.planned_values.carbs*7}</span>
+                        /{this.props.planned_values.carbs}</span>
                     </div>
                     <div className="subtitle">Carbs: </div>
                 </div>
@@ -99,7 +99,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="fatsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.fats,2)}
-                        /{this.props.planned_values.fats*7}</span>
+                        /{this.props.planned_values.fats}</span>
                     </div>
                     <div className="subtitle">Fats: </div>
                 </div>
