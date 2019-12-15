@@ -7,9 +7,7 @@ import firebase from '../firebase/firebase';
 import {db,mealPlan} from '../firebase/firebase';
 import {addMealPlanDoc, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
 import loadingSvg from '../../images/loading.svg';
-import homepage_gif from "../../images/homepage-gif.gif";
-// import DragDropTest from './DragDropTest';
-// import InitialBox from "./testY";
+import plan1 from "../../images/plan1.gif";
 
 export default class MealPlannerPage extends React.Component {
     constructor(props) {
@@ -335,7 +333,7 @@ export default class MealPlannerPage extends React.Component {
                 return (
                     <div className="view create-help">
                         <div className="help-pic">
-                           <img alt="screenshot - gif of how it works"></img>
+                           <img src={plan1} alt="screenshot - gif of how it works"></img>
                         </div>
                         <div>
                             <h3 className="title">Create your first meal plan</h3>

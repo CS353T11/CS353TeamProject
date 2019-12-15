@@ -1,4 +1,5 @@
- import React from 'react';
+import React from 'react';
+import img from '../../images/recipe.svg'
 
 export default class Footer extends React.Component {
     render() {
@@ -14,7 +15,7 @@ export default class Footer extends React.Component {
                     </div>
 
                     <div className="footer-item">
-                        <img alt="cute little ilustration"></img>
+                        <img className="img" alt="Icon by https://www.flaticon.es/autores/freepik" src={img}></img>
                     </div>
 
                     <div className="footer-item">

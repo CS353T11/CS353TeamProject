@@ -3,7 +3,9 @@ import {TextInput} from 'react-materialize';
 import axios from 'axios';
 import SearchResultTile from "./SearchResultTile";
 import firebase from '../firebase/firebase';
-import {db,mealPlan} from '../firebase/firebase';
+import noresults from '../../images/toast.svg';
+import nosearch from '../../images/toast2.svg';
+
 export default class SearchBar extends React.Component {
 
     constructor(props){
@@ -138,8 +140,9 @@ export default class SearchBar extends React.Component {
                             );
                         }) :
                         (
-                            <div>
-                                   Search something! (we could add an ilustration)
+                            <div className="empty-results">
+                                <img alt="happy toast" className="toast2" src={nosearch}></img>
+                                <p className="message">Search meals</p>
                             </div>
                         )
                     }
@@ -147,8 +150,9 @@ export default class SearchBar extends React.Component {
                     {
                         (this.state.results.hints && this.state.results.hints.length <= 0) ?
                             (
-                                <div>
-                                    No results (we could add an ilustration)
+                                <div className="empty-results">
+                                    <img alt="burned toast" className="toast" src={noresults}></img>
+                                    <p className="message">No results</p>
                                 </div>
                             ) : null
                     }
