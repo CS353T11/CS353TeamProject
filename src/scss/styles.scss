@@ -179,8 +179,15 @@ div.input-field.col {
   align-items: center;
   justify-content: flex-start;
   .header-brand {
+    display: flex;
+    align-items: center;
     font: normal 32px $sans-serif;
     margin: 0 64px 4px 0;
+    img {
+      width: 80px;
+      margin: 0 -6px 0 -14px;
+      opacity: 0.7;
+    }
     .bold {
       font-weight: bold;
     }
@@ -199,6 +206,7 @@ div.input-field.col {
      margin-left: auto;
   }
 }
+
 
 .footer {
   display: flex;
@@ -242,6 +250,12 @@ div.input-field.col {
     .bold {
       font-weight: bold;
     }
+  }
+}
+
+@media screen and (max-width: 1195px) {
+  .footer-bottom, .footer-top, .header {
+    padding: 0 64px 0 64px;
   }
 }
 
