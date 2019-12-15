@@ -21,14 +21,14 @@ export default class Footer extends React.Component {
                     <div className="footer-item">
                         <p className="bold">Contact & Suport</p>
                         <NavLink to="/about">FAQ</NavLink>
-                        <a  href="mailto:info@planmy.ml?Subject=Hello" >Email</a>
-                        <a href="https://www.instagram.com/aymchill/" target="_blank">Instagram</a>
+                        <a  href="mailto:info@planmy.ml?Subject=Hello" rel="noopener noreferrer" target="_blank">Email</a>
+                        <a href="https://www.instagram.com/aymchill/"  rel="noopener noreferrer" target="_blank">Instagram</a>
                     </div>
                 </div>
                 <div className="footer-bottom">
-                    <a href="https://lmgtfy.com/?q=terms+of+use" target="_blank">Terms of use</a>
-                    <a href="https://lmgtfy.com/?q=privacy+policy" target="_blank">Privacy Policy</a>
-                    <a href="https://lmgtfy.com/?q=cookie+policy" target="_blank">Cookie Policy</a>
+                    <a href="https://lmgtfy.com/?q=terms+of+use" rel="noopener noreferrer" target="_blank">Terms of use</a>
+                    <a href="https://lmgtfy.com/?q=privacy+policy" rel="noopener noreferrer"  target="_blank">Privacy Policy</a>
+                    <a href="https://lmgtfy.com/?q=cookie+policy"  rel="noopener noreferrer" target="_blank">Cookie Policy</a>
                     <span className="copyright">© Copyright 2019 - 2020 . planmyml. All rights reserved.</span>
                 </div>
             </footer>

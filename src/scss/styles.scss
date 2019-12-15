@@ -522,7 +522,7 @@ div.input-field.col {
       justify-content: space-between;
       .height, .weight {
         display: flex;
-        align-items: start;
+        align-items: flex-start;
         margin-top: 16px;
         width: 40%;
         p {
@@ -983,7 +983,7 @@ div.input-field.col {
   flex-direction: column;
   width: 44%;
   padding: 48px 0 48px 48px;
-  align-items: start;
+  align-items: flex-start;
   &.goals {
     width: 30%;
     padding: 48px 48px 48px 0;

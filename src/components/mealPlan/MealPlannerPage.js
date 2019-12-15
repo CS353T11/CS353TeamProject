@@ -4,7 +4,7 @@ import WeekPlan from './weekPlan';
 import NutriScore from './nutriScore';
 import DragDropBox from "./DragDropBox";
 import firebase from '../firebase/firebase';
-import {db,mealPlan} from '../firebase/firebase';
+import {mealPlan} from '../firebase/firebase';
 import {addMealPlanDoc, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
 import loadingSvg from '../../images/loading.svg';
 import plan1 from "../../images/plan1.gif";
@@ -105,6 +105,8 @@ export default class MealPlannerPage extends React.Component {
                     return {
                         cal, fat, pro, carbs
                     };
+                }else {
+                    return 0;
                 }
             });
             totalNutrWeek = foodArray.reduce((a,b) => {
@@ -116,6 +118,8 @@ export default class MealPlannerPage extends React.Component {
                         pro: a.pro + b.pro,
                         carbs: a.carbs + b.carbs,
                     });
+                }else {
+                    return null;
                 }
             });
         }
@@ -170,7 +174,7 @@ export default class MealPlannerPage extends React.Component {
             </tr>
         );
         this.setState({ rows: joined,
-        rowcount: (++this.state.rowcount)})
+        rowcount: (this.state.rowcount + 1)})
     }
 
     async removeRow() {
@@ -202,6 +206,8 @@ export default class MealPlannerPage extends React.Component {
                 return {
                     cal, fat, pro, carbs
                 };
+            }else {
+                return 0;
             }
         });
         if(foodArray.length > 1) {
@@ -214,6 +220,8 @@ export default class MealPlannerPage extends React.Component {
                         pro: a.pro + b.pro,
                         carbs: a.carbs + b.carbs,
                     });
+                }else {
+                    return null;
                 }
             });
         }else {

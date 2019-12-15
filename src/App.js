@@ -7,7 +7,6 @@ import firebase from './components/firebase/firebase';
 import LoggedInHeader from './components/layout/loggedInHeader';
 import LoggedOutHeader from './components/layout/loggedOutHeader';
 import MealPlannerPage from './components/mealPlan/MealPlannerPage';
-import Goals from './components/mealPlan/goals';
 import Profile from './components/userInfo/profile';
 import EditProfile from './components/userInfo/editProfile';
 import Register from './components/authentication/register';

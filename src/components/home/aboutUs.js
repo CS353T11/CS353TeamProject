@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+//import { NavLink } from 'react-router-dom';
 import firebase from 'firebase';
 
 export default class aboutUs extends React.Component {

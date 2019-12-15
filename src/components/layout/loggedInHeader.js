@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from '../firebase/firebase'
 import { NavLink } from 'react-router-dom';
-import About from '../home/aboutUs';
 
 export default class LoggedInHeader extends React.Component {
     state = {

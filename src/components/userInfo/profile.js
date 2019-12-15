@@ -1,9 +1,8 @@
-//f
 import React from 'react';
 import firebase from '../firebase/firebase';
 import SideBar from './sideBar';
-import Achievements from './achievements';
 import Diet from '../mealPlan/goals';
+
 export default class Profile extends React.Component {
     state = {
         user: null,

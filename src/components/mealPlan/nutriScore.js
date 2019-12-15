@@ -25,7 +25,7 @@ export default class NutriScore extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({ user })
-                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
                     //console.log(doc.data())
                     this.setState((preState) => ({ ...preState.user, ...doc.data() })
                     )
@@ -84,7 +84,6 @@ export default class NutriScore extends React.Component {
     }
 
     render() {
-        const { calories, carbs, protein, fats} = this.state;
         return (
             <div className="nutriscore">
                 <h3 className="title">NutriScore</h3>
