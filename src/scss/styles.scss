@@ -936,6 +936,8 @@ div.input-field.col {
   .bar {
     display: block;
     position: absolute;
+    -webkit-transition: width 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: width 0.5s;
     left: 0;
     height: 18px;
     border-radius: 12px;

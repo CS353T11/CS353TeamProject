@@ -30,10 +30,10 @@ export default class MealPlannerPage extends React.Component {
                 fats: 0,
             },
             totalNutrRecomended:  {     /* Nutrition values for the the recommended diet depending on user data */
-                kcal: 2000*7,
-                prots: 200*7,
-                carbs: 100*7,
-                fats: 80*7,
+                kcal: 0,
+                prots: 0,
+                carbs: 0,
+                fats: 0,
             },
             nutritionValues: [],        /* Array with nutrition values for every tile */
             cachedMeals:{
@@ -62,6 +62,23 @@ export default class MealPlannerPage extends React.Component {
                 this.setState({ uid:userID});
                 console.log("User:"+userID+" is logged in.");
 
+                //Retrieves the recommended values
+                firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                    let user_info = doc.data();
+
+                    this.setState({
+                        totalNutrRecomended:  {     /* Nutrition values for the the recommended diet depending on user data */
+                            kcal: user_info.calories*7,
+                            prots:  user_info.protein*7,
+                            carbs:  user_info.carbs*7,
+                            fats:  user_info.fats*7,
+                        },
+                    });
+
+                    //console.log(this.state)
+                });
+                console.log(this.state)
+
                 /*Retrieve from the database if the user already has a mealplan*/
                 mealPlan.doc(userID).collection("Template").doc("default").get()
                     .then(doc => {
@@ -80,6 +97,7 @@ export default class MealPlannerPage extends React.Component {
 
                     })
             }
+
         })
     }
 
@@ -317,7 +335,7 @@ export default class MealPlannerPage extends React.Component {
                         <span className="btn-login edit" onClick={() => this.editButton()}>EDIT</span>
                         <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                     </div>
-                    <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>
+                    <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrReal}/>
                 </div>
             )
         }
