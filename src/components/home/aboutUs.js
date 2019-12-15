@@ -18,7 +18,7 @@ export default class aboutUs extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="view about-us">
                 This was a project created for our CS353 Team Project module.
 
             </div>
