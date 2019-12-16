@@ -6,37 +6,19 @@ export default class NutriScore extends React.Component {
         this.state = {
             //all of this will be props
             planned_values: {
-                kcal: 2000,
-                prots: 40,
-                carbs: 250,
-                fats: 100,
+                kcal: '',
+                prots: '',
+                carbs: '',
+                fats: '',
             },
             actual_values: {
-                kcal: 1800,
-                prots: 38,
-                carbs: 200,
-                fats: 150,
+                kcal: '',
+                prots: '',
+                carbs: '',
+                fats: '',
             },
             nutriscore: {}
         }
-    }
-
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.setState({ user })
-                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
-                    //console.log(doc.data())
-                    this.setState((preState) => ({ ...preState.user, ...doc.data() })
-                    )
-                    //console.log(this.state)
-                });
-                //console.log(this.state)
-            } else {
-                this.props.history.push('/');
-            }
-
-        })
     }
 
     async componentDidUpdate() {
@@ -44,6 +26,8 @@ export default class NutriScore extends React.Component {
         var prots = (this.props.actual_values.prots/this.props.planned_values.prots)*100;
         var carbs = (this.props.actual_values.carbs/this.props.planned_values.carbs)*100;
         var fats = (this.props.actual_values.fats/this.props.planned_values.fats)*100;
+
+        //console.log(kcal, prots,carbs,fats);
 
         document.getElementById("kcalbar").style.width= kcal + '%';
         document.getElementById("protsbar").style.width= prots + '%';
@@ -84,7 +68,6 @@ export default class NutriScore extends React.Component {
     }
 
     render() {
-        const { calories, carbs, protein, fats} = this.state;
         return (
             <div className="nutriscore">
                 <h3 className="title">NutriScore</h3>
@@ -92,7 +75,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="kcalbar"/>
                         <span className="counter">{this.round(this.props.actual_values.kcal,2)}
-                        /{this.state.calories*7}</span>
+                        /{this.props.planned_values.kcal}</span>
                     </div>
                     <div className="subtitle">Calories: </div>
                 </div>
@@ -100,7 +83,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="protsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.prots,2)}
-                        /{this.state.protein*7}</span>
+                        /{this.props.planned_values.prots}</span>
                     </div>
                     <div className="subtitle">Prots: </div>
                 </div>
@@ -108,7 +91,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="carbsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.carbs,2)}
-                        /{this.state.carbs*7}</span>
+                        /{this.props.planned_values.carbs}</span>
                     </div>
                     <div className="subtitle">Carbs: </div>
                 </div>
@@ -116,7 +99,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="fatsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.fats,2)}
-                        /{this.state.fats*7}</span>
+                        /{this.props.planned_values.fats}</span>
                     </div>
                     <div className="subtitle">Fats: </div>
                 </div>

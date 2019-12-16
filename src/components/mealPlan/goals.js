@@ -1,6 +1,5 @@
 import React from 'react'
-import Avatar from "../../images/avatar.svg";
-import {RadioGroup, Select} from 'react-materialize';
+import {Select} from 'react-materialize';
 import firebase from '../firebase/firebase';
 export default class Goals extends React.Component {
     state = {
@@ -22,7 +21,7 @@ export default class Goals extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({ user })
-                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
                     //console.log(doc.data())
                     this.setState((preState) => ({ ...preState.user, ...doc.data() })
                     )
@@ -89,7 +88,6 @@ export default class Goals extends React.Component {
         this.setState({dietCalc:c});
         console.log(this.state.dietCalc);
         const userId = this.state.user.uid;
-        const { calories, carbs, protein, fats} = this.state;
         //console.log(this.state)
         firebase.firestore().collection('profiles').doc(userId)
             .update({
@@ -101,7 +99,7 @@ export default class Goals extends React.Component {
             }).catch(error => {
             this.setState({ error })
         })
-        let profileRef = firebase.firestore().collection('profiles').doc(userId).get().then(doc => {
+        firebase.firestore().collection('profiles').doc(userId).get().then(doc => {
             //console.log(doc.data())
             this.setState((preState) => ({ ...preState.user, ...doc.data() })
             )

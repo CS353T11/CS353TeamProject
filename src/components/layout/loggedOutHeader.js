@@ -1,15 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginPopUP from '../authentication/loginPopUp';
-import About from '../home/aboutUs';
+import logo from "../../images/logo.svg";
 
 export default class LoggedOutHeader extends React.Component {
     render() {
         return (
             <header className="header">
-                <span className="header-brand">
-                    <NavLink to='/'><b className="bold">plan</b>my.ml</NavLink>
-                </span>
+                <NavLink to='/' className="header-brand">
+                    <img src={logo} alt="logo"></img> <b className="bold">plan</b>my.ml
+                </NavLink>
+
                 <span className="header-link">
                     <NavLink to='/register'>Meal Plans</NavLink>
                 </span>

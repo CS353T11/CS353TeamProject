@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+//import { NavLink } from 'react-router-dom';
 import firebase from 'firebase';
 
 export default class aboutUs extends React.Component {
@@ -18,7 +18,7 @@ export default class aboutUs extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="view about-us">
                 This was a project created for our CS353 Team Project module.
 
             </div>

@@ -1,8 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 import SideBar from './sideBar';
-import Achievements from './achievements'
-import { RadioGroup, Select } from 'react-materialize';
+import {  Select } from 'react-materialize';
 
 export default class EditProfile extends React.Component {
     state = {
@@ -33,7 +32,7 @@ export default class EditProfile extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({ user })
-                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
                     this.setState({ email: user.email, user, ...doc.data() })
                 });
             } else {
