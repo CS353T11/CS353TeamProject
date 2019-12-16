@@ -1,68 +1,8 @@
 //import React from 'react';
 // firebase from '../firebase/firebase';
 import {mealPlan} from '../firebase/firebase';
-export const mealPlanOBJTemplate={
-    monday:{
-        "meal1":[{
-            LABEL:"",
-            FOOD_ID:"",
-            CAL:0,
-            CARBS:0,
-            FAT:0,
-            PRO:0
-        }]
-    },
-    tuesday:{
-        "meal1":[{
-            LABEL:"",
-            FOOD_ID:"",
-            CAL:0,
-            CARBS:0,
-            FAT:0,
-            PRO:0
-        }]
-    },
-    wednesday:{
-        "meal1":[{
-            LABEL:"",
-            FOOD_ID:"",
-            CAL:0,
-            CARBS:0,
-            FAT:0,
-            PRO:0
-        }]
-    },
-    thursday:{
-        "meal1":[{
-            LABEL:"",
-            FOOD_ID:"",
-            CAL:0,
-            CARBS:0,
-            FAT:0,
-            PRO:0
-        }]
-    },
-    friday:{
-        "meal1":[{
-            LABEL:"",
-            FOOD_ID:"",
-            CAL:0,
-            CARBS:0,
-            FAT:0,
-            PRO:0
-        }]
-    },
-    saturday:{
-        "meal1":[{
-            LABEL:"",
-            FOOD_ID:"",
-            CAL:0,
-            CARBS:0,
-            FAT:0,
-            PRO:0
-        }]
-    },
-    sunday:{
+export const mealPlanDayStructure={
+    day:{
         "meal1":[{
             LABEL:"",
             FOOD_ID:"",
@@ -74,12 +14,36 @@ export const mealPlanOBJTemplate={
     }
 }
 
+export const mealPlanOBJTemplate={
+    monday:{
+        "meal1":[]
+    },
+    tuesday:{
+        "meal1":[]
+    },
+    wednesday:{
+        "meal1":[]
+    },
+    thursday:{
+        "meal1":[]
+    },
+    friday:{
+        "meal1":[]
+    },
+    saturday:{
+        "meal1":[]
+    },
+    sunday:{
+        "meal1":[]
+    }
+}
+
 export function addMealPlanDoc(userID){
     mealPlan.doc(userID).set({
     userID:userID
     })
         .then(function() {
-            console.log("Collection added to Firestore!");
+            //console.log("Collection added to Firestore!");
             let promises = [];
             const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
             let actualMealPlanObj=mealPlanOBJTemplate;

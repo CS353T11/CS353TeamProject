@@ -291,7 +291,7 @@ export default class MealPlannerPage extends React.Component {
                     if(doc.exists){
                         console.log("huh...a meal plan already exists...");
                     }else{
-                        console.log("creating meal plan for"+userID);
+                        console.log("creating meal plan for "+userID);
                         addMealPlanDoc(userID);
                     }
                 })

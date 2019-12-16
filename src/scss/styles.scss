@@ -302,7 +302,6 @@ div.input-field.col {
   .title {
     display: block;
     font-size: 56px;
-    font-weight: bold;
     color: black;
     .bold {
       display:inline-block;
@@ -310,7 +309,8 @@ div.input-field.col {
       margin: 0 0 8px 0;
       padding: 0 0 4px 0;
       min-height: 40px;
-      background: $primaryColor;
+      text-decoration:underline;
+      text-decoration-color: $primaryColor;
     }
   }
   .subtitle {
@@ -408,8 +408,9 @@ div.input-field.col {
     padding-right:  4px;
     font-weight: bold;
     color: black;
-    background: $primaryColor;
     margin-bottom: 6px;
+    text-decoration: underline;
+    text-decoration-color: $primaryColor;
   }
   .sub-descr {
     margin-top: 22px;
