@@ -5,9 +5,11 @@ import NutriScore from './nutriScore';
 import DragDropBox from "./DragDropBox";
 import firebase from '../firebase/firebase';
 import {mealPlan} from '../firebase/firebase';
-import {addMealPlanDoc, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
+import {addMealPlanDoc, deleteMealPlanTemplate, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
 import loadingSvg from '../../images/loading.svg';
 import plan1 from "../../images/plan1.gif";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 export default class MealPlannerPage extends React.Component {
     constructor(props) {
@@ -54,6 +56,7 @@ export default class MealPlannerPage extends React.Component {
         this.removeRow=this.removeRow.bind(this);
         this.getTotalNutr = this.getTotalNutr.bind(this);
         this.cacheTile=this.cacheTile.bind(this);
+        this.confirmDeletion=this.confirmDeletion.bind(this);
     }
 
     async componentDidMount() {
@@ -197,75 +200,77 @@ export default class MealPlannerPage extends React.Component {
     }
 
     async removeRow() {
-        let newRows = this.state.rows;
-        let rowkey = "meal"+(this.state.rowcount-1);
-        let newNutritionValues = [];
-        let index,i;
+        if(this.state.rowcount!==1){
+            let newRows = this.state.rows;
+            let rowkey = "meal" + (this.state.rowcount - 1);
+            let newNutritionValues = [];
+            let index, i;
 
-        console.log(this.state.nutritionValues);
+            console.log(this.state.nutritionValues);
 
-        //This takes out from the list all the items that where in the row we are deleting
-        for(index in this.state.nutritionValues){
-            i = index.slice(-5);
-            console.log(i,rowkey);
-            if(i !== rowkey){
-                newNutritionValues[index] = this.state.nutritionValues[index];
+            //This takes out from the list all the items that where in the row we are deleting
+            for (index in this.state.nutritionValues) {
+                i = index.slice(-5);
+                console.log(i, rowkey);
+                if (i !== rowkey) {
+                    newNutritionValues[index] = this.state.nutritionValues[index];
+                }
             }
-        }
-        console.log(newNutritionValues);
-        newRows.pop();
+            console.log(newNutritionValues);
+            newRows.pop();
 
-        let totalNutrWeek;
-        let foodArray = newNutritionValues;
+            let totalNutrWeek;
+            let foodArray = newNutritionValues;
 
-        // We calculate again the nutrition values
-        foodArray = Object.keys(foodArray).map(key => {
-            if(foodArray[key] !== 0) {
-                let {cal, fat, pro, carbs} = foodArray[key];
-                return {
-                    cal, fat, pro, carbs
-                };
-            }else {
-                return 0;
-            }
-        });
-        if(foodArray.length > 1) {
-            totalNutrWeek = foodArray.reduce((a, b) => {
-                if (a && b) {
-                    //console.log(a, b);
-                    return ({
-                        cal: a.cal + b.cal,
-                        fat: a.fat + b.fat,
-                        pro: a.pro + b.pro,
-                        carbs: a.carbs + b.carbs,
-                    });
-                }else {
-                    return null;
+            // We calculate again the nutrition values
+            foodArray = Object.keys(foodArray).map(key => {
+                if (foodArray[key] !== 0) {
+                    let {cal, fat, pro, carbs} = foodArray[key];
+                    return {
+                        cal, fat, pro, carbs
+                    };
+                } else {
+                    return 0;
                 }
             });
-        }else {
-            if(foodArray.length === 0){
-                foodArray =foodArray.concat({
-                    cal: 0,
-                    fat: 0,
-                    pro: 0,
-                    carbs: 0,
+            if (foodArray.length > 1) {
+                totalNutrWeek = foodArray.reduce((a, b) => {
+                    if (a && b) {
+                        //console.log(a, b);
+                        return ({
+                            cal: a.cal + b.cal,
+                            fat: a.fat + b.fat,
+                            pro: a.pro + b.pro,
+                            carbs: a.carbs + b.carbs,
+                        });
+                    } else {
+                        return null;
+                    }
                 });
+            } else {
+                if (foodArray.length === 0) {
+                    foodArray = foodArray.concat({
+                        cal: 0,
+                        fat: 0,
+                        pro: 0,
+                        carbs: 0,
+                    });
+                }
+                totalNutrWeek = foodArray[0];
             }
-            totalNutrWeek = foodArray[0];
-        }
 
-        await this.setState({
-            rows: newRows,
-            rowcount: (--this.state.rowcount),
-            nutritionValues: newNutritionValues,
-            totalNutrPlan:  {
-                kcal: totalNutrWeek.cal,
-                prots: totalNutrWeek.pro,
-                carbs: totalNutrWeek.carbs,
-                fats: totalNutrWeek.fat,
-            },
-        })
+            await this.setState({
+                rows: newRows,
+                rowcount: (--this.state.rowcount),
+                nutritionValues: newNutritionValues,
+                totalNutrPlan: {
+                    kcal: totalNutrWeek.cal,
+                    prots: totalNutrWeek.pro,
+                    carbs: totalNutrWeek.carbs,
+                    fats: totalNutrWeek.fat,
+                },
+            })
+        }
     }
 
     saveMealplan(){
@@ -309,9 +314,29 @@ export default class MealPlannerPage extends React.Component {
         });
     }
 
+    async confirmDeletion(){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your Meal Plan has been deleted.',
+                    'success'
+                )
+                this.deleteMealplan();
+            }
+        })
+    }
     async deleteMealplan(){
         await this.setState({
-            rowcount: 1,
+            rowcount: 0,
             mealplansaved: false,
             creationcheck: true,
             totalNutrPlan:  {
@@ -323,9 +348,8 @@ export default class MealPlannerPage extends React.Component {
             nutritionValues: [],
             rows: [],});
         await this.addRow();
-        await this.addRow();
-        await this.addRow();
-        //Here we should do the thing with the database
+        let userID=this.state.uid;
+        deleteMealPlanTemplate(userID);
     }
 
     //Performs the creation process changing the view depending if the user has a mealplan saved or not
@@ -351,7 +375,7 @@ export default class MealPlannerPage extends React.Component {
                         <div className="mp-settings">
                             <span className="btn-login add" onClick={this.addRow}>ADD</span>
                             <span className="btn-login rm" onClick={() => this.removeRow()}>REMOVE</span>
-                            <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
+                            <span className="btn-login del" onClick={this.confirmDeletion}>DELETE</span>
                             <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                         </div>
                         <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>

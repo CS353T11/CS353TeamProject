@@ -63,9 +63,15 @@ export function addMealPlanDoc(userID){
         });
 }
 
-export function saveMealPlanTemplate(userID,cachedMeals){
+export function saveMealPlanTemplate(userID,cachedMeals,type){
     console.warn("Saving user "+userID+" 's meal plan template...");
     console.warn(cachedMeals);
 
     mealPlan.doc(userID).collection('Template').doc('default').set(cachedMeals,{merge:true});
+}
+
+export function deleteMealPlanTemplate(userID){
+    console.warn("Deleting user "+userID+" 's meal plan template...");
+
+    mealPlan.doc(userID).collection('Template').doc('default').set(mealPlanOBJTemplate);
 }
