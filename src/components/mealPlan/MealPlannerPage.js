@@ -17,7 +17,7 @@ export default class MealPlannerPage extends React.Component {
         this.state = {
             uid:"",                     /* User ID*/
             rowcount: 0,                /* Number of rows*/
-            mealplansaved: false,       /* Checks if the plan is being created or it's already saved*/
+            mealplansaved: '',       /* Checks if the plan is being created or it's already saved*/
             creationcheck: '',          /* Checks if the user ever created a plan or if its their first*/
             totalNutrPlan:  {           /* Nutrition values for the created plan */
                 kcal: 0,
@@ -96,7 +96,9 @@ export default class MealPlannerPage extends React.Component {
                             }
                             this.saveMealplan();
                         }else {
-                            this.setState({creationcheck:false});
+                            this.setState({
+                                creationcheck:false,
+                                mealplansaved: false});
                         }
 
                     })
@@ -186,13 +188,13 @@ export default class MealPlannerPage extends React.Component {
         //console.log(this.state.cachedMeals.tuesday["meal1"]);
         let joined = this.state.rows.concat(
             <tr key={rowkey}>
-                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.monday[rowkey]}/>
-                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.tuesday[rowkey]}/>
-                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.wednesday[rowkey]}/>
-                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.thursday[rowkey]}/>
-                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.friday[rowkey]}/>
-                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.saturday[rowkey]}/>
-                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.sunday[rowkey]}/>
+                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.monday[rowkey]} />
+                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.tuesday[rowkey]} />
+                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.wednesday[rowkey]} />
+                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.thursday[rowkey]} />
+                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.friday[rowkey]} />
+                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.saturday[rowkey]} />
+                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.sunday[rowkey]} />
             </tr>
         );
         this.setState({ rows: joined,
@@ -354,11 +356,12 @@ export default class MealPlannerPage extends React.Component {
 
     //Performs the creation process changing the view depending if the user has a mealplan saved or not
     createProcess() {
+        // When the mealplan is already created
         if(this.state.mealplansaved){
             return (
                 <div className="view">
                     <SearchBar/>
-                    <WeekPlan rows={this.state.rows}/>
+                    <WeekPlan rows={this.state.rows} using={this.state.mealplansaved}/>
                     <div className="mp-settings">
                         <span className="btn-login edit" onClick={() => this.editButton()}>EDIT</span>
                     </div>

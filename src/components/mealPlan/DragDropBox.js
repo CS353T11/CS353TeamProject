@@ -143,7 +143,7 @@ export default class DragDropTest extends React.Component {
 
 	render() {
 		return (
-			<td className="dropBox"
+			<td className={"dropBox "+this.props.using}
 				id={this.props.id}
 				onDrop={this.drop}
 				onDragOver={this.dragOver}
@@ -157,6 +157,7 @@ export default class DragDropTest extends React.Component {
 								index={index}
 								onDel={this.targetDel}
 								key={this.props.index+"food"+index}
+								using={this.props.using}
 							/>
 						);
 					})

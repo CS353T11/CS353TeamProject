@@ -11,7 +11,7 @@ export default class WeekPlan extends React.Component{
         return (
             <div>
                 <div>
-                    <table className="mealplan">
+                    <table className={"mealplan " + this.props.using}>
                         <thead>
                         <tr className="plan-header">
                             <th>Mon</th>

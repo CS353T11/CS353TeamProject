@@ -893,6 +893,37 @@ div.input-field.col {
     background: #fafafa;
   }
 }
+
+//WHILE USING
+.mealplan {
+  &.true thead tr {
+    background: $primaryColor;
+  }
+  &.true tbody tr td.dropBox {
+    .foodItem {
+      position: relative;
+      margin: 4px 0;
+      background: white;
+      border-radius: 0px;
+    }
+    .foodItemTitle {
+      box-shadow: none;
+      padding: 0px 24px 0px 0px;
+      &:before {
+        content: '- ';
+
+      }
+      &:hover>.foodItemDel{
+        display: none;
+      }
+    }
+    .foodItemQty {
+      background: white;
+      padding: 0 4px 0 2px;
+    }
+  }
+}
+
 //------------------------------------------------ NUTRISCORE ----------------------------------------------
 
 .nutriscore {
