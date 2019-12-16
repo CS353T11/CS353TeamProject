@@ -314,7 +314,7 @@ export default class MealPlannerPage extends React.Component {
         });
     }
 
-    async confirmDeletion(){
+    confirmDeletion(){
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -334,6 +334,7 @@ export default class MealPlannerPage extends React.Component {
             }
         })
     }
+
     async deleteMealplan(){
         await this.setState({
             rowcount: 0,
@@ -346,6 +347,15 @@ export default class MealPlannerPage extends React.Component {
                 fats: 0,
             },
             nutritionValues: [],
+            cachedMeals:{
+                monday:{},
+                tuesday:{},
+                wednesday:{},
+                thursday:{},
+                friday:{},
+                saturday:{},
+                sunday:{}
+            },
             rows: [],});
         await this.addRow();
         let userID=this.state.uid;
