@@ -35,7 +35,8 @@ export const mealPlanOBJTemplate={
     },
     sunday:{
         "meal1":[]
-    }
+    },
+    rowcount:1
 }
 
 export function addMealPlanDoc(userID){
@@ -46,7 +47,7 @@ export function addMealPlanDoc(userID){
             //console.log("Collection added to Firestore!");
             let promises = [];
             const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
-            let actualMealPlanObj=mealPlanOBJTemplate;
+            let actualMealPlanObj=JSON.parse(JSON.stringify(mealPlanOBJTemplate));
             Object.assign(actualMealPlanObj,{timestamp:timestamp});
             promises.push(mealPlan.doc(userID).collection('Actual').add(actualMealPlanObj));
             promises.push(mealPlan.doc(userID).collection('Template').doc('default').set(mealPlanOBJTemplate));

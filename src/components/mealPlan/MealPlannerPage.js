@@ -14,7 +14,7 @@ export default class MealPlannerPage extends React.Component {
         super(props);
         this.state = {
             uid:"",                     /* User ID*/
-            rowcount: 1,                /* Number of rows*/
+            rowcount: 0,                /* Number of rows*/
             mealplansaved: false,       /* Checks if the plan is being created or it's already saved*/
             creationcheck: '',          /* Checks if the user ever created a plan or if its their first*/
             totalNutrPlan:  {           /* Nutrition values for the created plan */
@@ -51,6 +51,7 @@ export default class MealPlannerPage extends React.Component {
         this.addRow = this.addRow.bind(this);
         this.saveMealplan = this.saveMealplan.bind(this);
         this.deleteMealplan = this.deleteMealplan.bind(this);
+        this.removeRow=this.removeRow.bind(this);
         this.getTotalNutr = this.getTotalNutr.bind(this);
         this.cacheTile=this.cacheTile.bind(this);
     }
@@ -86,10 +87,11 @@ export default class MealPlannerPage extends React.Component {
                             console.log("Retrieving Meal Plan...");
                             console.log("MealPlan",doc.data());
                             this.state.cachedMeals=doc.data();
+                            let numRows=doc.data().rowcount;
+                            for(let i=1; i<=numRows; i++){
+                                this.addRow();
+                            }
                             this.saveMealplan();
-                            this.addRow();
-                            this.addRow();
-                            this.addRow();
                         }else {
                             this.setState({creationcheck:false});
                         }
@@ -176,7 +178,7 @@ export default class MealPlannerPage extends React.Component {
         this.setState({tilesCached: true});
     }
 
-    addRow() {
+    addRow(setting) {
         let rowkey = "meal"+this.state.rowcount;
         //console.log(this.state.cachedMeals.tuesday["meal1"]);
         let joined = this.state.rows.concat(
@@ -191,7 +193,7 @@ export default class MealPlannerPage extends React.Component {
             </tr>
         );
         this.setState({ rows: joined,
-        rowcount: (this.state.rowcount + 1)})
+        rowcount: (this.state.rowcount + 1)});
     }
 
     async removeRow() {
@@ -267,12 +269,14 @@ export default class MealPlannerPage extends React.Component {
     }
 
     saveMealplan(){
-        //TODO: Save 'actual items' when they are added vs an explicity save button for changing template/diet
+        //TODO: Save 'actual items' when they are added vs an explicitly save button for changing template/diet
         this.setState({mealplansaved: true});
 
         //has tiles been cached?
         if(this.state.tilesCached){
             let userID=this.state.uid;
+            this.state.cachedMeals.rowcount=this.state.rowcount;
+            console.log(this.state.rowcount);
             saveMealPlanTemplate(userID,this.state.cachedMeals);
         }else{
             //console.warn("There is no items to save in your meal plan");
@@ -293,6 +297,7 @@ export default class MealPlannerPage extends React.Component {
                     }else{
                         console.log("creating meal plan for "+userID);
                         addMealPlanDoc(userID);
+                        this.addRow();
                     }
                 })
         }
@@ -332,7 +337,6 @@ export default class MealPlannerPage extends React.Component {
                     <WeekPlan rows={this.state.rows}/>
                     <div className="mp-settings">
                         <span className="btn-login edit" onClick={() => this.editButton()}>EDIT</span>
-                        <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                     </div>
                     <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrReal}/>
                 </div>
