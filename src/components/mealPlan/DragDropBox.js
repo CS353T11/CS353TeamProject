@@ -6,6 +6,7 @@ export default class DragDropTest extends React.Component {
 		super(props);
 		this.state = {
 			foodList: [],
+			foodListActal:[],
 			totalNutr: {
 				cal: "",
 				fat: "",
@@ -19,13 +20,15 @@ export default class DragDropTest extends React.Component {
 				carbs: "",
 				qty: 0
 			},
-			boxEmpty:true
+			boxEmpty:true,
+			saveToActual:true,
 		};
 		if(this.props.foodObjProp!==undefined && this.props.foodObjProp.length !==0){
 			this.state.foodList=this.props.foodObjProp;
 			/*console.log("One food item goes here...",this.state.foodList);*/
 			this.state.boxEmpty=false;
 		}
+		//TODO: saveToActual will hold value of mealPlanSaved from props
 		this.targetDel=this.targetDel.bind(this);
 	}
 
@@ -34,12 +37,19 @@ export default class DragDropTest extends React.Component {
 		if(this.state.boxEmpty===false){
 			this.groupFoodList();
 		}
+
+		if(this.state.saveToActual){
+			console.log("All dropped meals will currently be saved to Actual");
+		}else{
+			console.log("All dropped meals will be currently saved to Template")
+		}
 	}
 
 	drop = async e => {
 		e.preventDefault();
 		const foodJSON = e.dataTransfer.getData('foodJSON');
 		const foodObj = JSON.parse(foodJSON);
+		//Detect if item drop is meant to go into actual/template
 
 		await this.setState(prevState => {
 			let foodList = prevState.foodList;
@@ -143,7 +153,7 @@ export default class DragDropTest extends React.Component {
 
 	render() {
 		return (
-			<td className={"dropBox "+this.props.using}
+			<td className="dropBox"
 				id={this.props.id}
 				onDrop={this.drop}
 				onDragOver={this.dragOver}
@@ -157,7 +167,6 @@ export default class DragDropTest extends React.Component {
 								index={index}
 								onDel={this.targetDel}
 								key={this.props.index+"food"+index}
-								using={this.props.using}
 							/>
 						);
 					})

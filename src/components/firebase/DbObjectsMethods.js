@@ -1,6 +1,6 @@
 //import React from 'react';
-// firebase from '../firebase/firebase';
-import {mealPlan} from '../firebase/firebase';
+import firebase from 'firebase';
+import {db,mealPlan} from '../firebase/firebase';
 export const mealPlanDayStructure={
     day:{
         "meal1":[{
@@ -46,7 +46,8 @@ export function addMealPlanDoc(userID){
         .then(function() {
             //console.log("Collection added to Firestore!");
             let promises = [];
-            const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
+            //const timestamp = new Date().toLocaleString('en-GB', { timeZone: 'UTC' });
+            const timestamp=firebase.firestore.FieldValue.serverTimestamp();
             let actualMealPlanObj=JSON.parse(JSON.stringify(mealPlanOBJTemplate));
             Object.assign(actualMealPlanObj,{timestamp:timestamp});
             promises.push(mealPlan.doc(userID).collection('Actual').add(actualMealPlanObj));
@@ -63,15 +64,22 @@ export function addMealPlanDoc(userID){
         });
 }
 
-export function saveMealPlanTemplate(userID,cachedMeals,type){
+export function saveMealPlanTemplate(userID,cachedMeals){
     console.warn("Saving user "+userID+" 's meal plan template...");
     console.warn(cachedMeals);
 
-    mealPlan.doc(userID).collection('Template').doc('default').set(cachedMeals,{merge:true});
+    mealPlan.doc(userID).collection('Template').doc('default').set(cachedMeals);
 }
 
 export function deleteMealPlanTemplate(userID){
     console.warn("Deleting user "+userID+" 's meal plan template...");
 
     mealPlan.doc(userID).collection('Template').doc('default').set(mealPlanOBJTemplate);
+}
+
+export function removeRowMealPlanTemplate(userID,cachedMeals){
+    console.warn("removing a row from user "+userID+" 's meal plan template...");
+    console.warn(cachedMeals);
+
+    //mealPlan.doc(userID).collection('Template').doc('default').set(cachedMeals);
 }
