@@ -10,7 +10,7 @@ export default class FoodItem extends React.Component{
     render() {
         const obj=this.props.obj;
         return(
-            <div className={"foodItem "+this.props.using} key={"foodItem"+ this.props.index}>
+            <div className={"foodItem "+this.props.using} id={this.props.id} key={"foodItem"+ this.props.index}>
                 <p key={"p"+ this.props.index} className="foodItemTitle gmd-1">{obj.label}
                     <Button className="foodItemDel"
                             flat icon={<Icon>close</Icon>}

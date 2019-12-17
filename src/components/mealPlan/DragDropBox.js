@@ -1,12 +1,17 @@
 import React from 'react';
 import FoodItem from "./FoodItem";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
 
 export default class DragDropTest extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			foodList: [],
-			foodListActal:[],
+            foodReal: [],
 			totalNutr: {
 				cal: "",
 				fat: "",
@@ -21,15 +26,16 @@ export default class DragDropTest extends React.Component {
 				qty: 0
 			},
 			boxEmpty:true,
-			saveToActual:true,
+            boxChecked: false,
+            boxEditing: false,
 		};
 		if(this.props.foodObjProp!==undefined && this.props.foodObjProp.length !==0){
 			this.state.foodList=this.props.foodObjProp;
 			/*console.log("One food item goes here...",this.state.foodList);*/
 			this.state.boxEmpty=false;
 		}
-		//TODO: saveToActual will hold value of mealPlanSaved from props
 		this.targetDel=this.targetDel.bind(this);
+        this.targetCross=this.targetCross.bind(this);
 	}
 
 	componentDidMount(){
@@ -37,19 +43,12 @@ export default class DragDropTest extends React.Component {
 		if(this.state.boxEmpty===false){
 			this.groupFoodList();
 		}
-
-		if(this.state.saveToActual){
-			console.log("All dropped meals will currently be saved to Actual");
-		}else{
-			console.log("All dropped meals will be currently saved to Template")
-		}
 	}
 
 	drop = async e => {
 		e.preventDefault();
 		const foodJSON = e.dataTransfer.getData('foodJSON');
 		const foodObj = JSON.parse(foodJSON);
-		//Detect if item drop is meant to go into actual/template
 
 		await this.setState(prevState => {
 			let foodList = prevState.foodList;
@@ -83,11 +82,25 @@ export default class DragDropTest extends React.Component {
 	};
 
 	async targetDel(e){
-		console.log("WOW! it was you NUMBER "+e.currentTarget.value);
+		console.log("Deleted: "+e.currentTarget.value);
 		let i=parseInt(e.currentTarget.value);
 		await this.onRemoveItem(i);
 		this.groupFoodList();
 	};
+
+	editBox(index,boxEditing) {
+	    this.props.editBox(index,boxEditing);
+        this.setState({boxEditing: !this.state.boxEditing});
+    }
+
+    async targetCross(e){
+        console.log(e.currentTarget);
+        let food_id = this.props.index + "i" + parseInt(e.currentTarget.value);
+
+        document.getElementById(food_id).classList.toggle("crossed");
+
+
+    };
 
 	async groupFoodList(){
 		let totalNutr;
@@ -153,8 +166,10 @@ export default class DragDropTest extends React.Component {
 
 	render() {
 		return (
-			<td className="dropBox"
-				id={this.props.id}
+			<td className={"dropBox " +
+            (this.state.boxChecked ? "checked" : "non-checked") + " " +
+            (this.state.boxEditing ? "editing" : "non-editing")}
+				id={this.props.index}
 				onDrop={this.drop}
 				onDragOver={this.dragOver}
 			>
@@ -165,16 +180,32 @@ export default class DragDropTest extends React.Component {
 							<FoodItem
 								obj={obj}
 								index={index}
-								onDel={this.targetDel}
-								key={this.props.index+"food"+index}
+								onDel={this.state.boxEditing ? this.targetCross : this.targetDel}
+								id={this.props.index+"i"+index}
+                                key={this.props.index+"i"+index}
+								using={this.props.using}
 							/>
 						);
 					})
 					:
 					<ul>
-						<li>Add Item</li>
+						<li className="placeholder"></li>
 					</ul>
 				}
+				<div className="buttons">
+                    <span className="edit" onClick={()=>
+                        this.editBox(this.props.index, this.state.boxEditing)} >
+                        <FontAwesomeIcon icon={faEdit} />
+                    </span>
+                    <span className="confirm" onClick={()=> {
+                        //Whenever we click confirm, we change the state of the box "boxChecked" and add or sub the nutrition values
+                        this.props.confirmBox(this.props.index, this.state.boxChecked);
+                        this.setState({boxChecked: !this.state.boxChecked})
+                    }}>
+                        <FontAwesomeIcon icon={faCheckSquare} className="check"/>
+                        <FontAwesomeIcon icon={faTimes} className="un-check"/>
+                    </span>
+                </div>
 			</td>
 		);
 	};

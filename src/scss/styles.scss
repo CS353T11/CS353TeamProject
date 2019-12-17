@@ -760,6 +760,14 @@ div.input-field.col {
     padding: 4px;
     max-width: 50px;
     width: 14%;
+    .placeholder {
+      &:after {
+        content: 'Add item';
+      }
+    }
+    .buttons {
+      display: none;
+    }
   }
   .plan-item {
     background: gray;
@@ -852,16 +860,16 @@ div.input-field.col {
     margin-top: 32px;
   }
 }
-.loadingSvg{
+.loadingSvg {
   margin: auto;
 }
 
-.foodItem{
+.foodItem {
   position: relative;
   margin: 4px 0;
   background: #fafafa;
   border-radius: 8px;
-  .foodItemTitle{
+  .foodItemTitle {
     padding:8px 24px 8px 8px;
     overflow: hidden;
     white-space: nowrap;
@@ -870,11 +878,12 @@ div.input-field.col {
     text-align: left;
     position: relative;
     font: bold 11px "Montserrat";
-    .foodItemDel{
+    .foodItemDel {
       display:none;
+      transition: transform 0.2s;
       z-index: 1;
     }
-    &:hover>.foodItemDel{
+    &:hover>.foodItemDel {
       display: block;
       border-radius: 20px;
       position: absolute;
@@ -894,24 +903,60 @@ div.input-field.col {
   }
 }
 
-//WHILE USING
+//--------------------------------------------------WHILE USING------------------------------------------------------
 .mealplan {
   &.true thead tr {
     background: $primaryColor;
   }
   &.true tbody tr td.dropBox {
+    padding: 4px 4px 20px 4px;
+    position: relative;
+    transition: none;
+    .placeholder {
+      &:after {
+        content: '';
+      }
+    }
     .foodItem {
+      transition: none;
       position: relative;
       margin: 4px 0;
       background: white;
       border-radius: 0px;
+      &:after {
+        content: '';
+        display: block;
+        height: 2px;
+        width: 0%;
+        margin-left: 2px;
+        background: black;
+        position: absolute;
+        top: 50%;
+        transition: width 0.1s ease-in;
+      }
+      &.crossed {
+        &:after {
+          content: '';
+          display: block;
+          height: 2px;
+          width: 96%;
+          z-index: 2;
+          background: black;
+          position: absolute;
+          top: 50%;
+        }
+        .foodItemDel {
+          transform: rotate(45deg);
+          transition: transform 0.2s;
+        }
+      }
     }
     .foodItemTitle {
+      transition: none;
       box-shadow: none;
-      padding: 0px 24px 0px 0px;
+      padding: 0px 24px 0px 3px;
       &:before {
         content: '- ';
-
       }
       &:hover>.foodItemDel{
         display: none;
@@ -921,7 +966,111 @@ div.input-field.col {
       background: white;
       padding: 0 4px 0 2px;
     }
+    &:hover {
+      .buttons {
+        display: flex;
+        position: absolute;
+        background-color: transparent;
+        width: 94%;
+        bottom: 0px;
+        z-index: 2;
+        justify-content: space-between;
+        .edit {
+          cursor: pointer;
+          padding: 4px 8px 6px 2px;
+          margin-top: -0.5px;
+          color: $secondaryColor;
+        }
+        .confirm {
+          cursor: pointer;
+          padding: 4px 2px 4px 8px;
+          color: $primaryColor;
+          .un-check {
+            display: none;
+          }
+          .check {
+            display: block;
+          }
+        }
+      }
+    }
+    &.checked {
+      &:hover {
+        span.confirm {
+          margin-left: auto;
+          svg.check {
+            display: none;
+          }
+          svg.un-check {
+            display: block;
+          }
+        }
+        .edit {
+          display: none;
+        }
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom: 2px solid $primaryColor;
+        z-index: 1;
+        display: block;
+        min-width: 100%;
+        width: 100%;
+        background-color: transparent;
+        min-height: 20px;
+        height: 20px;
+      }
+    }
+    &.editing { //DropBox when editing
+      &:after {
+        content: 'Add more items';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font: 12px $sans-serif;
+        height: 48px;
+      }
+      .foodItem.crossed {
+        &:after{
+          width: 86%;
+        }
+        .foodItemQty {
+          z-index: 2;
+        }
+      }
+      .foodItemTitle {
+        padding: 0 18px 0 3px;
+        .foodItemDel{
+          display: block;
+          z-index: 2;
+          margin-top: -8px;
+          border-radius: 0;
+          background: white;
+          position: absolute;
+          top:-2px;
+          right:0px;
+          padding:0px!important;
+          &:active {
+            background: white;
+          }
+          i {
+            font-size: 14px !important;
+          }
+        }
+      }
+      .foodItemQty {
+        margin-right: 11px;
+        padding-right: 2px;
+      }
+    }
   }
+
+
 }
 
 //------------------------------------------------ NUTRISCORE ----------------------------------------------
@@ -1095,5 +1244,46 @@ div.input-field.col {
 
 //------------------------------------------------ ABOUT US ----------------------------------------------
 .about-us {
+  .title {
+    display: block;
+    font-size: 42px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 24px;
+  }
+  p {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  ul {
+    list-style-type: circle;
+    margin-left: 12px;
+    margin-bottom: 24px;
+    b {
+      font-weight: bold;
+      text-decoration:underline;
+      text-decoration-color: $primaryColor;
+    }
+    li {
+      list-style-type: circle;
+      margin-bottom: 12px;
+    }
+    ul li {
+      margin-left: 24px;
+      b {
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+  }
+  .subtitle {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+    text-decoration:underline;
+    text-decoration-color: $primaryColor;
+  }
 
 }
