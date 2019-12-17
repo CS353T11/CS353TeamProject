@@ -103,17 +103,19 @@ class LoginPopUp extends React.Component {
                         <form onSubmit={this.handleSubmit} className="form">
                             <label className="label">Email: </label>
                             <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
-                            <br></br>
+
                             <label className="label">Password:</label>
                             <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
-                            <br></br>
+
                             <div>
                                 {this.state.error ? <p style={{ color: "red" }}>{this.state.error.message}</p> : null}
                             </div>
                             <p className="forgot" onClick={() => this.setState({ forget: true })}>forgot your password?</p>
-                            {/*{this.state.user ? null : <NavLink className="forgot" to='/register'>create an account</NavLink>}*/}
-                            {this.state.user ? null : <NavLink className="forgot" to='/register'>create an account</NavLink>}
+
+
                             <button type="submit" className="btn-login" >LOGIN</button>
+
+                            {this.state.user ? null : <NavLink className="forgot" to='/register'>Don't have an account? Register</NavLink>}
 
                         </form>
                     </div>)
