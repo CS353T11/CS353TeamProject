@@ -85,7 +85,7 @@ export default class NutriScore extends React.Component {
                         <span className="counter">{this.round(this.props.actual_values.prots,2)}
                         /{this.props.planned_values.prots}</span>
                     </div>
-                    <div className="subtitle">Prots: </div>
+                    <div className="subtitle">Protein: </div>
                 </div>
                 <div className="nutribar-container">
                     <div className="nutribar">

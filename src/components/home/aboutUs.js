@@ -68,7 +68,9 @@ export default class aboutUs extends React.Component {
                     <li><b>SEARCHBAR:</b> By using EDAMAM API we can search for any food and get a list of related items and their nutrition
                      values. Additionally we can modify the quantity of grams and the proportional nutrition will be automatically updated.</li>
                     <li><b>DRAG-N-DROP:</b>  -----AARON write here a little thing of how it works-----</li>
-                    <li><b>NUTRITION CALCULATION:</b> ----JAKE WRITE HERE A LIL DESCRIPTION OF HOW IT WORKS---</li>
+                    <li><b>NUTRITION CALCULATION:</b> A user's recommended nutrition intake is calculated based on factors such as their height, weight, age, gender and
+                        activity level. From there we researched formulas to find accurate nutrition recommendations based on these inputs. <br/>
+                        We also did research into different diets and scaled a user's recommended nutrient levels according to the diet plan that they chose.</li>
                     <li><b>NUTRITION BARS:</b> Everytime we add/delete an item/row, the nutrition bars will be numerically and visually updated.
                     After saving the tamplate, everytime we confirma meal it will also update the bars.</li>
                 </ul>
