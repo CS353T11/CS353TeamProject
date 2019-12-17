@@ -273,6 +273,9 @@ export default class MealPlannerPage extends React.Component {
             console.log(newNutritionValues);
             newRows.pop();
 
+            let temp=this.state.cachedMeals;
+            temp=temp.filter((item,j) => i!==j);
+
             let totalNutrWeek;
             let foodArray = newNutritionValues;
 
