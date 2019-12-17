@@ -27,7 +27,7 @@ export default class ChangePassword extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.setState({ user })
-                let profileRef = firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
                     this.setState({ email:user.email, user, ...doc.data() })
                 });
             } else {
@@ -39,15 +39,15 @@ export default class ChangePassword extends React.Component {
     handleSubmit = e => {
         e.preventDefault()
         this.setState({ success: null, error: null })
-        var virError = null
-        const { oldPassword, newPassword, confirmNewPassword, email, newEmail } = this.state;
+
+        const { newPassword, confirmNewPassword, newEmail } = this.state;
         if (newEmail !== '') {
             firebase.auth().currentUser.updateEmail(newEmail).then(this.setState({ success: 'Updating email successfully' })).catch(error => {
                 this.setState({ error: error, success: null })
             })
         }
         if (newPassword.length > 0) {
-            if (newPassword == confirmNewPassword) {
+            if (newPassword === confirmNewPassword) {
                 //this.setState({ error: null })
                 // console.log("try login")
                 // let credential = firebase.auth().currentUser
@@ -86,7 +86,7 @@ export default class ChangePassword extends React.Component {
 
     render() {
         //console.log(this.state)
-        const { oldPassword, newPassword, confirmNewPassword, name, email, newEmail } = this.state;
+        const { newPassword, confirmNewPassword, name, email, newEmail } = this.state;
         return (
             <div className="profile">
                 <SideBar name={name} email={email} path="/edit-pwd" />

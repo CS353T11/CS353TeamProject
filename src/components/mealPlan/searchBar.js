@@ -3,7 +3,9 @@ import {TextInput} from 'react-materialize';
 import axios from 'axios';
 import SearchResultTile from "./SearchResultTile";
 import firebase from '../firebase/firebase';
-import {db,mealPlan} from '../firebase/firebase';
+import noresults from '../../images/toast.svg';
+import nosearch from '../../images/toast2.svg';
+
 export default class SearchBar extends React.Component {
 
     constructor(props){
@@ -12,6 +14,7 @@ export default class SearchBar extends React.Component {
 			searchTerm: '',
 			results: '',
             qtyGrams: 100,
+            lastSearch: '',
 		}
     }
 
@@ -66,7 +69,7 @@ export default class SearchBar extends React.Component {
     }
 
      keyPressed = async (event) => {
-        if (event.key === "Enter" || event.type === "click") {
+        if ((event.key === "Enter" || event.type === "click") && this.state.lastSearch !== this.state.searchTerm) {
             document.body.style.cursor = "progress";
 			let urlFood=encodeURI(this.state.searchTerm);
             //making a hard coded post request for an apple
@@ -89,14 +92,14 @@ export default class SearchBar extends React.Component {
             //stops from setting state when user inputs empty string
             if(results !== "Error 400"){
                 this.setState({
-                    results: results
+                    results: results,
+                    lastSearch: this.state.searchTerm,
                 })
                 document.body.style.cursor = "default";
             }else{
                 console.log("Empty Search Parameters!");
                 document.body.style.cursor = "default";
             }
-
         }
     }
 
@@ -137,8 +140,9 @@ export default class SearchBar extends React.Component {
                             );
                         }) :
                         (
-                            <div>
-                                   Search something! (we could add an ilustration)
+                            <div className="empty-results">
+                                <img alt="happy toast" className="toast2" src={nosearch}></img>
+                                <p className="message">Search meals</p>
                             </div>
                         )
                     }
@@ -146,8 +150,9 @@ export default class SearchBar extends React.Component {
                     {
                         (this.state.results.hints && this.state.results.hints.length <= 0) ?
                             (
-                                <div>
-                                    No results (we could add an ilustration)
+                                <div className="empty-results">
+                                    <img alt="burned toast" className="toast" src={noresults}></img>
+                                    <p className="message">No results</p>
                                 </div>
                             ) : null
                     }

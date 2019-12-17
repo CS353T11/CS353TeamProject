@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase'
 import { NavLink } from 'react-router-dom';
+import logo from '../../images/logo.svg'
 
 export default class LoggedInHeader extends React.Component {
     state = {
@@ -17,20 +18,19 @@ export default class LoggedInHeader extends React.Component {
     render() {
         return (
             <header className="header">
-                <span className="header-brand">
-                    <NavLink to='/'><b className="bold">plan</b>my.ml</NavLink>
-                </span>
+
+                <NavLink to='/' className="header-brand">
+                    <img src={logo} alt="logo"></img> <b className="bold">plan</b>my.ml
+                </NavLink>
+
                 <span className="header-link">
                     <NavLink to='/plan'>Meal Plans</NavLink>
                 </span>
                 <span className="header-link">
-                    <NavLink to='/recipes'>Recipes</NavLink>
-                </span>
-                <span className="header-link">
-                    <NavLink to='/goals'>Progress</NavLink>
-                </span>
-                <span className="header-link">
                     <NavLink to='/profile'>Profile</NavLink>
+                </span>
+                <span className="header-link">
+                    <NavLink to='/About'>About Us</NavLink>
                 </span>
                 <span className="header-login">
                     <a href="/#" className="btn-login"  onClick={this.logOutUser}>LOG OUT</a>

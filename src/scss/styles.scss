@@ -1,6 +1,7 @@
 @import "reset.scss";
 @import "vars.scss";
 
+//-------------------------------------------- IS THIS EVEN USED?? ----------------------------------------------
 @mixin searchResFoodNutr{
   display: none;
   height: 128px;
@@ -135,8 +136,38 @@
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
+
+.btn-hide {
+  height: 1px;
+  width: 1px;
+}
+
+//-------------------------------------------- GENERAL LAYOUT ----------------------------------------------
 body, input, select, button {
   font-family: $sans-serif !important;
+}
+
+//Fix for the materialize select input
+div.input-field.col {
+  padding: 0;
+  width: 100%;
+  ul.dropdown-content {
+    li > span {
+      color: black !important;
+    }
+    li.selected > span {
+      color: $primaryColor !important;
+      font-weight: bold;
+    }
+    li.disabled > span {
+      color: gray !important;
+    }
+  }
+}
+
+.view {
+  padding: 48px 96px 48px 96px;
+  min-height: calc(100vh - 128px);
 }
 
 .header {
@@ -146,16 +177,24 @@ body, input, select, button {
   background-color: $primaryColor;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   .header-brand {
+    display: flex;
+    align-items: center;
     font: normal 32px $sans-serif;
-    margin-bottom: 4px;
+    margin: 0 64px 4px 0;
+    img {
+      width: 80px;
+      margin: 0 -6px 0 -14px;
+      opacity: 0.7;
+    }
     .bold {
       font-weight: bold;
     }
   }
   .header-link {
     font-weight: bold;
+    margin-right: 64px;
     &:hover {
       color: white;
     }
@@ -163,12 +202,12 @@ body, input, select, button {
       color: white;
     }
   }
+  .header-login {
+     margin-left: auto;
+  }
 }
 
-.view {
-  padding: 48px 96px 48px 96px;
-  min-height: calc(100vh - 128px);
-}
+
 .footer {
   display: flex;
   height: 256px;
@@ -182,6 +221,13 @@ body, input, select, button {
     justify-content: space-between;
     height: 224px;
   }
+  .footer-item {
+    width: 150px;
+    .img {
+      width: 100%;
+      opacity: 0.8;
+    }
+  }
   .footer-bottom {
     padding: 0 96px 0 96px;
     background-color: white;
@@ -193,6 +239,7 @@ body, input, select, button {
     .copyright {
       margin-left: 20%;
     }
+
   }
   .footer-item {
     padding: 32px 0;
@@ -206,44 +253,183 @@ body, input, select, button {
   }
 }
 
+@media screen and (max-width: 1195px) {
+  .footer-bottom, .footer-top, .header {
+    padding: 0 64px 0 64px;
+  }
+}
+
+//------------------------------------------------ HOMEPAGE ----------------------------------------------
 .home {
+  padding-top: 96px;
+}
+.first-section {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: calc(100vh - 196px) ;
+  align-items: flex-start;
+  padding-bottom: 48px;
+  .big-sub {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 48px;
+    min-height: 100%;
+  }
   .home-illustration {
-    min-width: 35%;
-    height: 321px;
-    border: solid black 1px;
+    min-width: 300px;
+    max-width: 500px;
+    width: 50%;
+    .gif {
+      //border: 4px solid black;
+      box-sizing: border-box;
+      border-radius: 6px;
+      width: 100%;
+    }
   }
   .home-titles {
-    min-width: 65%;
-    padding-left: 48px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    flex-direction: column;
+    min-width: 50%;
+    height: 100%;
+    padding-left: 5%;
+    .subtitle {
+     display: none;
+    }
   }
   .title {
-    font-size: 48px;
-    margin-bottom: 48px;
+    display: block;
+    font-size: 56px;
+    color: black;
     .bold {
+      display:inline-block;
       font-weight: bold;
+      margin: 0 0 8px 0;
+      padding: 0 0 4px 0;
+      min-height: 40px;
+      text-decoration:underline;
+      text-decoration-color: $primaryColor;
     }
   }
   .subtitle {
     font-size: 20px;
     margin-bottom: 48px;
+    p {
+      margin-bottom: 8px;
+    }
+  }
+  a.btn-login {
+    margin-top: 5%;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 1195px) {
+  .view {
+    padding: 48px 64px;
+  }
+  .home {
+    padding-top:64px;
+  }
+  .first-section {
+    padding-top: 48px;
+    .home-illustration {
+      width: 40%;
+    }
+    .home-titles {
+      margin-right: auto;
+    }
+    .title {
+      font-size: 48px;
+    }
+    .subtitle {
+      font-size: 20px;
+      margin-bottom: 24px;
+    }
+  }
+}
+@media screen and (min-width: 1196px) {
+  .first-section {
+    min-height: calc(100vh - 226px) ;
+    .home-illustration {
+      min-width: 40%;
+    }
+    .home-titles {
+      min-height: 100%;
+      height: 100%;
+      min-width: 45%;
+      .title {
+        margin-bottom: 5%;
+      }
+      .subtitle {
+        display: block;
+        margin: 0 0;
+      }
+    }
+  }
+  .subtitle  {
+    display: none;
+  }
+}
+
+.second-section {
+  padding: 48px 0 128px;
+  border-top: 1px solid rgba(207, 207, 207, 0.5);;
+  .second-title {
+    display: block;
+    text-align: center;
+    font-size: 34px;
+    font-weight: bold;
+    color: black;
+    padding-bottom: 64px;
+  }
+  .sub-section {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+  }
+  .screencast {
+    width: 50%;
+    min-width: 400px;
+  }
+  .subsub {
+    display: flex;
+    padding: 24px 24px 24px 48px;
+    width: 50%;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .sub-title {
+    font-size: 28px;
+    width: fit-content;
+    padding-right:  4px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 6px;
+    text-decoration: underline;
+    text-decoration-color: $primaryColor;
+  }
+  .sub-descr {
+    margin-top: 22px;
+    text-align: left;
+    font-size: 20px;
+    color: black;
+    padding-bottom: 28px;
   }
   .btn-login {
-    width: 280px;
+    margin-top: auto;
+    width: 248px;
   }
 }
-
-.btn-hide {
-  height: 1px;
-  width: 1px;
+.third-section {
 
 }
 
+
+//------------------------------------------------ LOGIN ----------------------------------------------
 .login {
   padding: 32px 64px 0;
   margin-top: 64px;
@@ -307,6 +493,64 @@ body, input, select, button {
   }
 }
 
+//------------------------------------------------ REGISTER ----------------------------------------------
+
+.register {
+  display: flex;
+  flex-direction: column;
+  input, select {
+    width: 100%;
+    height: 32px !important;
+    margin:0;
+    margin: 0 0 32px 0 !important;
+    &:focus {
+      border-bottom: 1px solid $primaryColor !important;
+      -webkit-box-shadow: 0 1px 0 0 $primaryColor !important;
+      box-shadow: 0 1px 0 0 $primaryColor !important;
+    }
+  }
+  .submit-box {
+    display: flex;
+    align-items: center;
+    .alert {
+      background: $primaryColor;
+      margin-left: 32px;
+    }
+    .btn-login {
+      background: transparent;
+      width: 172px;
+      &:hover {
+        background: black;
+      }
+    }
+  }
+  .register-form {
+    padding: 24px 0 0;
+    display: flex;
+    justify-content: space-between;
+    .form1, .form2 {
+      width: 40%;
+
+    }
+    .height-weight {
+      display: flex;
+      justify-content: space-between;
+      .height, .weight {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 16px;
+        width: 40%;
+        p {
+          margin-top: 8px;
+        }
+      }
+    }
+  }
+  .register-header {
+    font: bold 32px $sans-serif;
+  }
+}
+//------------------------------------------------ SEARCH BAR ----------------------------------------------
 .searchbar {
   background: $secondaryColor;
   display: flex;
@@ -360,21 +604,23 @@ body, input, select, button {
     }
     .input-field{
       margin-top:-0.5rem!important;
+      width: 50%;
     }
     .input-field .prefix{
       top:0.35rem!important;
-      right:-13%!important;
+      right: 24px!important;
       width:32px!important;
       &.active, :hover {
         color: $primaryColor !important;
       }
     }
     .input-field .prefix ~ input{
-      width:105%!important;
+      //width:105%!important;
     }
     .icon-click{
       height: 34px;
       width: 34px;
+      margin-left: -60px;
       z-index: 1;
       cursor:pointer !important;
     }
@@ -400,6 +646,39 @@ body, input, select, button {
       border-radius: 5px;
       opacity: 0.1;
     }
+  }
+  .empty-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    opacity: 0.5;
+    margin-bottom: 12px;
+    .toast {
+      background: transparent;
+      box-shadow: none;
+      width: 100px;
+      opacity: 0.9;
+      margin: 0 0 64px 0;
+      padding: 0;
+    }
+    .toast2 {
+      background: transparent;
+      box-shadow: none;
+      width: 140px;
+      margin: 0 -20px 0 0;
+      padding: 0;
+      opacity: 0.8;
+    }
+    .message {
+      font: bold 30px $sans-serif;
+      opacity: 0.8;
+    }
+  }
+
+  .results{
+    display: flex;
+    flex-direction: row;
   }
 
   .api-item {
@@ -461,6 +740,7 @@ body, input, select, button {
     height:80%;
   }
 }
+//------------------------------------------------ MEALPLAN ----------------------------------------------
 
 .mealplan {
   border-top-left-radius: 12px;
@@ -540,21 +820,29 @@ body, input, select, button {
   .del {
     margin-right: auto;
   }
+  .edit {
+    margin-right: auto;
+  }
 }
 
 .create-help {
   display: flex;
   margin-bottom: 16px;
+  padding-top: 96px;
   flex-direction: row;
   .title {
     font: bold 48px $sans-serif;
     margin-bottom: 32px;
   }
   .help-pic {
-    min-width: 40%;
-    border: solid black 1px;
+    min-width: 50%;
     margin-right: 32px;
     height: 600px;
+    img {
+      width: 100%;
+      border-radius: 6px;
+      border: 2px solid $secondaryColor;
+    }
   }
   p {
     font: 22px $sans-serif;
@@ -563,6 +851,9 @@ body, input, select, button {
   .btn-login {
     margin-top: 32px;
   }
+}
+.loadingSvg{
+  margin: auto;
 }
 
 .foodItem{
@@ -602,6 +893,38 @@ body, input, select, button {
     background: #fafafa;
   }
 }
+
+//WHILE USING
+.mealplan {
+  &.true thead tr {
+    background: $primaryColor;
+  }
+  &.true tbody tr td.dropBox {
+    .foodItem {
+      position: relative;
+      margin: 4px 0;
+      background: white;
+      border-radius: 0px;
+    }
+    .foodItemTitle {
+      box-shadow: none;
+      padding: 0px 24px 0px 0px;
+      &:before {
+        content: '- ';
+
+      }
+      &:hover>.foodItemDel{
+        display: none;
+      }
+    }
+    .foodItemQty {
+      background: white;
+      padding: 0 4px 0 2px;
+    }
+  }
+}
+
+//------------------------------------------------ NUTRISCORE ----------------------------------------------
 
 .nutriscore {
   background: #c4c4c4;
@@ -645,6 +968,8 @@ body, input, select, button {
   .bar {
     display: block;
     position: absolute;
+    -webkit-transition: width 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: width 0.5s;
     left: 0;
     height: 18px;
     border-radius: 12px;
@@ -664,7 +989,7 @@ body, input, select, button {
     }
   }
 }
-
+//------------------------------------------------ PROFILE ----------------------------------------------
 .profile {
   display: flex;
   min-height: calc(100vh - 80px);
@@ -705,8 +1030,21 @@ body, input, select, button {
   display: flex;
   flex-direction: column;
   width: 44%;
-  padding: 48px;
-  align-items: start;
+  padding: 48px 0 48px 48px;
+  align-items: flex-start;
+  &.goals {
+    width: 30%;
+    padding: 48px 48px 48px 0;
+    .cell{
+      width: 150px;
+      &.bold{
+        width: 150px;
+      }
+      &.input {
+        align-self: flex-start;
+      }
+    }
+  }
   .title {
     font: bold 32px $sans-serif;
     margin-bottom: 24px;
@@ -714,7 +1052,7 @@ body, input, select, button {
   .table {
     display: flex;
     flex-direction: column;
-    width: auto;
+    width: 300px;
     text-align: left;
   }
   .row {
@@ -731,22 +1069,8 @@ body, input, select, button {
       width: 180px;
       font-weight: bold;
     }
-    div.input-field.col {
-      padding: 0;
-      width: 100%;
-    }
-    ul.dropdown-content {
-      li > span {
-        color: black !important;
-      }
-      li.selected > span {
-        color: $primaryColor !important;
-        font-weight: bold;
-      }
-      li.disabled > span {
-        color: gray !important;
-      }
-    }
+
+
     input, select {
       min-width: 100%;
       height: 40px;
@@ -769,42 +1093,7 @@ body, input, select, button {
   }
 }
 
-.profile-achievements {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  padding: 48px 48px 48px 0;
-  .title {
-    font: bold 32px $sans-serif;
-    margin-bottom: 24px;
-  }
-}
+//------------------------------------------------ ABOUT US ----------------------------------------------
+.about-us {
 
-.results{
-  display: flex;
-  flex-direction: row;
-}
-
-.register-form {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.register-header {
-  font: bold 32px $sans-serif;
-}
-
-
-
-.plan{
-  //position: center;
-  margin: auto;
-  width: 50%;
-  text-align: center;
-  justify-content: center;
-  padding: 10px;
 }

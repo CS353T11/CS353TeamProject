@@ -4,18 +4,20 @@ import WeekPlan from './weekPlan';
 import NutriScore from './nutriScore';
 import DragDropBox from "./DragDropBox";
 import firebase from '../firebase/firebase';
-import {db,mealPlan} from '../firebase/firebase';
-import {addMealPlanDoc, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
-// import DragDropTest from './DragDropTest';
-// import InitialBox from "./testY";
+import {mealPlan} from '../firebase/firebase';
+import {addMealPlanDoc, deleteMealPlanTemplate, saveMealPlanTemplate} from "../firebase/DbObjectsMethods";
+import loadingSvg from '../../images/loading.svg';
+import plan1 from "../../images/plan1.gif";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 export default class MealPlannerPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             uid:"",                     /* User ID*/
-            rowcount: 1,                /* Number of rows*/
-            mealplansaved: false,       /* Checks if the plan is being created or it's already saved*/
+            rowcount: 0,                /* Number of rows*/
+            mealplansaved: '',       /* Checks if the plan is being created or it's already saved*/
             creationcheck: '',          /* Checks if the user ever created a plan or if its their first*/
             totalNutrPlan:  {           /* Nutrition values for the created plan */
                 kcal: 0,
@@ -30,10 +32,10 @@ export default class MealPlannerPage extends React.Component {
                 fats: 0,
             },
             totalNutrRecomended:  {     /* Nutrition values for the the recommended diet depending on user data */
-                kcal: 2000*7,
-                prots: 200*7,
-                carbs: 100*7,
-                fats: 80*7,
+                kcal: 0,
+                prots: 0,
+                carbs: 0,
+                fats: 0,
             },
             nutritionValues: [],        /* Array with nutrition values for every tile */
             cachedMeals:{
@@ -51,39 +53,58 @@ export default class MealPlannerPage extends React.Component {
         this.addRow = this.addRow.bind(this);
         this.saveMealplan = this.saveMealplan.bind(this);
         this.deleteMealplan = this.deleteMealplan.bind(this);
+        this.removeRow=this.removeRow.bind(this);
         this.getTotalNutr = this.getTotalNutr.bind(this);
         this.cacheTile=this.cacheTile.bind(this);
+        this.confirmDeletion=this.confirmDeletion.bind(this);
     }
 
-    /*
-    To comment
-     */
     async componentDidMount() {
-        await this.addRow();
-        await this.addRow();
-        await this.addRow();
         await firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 let userID=user.uid;
                 this.setState({ uid:userID});
                 console.log("User:"+userID+" is logged in.");
 
-                mealPlan.doc(userID).get()
+                //Retrieves the recommended values
+                firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
+                    let user_info = doc.data();
+
+                    this.setState({
+                        totalNutrRecomended:  {     /* Nutrition values for the the recommended diet depending on user data */
+                            kcal: (user_info.calories*7),
+                            prots:  (user_info.protein*7),
+                            carbs:  (user_info.carbs*7),
+                            fats:  (user_info.fats*7),
+                        },
+                    });
+
+                });
+                //console.log(this.state)
+
+                /*Retrieve from the database if the user already has a mealplan*/
+                mealPlan.doc(userID).collection("Template").doc("default").get()
                     .then(doc => {
                         if(doc.exists){
+                            this.setState({creationcheck:true}); //MealPlan was already created
                             console.log("Retrieving Meal Plan...");
-                            this.setState({creationcheck:true});
+                            console.log("MealPlan",doc.data());
+                            this.state.cachedMeals=doc.data();
+                            let numRows=doc.data().rowcount;
+                            for(let i=1; i<=numRows; i++){
+                                this.addRow();
+                            }
                             this.saveMealplan();
                         }else {
-                            this.setState({creationcheck:false});
+                            this.setState({
+                                creationcheck:false,
+                                mealplansaved: false});
                         }
 
                     })
             }
 
         })
-
-        //Retrieve from the database if the user already has a mealplan
     }
 
     /*
@@ -93,8 +114,8 @@ export default class MealPlannerPage extends React.Component {
         let totalNutrWeek;
 
         if(tileNutr){
-            console.log("TILE NUTR:");
-            console.log(tileNutr);
+            /*console.log("TILE NUTR:");
+            console.log(tileNutr);*/
 
             this.state.nutritionValues[key] = tileNutr;
             ++this.state.nutritionValues.length;
@@ -108,6 +129,8 @@ export default class MealPlannerPage extends React.Component {
                     return {
                         cal, fat, pro, carbs
                     };
+                }else {
+                    return 0;
                 }
             });
             totalNutrWeek = foodArray.reduce((a,b) => {
@@ -119,6 +142,8 @@ export default class MealPlannerPage extends React.Component {
                         pro: a.pro + b.pro,
                         carbs: a.carbs + b.carbs,
                     });
+                }else {
+                    return null;
                 }
             });
         }
@@ -126,10 +151,10 @@ export default class MealPlannerPage extends React.Component {
             totalNutrWeek = tileNutr;
         }
 
-        console.log("!Nutrition per day & row");
-        console.log(this.state.nutritionValues);
-        console.log("!Total Nutrition Calc");
-        console.log(totalNutrWeek);
+        // console.log("!Nutrition per day & row");
+        // console.log(this.state.nutritionValues);
+        // console.log("!Total Nutrition Calc");
+        // console.log(totalNutrWeek);
 
         this.setState(
             {nutritionValues: this.state.nutritionValues,
@@ -158,98 +183,113 @@ export default class MealPlannerPage extends React.Component {
         this.setState({tilesCached: true});
     }
 
-    addRow() {
+    addRow(setting) {
         let rowkey = "meal"+this.state.rowcount;
+        //console.log(this.state.cachedMeals.tuesday["meal1"]);
         let joined = this.state.rows.concat(
             <tr key={rowkey}>
-                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
-                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile}/>
+                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.monday[rowkey]} />
+                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.tuesday[rowkey]} />
+                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.wednesday[rowkey]} />
+                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.thursday[rowkey]} />
+                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.friday[rowkey]} />
+                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.saturday[rowkey]} />
+                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.sunday[rowkey]} />
             </tr>
         );
         this.setState({ rows: joined,
-        rowcount: (++this.state.rowcount)})
+        rowcount: (this.state.rowcount + 1)});
     }
 
     async removeRow() {
-        let newRows = this.state.rows;
-        let rowkey = "meal"+(this.state.rowcount-1);
-        let newNutritionValues = [];
-        let index;
+        if(this.state.rowcount!==1){
+            let newRows = this.state.rows;
+            let rowkey = "meal" + (this.state.rowcount - 1);
+            let newNutritionValues = [];
+            let index, i;
 
-        console.log(this.state.nutritionValues);
-        for(index in this.state.nutritionValues){
-            let i = index.slice(0,4);
-            console.log(i,rowkey);
-            if(i !== rowkey){
-                newNutritionValues[index] = this.state.nutritionValues[index];
+            console.log(this.state.nutritionValues);
+
+            //This takes out from the list all the items that where in the row we are deleting
+            for (index in this.state.nutritionValues) {
+                i = index.slice(-5);
+                console.log(i, rowkey);
+                if (i !== rowkey) {
+                    newNutritionValues[index] = this.state.nutritionValues[index];
+                }
             }
-        }
-        console.log(newNutritionValues);
-        newRows.pop();
+            console.log(newNutritionValues);
+            newRows.pop();
 
-        let totalNutrWeek;
-        let foodArray = newNutritionValues;
+            let temp=this.state.cachedMeals;
+            temp=temp.filter((item,j) => i!==j);
 
-        foodArray = Object.keys(foodArray).map(key => {
-            if(foodArray[key] !== 0) {
-                let {cal, fat, pro, carbs} = foodArray[key];
-                return {
-                    cal, fat, pro, carbs
-                };
-            }
-        });
-        if(foodArray.length > 1) {
-            totalNutrWeek = foodArray.reduce((a, b) => {
-                if (a && b) {
-                    //console.log(a, b);
-                    return ({
-                        cal: a.cal + b.cal,
-                        fat: a.fat + b.fat,
-                        pro: a.pro + b.pro,
-                        carbs: a.carbs + b.carbs,
-                    });
+            let totalNutrWeek;
+            let foodArray = newNutritionValues;
+
+            // We calculate again the nutrition values
+            foodArray = Object.keys(foodArray).map(key => {
+                if (foodArray[key] !== 0) {
+                    let {cal, fat, pro, carbs} = foodArray[key];
+                    return {
+                        cal, fat, pro, carbs
+                    };
+                } else {
+                    return 0;
                 }
             });
-        }else {
-            if(foodArray.length === 0){
-                foodArray =foodArray.concat({
-                    cal: 0,
-                    fat: 0,
-                    pro: 0,
-                    carbs: 0,
+            if (foodArray.length > 1) {
+                totalNutrWeek = foodArray.reduce((a, b) => {
+                    if (a && b) {
+                        //console.log(a, b);
+                        return ({
+                            cal: a.cal + b.cal,
+                            fat: a.fat + b.fat,
+                            pro: a.pro + b.pro,
+                            carbs: a.carbs + b.carbs,
+                        });
+                    } else {
+                        return null;
+                    }
                 });
+            } else {
+                if (foodArray.length === 0) {
+                    foodArray = foodArray.concat({
+                        cal: 0,
+                        fat: 0,
+                        pro: 0,
+                        carbs: 0,
+                    });
+                }
+                totalNutrWeek = foodArray[0];
             }
-            totalNutrWeek = foodArray[0];
-        }
 
-        await this.setState({
-            rows: newRows,
-            rowcount: (--this.state.rowcount),
-            nutritionValues: newNutritionValues,
-            totalNutrPlan:  {
-                kcal: totalNutrWeek.cal,
-                prots: totalNutrWeek.pro,
-                carbs: totalNutrWeek.carbs,
-                fats: totalNutrWeek.fat,
-            },
-        })
+            await this.setState({
+                rows: newRows,
+                rowcount: (--this.state.rowcount),
+                nutritionValues: newNutritionValues,
+                totalNutrPlan: {
+                    kcal: totalNutrWeek.cal,
+                    prots: totalNutrWeek.pro,
+                    carbs: totalNutrWeek.carbs,
+                    fats: totalNutrWeek.fat,
+                },
+            })
+        }
     }
 
     saveMealplan(){
-        //TODO: Save 'actual items' when they are added vs an explicity save button for changing template/diet
+        //TODO: Save 'actual items' when they are added vs an explicitly save button for changing template/diet
         this.setState({mealplansaved: true});
 
-        //has tiles been chached?
-        if(this.state.tilesCached===false){
-            console.warn("There is no items to save in your meal plan");
-        }else{
+        //has tiles been cached?
+        if(this.state.tilesCached){
             let userID=this.state.uid;
+            this.state.cachedMeals.rowcount=this.state.rowcount;
+            console.log(this.state.rowcount);
             saveMealPlanTemplate(userID,this.state.cachedMeals);
+        }else{
+            //console.warn("There is no items to save in your meal plan");
         }
     }
 
@@ -265,16 +305,44 @@ export default class MealPlannerPage extends React.Component {
                     if(doc.exists){
                         console.log("huh...a meal plan already exists...");
                     }else{
-                        console.log("creating meal plan for"+userID);
+                        console.log("creating meal plan for "+userID);
                         addMealPlanDoc(userID);
+                        this.addRow();
                     }
                 })
         }
     }
 
+    editButton(){
+        this.setState({
+            mealplansaved: false,
+        });
+    }
+
+    confirmDeletion(){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your Meal Plan has been deleted.',
+                    'success'
+                )
+                this.deleteMealplan();
+            }
+        })
+    }
+
     async deleteMealplan(){
         await this.setState({
-            rowcount: 1,
+            rowcount: 0,
             mealplansaved: false,
             creationcheck: true,
             totalNutrPlan:  {
@@ -284,25 +352,33 @@ export default class MealPlannerPage extends React.Component {
                 fats: 0,
             },
             nutritionValues: [],
+            cachedMeals:{
+                monday:{},
+                tuesday:{},
+                wednesday:{},
+                thursday:{},
+                friday:{},
+                saturday:{},
+                sunday:{}
+            },
             rows: [],});
         await this.addRow();
-        await this.addRow();
-        await this.addRow();
-        //Here we should do the thing with the database
+        let userID=this.state.uid;
+        deleteMealPlanTemplate(userID);
     }
 
     //Performs the creation process changing the view depending if the user has a mealplan saved or not
     createProcess() {
+        // When the mealplan is already created
         if(this.state.mealplansaved){
             return (
                 <div className="view">
                     <SearchBar/>
-                    <WeekPlan rows={this.state.rows}/>
+                    <WeekPlan rows={this.state.rows} using={this.state.mealplansaved}/>
                     <div className="mp-settings">
-                        <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
-                        <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
+                        <span className="btn-login edit" onClick={() => this.editButton()}>EDIT</span>
                     </div>
-                    <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>
+                    <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrReal}/>
                 </div>
             )
         }
@@ -315,7 +391,7 @@ export default class MealPlannerPage extends React.Component {
                         <div className="mp-settings">
                             <span className="btn-login add" onClick={this.addRow}>ADD</span>
                             <span className="btn-login rm" onClick={() => this.removeRow()}>REMOVE</span>
-                            <span className="btn-login del" onClick={this.deleteMealplan}>DELETE</span>
+                            <span className="btn-login del" onClick={this.confirmDeletion}>DELETE</span>
                             <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                         </div>
                         <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>
@@ -326,7 +402,7 @@ export default class MealPlannerPage extends React.Component {
                 return (
                     <div className="view create-help">
                         <div className="help-pic">
-                           <img alt="screenshot - gif of how it works"></img>
+                           <img src={plan1} alt="screenshot - gif of how it works"></img>
                         </div>
                         <div>
                             <h3 className="title">Create your first meal plan</h3>
@@ -345,7 +421,7 @@ export default class MealPlannerPage extends React.Component {
             else {
                 return (
                     <div className="view create-help">
-                        LOADING
+                        <img src={loadingSvg} alt="Loading..." className="loadingSvg"/>
                     </div>
                 )
             }

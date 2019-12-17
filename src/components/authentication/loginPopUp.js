@@ -3,13 +3,17 @@ import firebase from '../firebase/firebase';
 import { Modal } from 'react-materialize';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { NavLink } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-export default class LoginPopUp extends React.Component {
-
-    state = {
-        email: '',
-        password: '',
-        error: null
+class LoginPopUp extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            email: '',
+            password: '',
+            error: null
+        }
     }
 
     //change the state when the content change in the form
@@ -40,7 +44,8 @@ export default class LoginPopUp extends React.Component {
                     timer: 1500
                 });
                 //TODO: for a smoother transition for closing, change props.history with a call to close modal
-                this.props.history.push('/');
+                console.log(this.props.history)
+                this.props.history.push('/plan');
             })
             .catch(error => {
                 this.setState({ error });
@@ -76,7 +81,7 @@ export default class LoginPopUp extends React.Component {
     }
 
     render() {
-        const LoginTrigger = <p onClick={()=> this.setState({forget: false})} className="btn-login">LOGIN</p>;
+        const LoginTrigger = <p onClick={() => this.setState({ forget: false })} className="btn-login">LOGIN</p>;
         //console.log(this.state);
         return (
             <Modal trigger={LoginTrigger} actions={false} className="login">
@@ -85,10 +90,10 @@ export default class LoginPopUp extends React.Component {
                         <h3 className="login-header">Forgot your password?</h3>
                         <form onSubmit={this.handleForget} className="form">
                             <p className="text">Don't worry. We will send you a link so that you can restore it. </p>
-                            <br/>
+                            <br />
                             <label className="label">Email:</label>
                             <input required className="input" type="text" name="email" id="email" placeholder={"Enter Email"} onChange={this.handleChange} />
-                            <p className="forgot" onClick={()=> this.setState({forget: false})}>I remembered!</p>
+                            <p className="forgot" onClick={() => this.setState({ forget: false })}>I remembered!</p>
                             <button type="submit" className="btn-login" >RESET PASSWORD</button>
                         </form>
                     </div>)
@@ -103,15 +108,19 @@ export default class LoginPopUp extends React.Component {
                             <input required className="input" type="password" id="password" name="password" placeholder={"Enter Password"} style={{}} onChange={this.handleChange} />
                             <br></br>
                             <div>
-                                {this.state.error ? <p style={{color:"red"}}>{this.state.error.message}</p> : null}
+                                {this.state.error ? <p style={{ color: "red" }}>{this.state.error.message}</p> : null}
                             </div>
-                            <p className="forgot" onClick={()=> this.setState({forget: true})}>forgot your password?</p>
+                            <p className="forgot" onClick={() => this.setState({ forget: true })}>forgot your password?</p>
+                            {/*{this.state.user ? null : <NavLink className="forgot" to='/register'>create an account</NavLink>}*/}
+                            {this.state.user ? null : <NavLink className="forgot" to='/register'>create an account</NavLink>}
                             <button type="submit" className="btn-login" >LOGIN</button>
-                            
+
                         </form>
                     </div>)
-                    }
+                }
             </Modal>
         )
     }
 }
+
+export default withRouter(LoginPopUp)

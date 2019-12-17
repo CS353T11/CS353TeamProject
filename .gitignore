@@ -1,3 +1,5 @@
 /planmy-ml-firebase-adminsdk-6yktz-438453f61e.json
 /.env
 /node_modules/
+/.firebaserc
+/firebase.json
