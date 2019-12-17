@@ -16,7 +16,9 @@ export default class Profile extends React.Component {
         error: '',
     }
 
+
     componentDidMount() {
+        //TODO:I believe this firebase pull is redundant
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 //this.setState({ user })

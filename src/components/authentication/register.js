@@ -18,11 +18,13 @@ export default class Register extends React.Component {
             height: '',
             weight: '',
             activityLevel: '',
+            diet:'',
             error: '',
         }
     }
 
     handleChange = (e) => {
+        //console.log(e.target.id+" => "+e.target.value);
         this.setState({
             [e.target.id]: e.target.value
         })
@@ -60,7 +62,7 @@ export default class Register extends React.Component {
 
     saveUserDetails(){
         let userId;
-        const { name, age, gender, height, weight, activityLevel} = this.state;
+        const { name, age, gender, height, weight, activityLevel,diet} = this.state;
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User logged in already or has just logged in.
@@ -74,6 +76,7 @@ export default class Register extends React.Component {
                         gender:gender,
                         weight:weight,
                         activityLevel:activityLevel,
+                        diet:diet
                     })
                     .then(() => {
                         const MySwal = withReactContent(Swal);
@@ -91,7 +94,7 @@ export default class Register extends React.Component {
     }
 
     render() {
-        const { name, age, gender, height, weight, activityLevel} = this.state;
+        const { name, age, gender, height, weight, activityLevel,diet} = this.state;
         return (
             <div className="view register">
                     <h3 className="register-header">Register Member</h3>
@@ -143,12 +146,24 @@ export default class Register extends React.Component {
                                 </div>
                             </div>
                             <div className="submit-box">
+                                <Select id="diet"
+                                        onChange={this.handleChange}
+                                    //window.location.reload();
+                                        options={{
+                                            classes: '',
+                                            dropdownOptions: {alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250}
+                                        }} value={diet ? diet : ""}>
+                                    <option disabled value="">Diet Plan</option>
+                                    <option value="Maintain weight" onChange={this.handleChange}>Maintain Weight</option>
+                                    <option value="Lose weight" onChange={this.handleChange}>Lose Weight</option>
+                                    <option value="Gain weight" onChange={this.handleChange}>Gain Weight</option>
+                                    <option value="High Protein diet" onChange={this.handleChange}>High Protein</option>
+                                    <option value="Ketogenic diet" onChange={this.handleChange}>Ketogenic</option>
+                                </Select>
                                 <button type="submit" className="btn-login" >REGISTER</button>
                                 {this.state.error ? <p className="alert">{this.state.error.message}</p> : null}
                             </div>
                         </form>
-
-
             </div>
         );
     }

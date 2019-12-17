@@ -23,9 +23,9 @@ export default class Goals extends React.Component {
                 this.setState({ user })
                 firebase.firestore().collection('profiles').doc(user.uid).get().then(doc => {
                     //console.log(doc.data())
-                    this.setState((preState) => ({ ...preState.user, ...doc.data() })
-                    )
-                    //console.log(this.state)
+                    this.setState((preState) => ({ ...preState.user, ...doc.data() }))
+                    this.calcDiet();
+                    console.log(this.state)
                 });
                 //console.log(this.state)
             } else {
@@ -33,6 +33,68 @@ export default class Goals extends React.Component {
             }
 
         })
+    }
+
+    calcDiet(){
+        let diet=this.state.diet;
+        let c = 0;
+        let carb=0;
+        let p=0;
+        let f=0;
+        if(diet==="Maintain weight"){
+            c=this.getCalculateResult();
+            carb = c*0.155;
+            p=c*0.025;
+            f=c*0.035;
+            this.setState({dietCalc:[c]});
+        }
+        else if(diet==="Lose weight"){
+            c=this.getCalculateResult()*0.8;
+            carb = c*0.155;
+            p=c*0.025;
+            f=c*0.035;
+            this.setState({dietCalc:[c]});
+        }
+        else if(diet==="Gain weight"){
+            c=this.getCalculateResult()*1.2;
+            carb = c*0.155;
+            p=c*0.025;
+            f=c*0.035;
+            this.setState({dietCalc:[c]});
+        }
+        else if(diet==="High Protein diet"){
+            c=this.getCalculateResult()*1.1;
+            carb = c*0.13;
+            p=c*0.075;
+            f=c*0.035;
+            this.setState({dietCalc:[c]});
+        }
+        else if(diet==="Ketogenic diet"){
+            c=this.getCalculateResult()*0.9;
+            carb = c*0.02;
+            p=c*0.04;
+            f=c*0.085;
+            this.setState({dietCalc:[c]});
+        }
+
+        const userId = this.state.user.uid;
+        //console.log(this.state)
+        firebase.firestore().collection('profiles').doc(userId)
+            .update({
+                diet: diet,
+                calories: Math.round(c),
+                carbs:Math.round(carb),
+                protein:Math.round(p),
+                fats:Math.round(f),
+            }).catch(error => {
+            this.setState({ error })
+        })
+        firebase.firestore().collection('profiles').doc(userId).get().then(doc => {
+            //console.log(doc.data())
+            this.setState((preState) => ({ ...preState.user, ...doc.data() })
+            )
+            //console.log(this.state)
+        });
     }
 
     handleChange = (e) => {
@@ -144,13 +206,13 @@ export default class Goals extends React.Component {
                     <h3 className="title">Nutrition</h3>
                     <div className="table">
                             <div className="cell input">
-                                <Select id="dietCalc"
+                                <Select id="diet"
                                         onChange={this.handleChange}
                                     //window.location.reload();
                                         options={{
                                             classes: '',
                                             dropdownOptions: {alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250}
-                                        }} value="">
+                                        }} value={diet ? diet : ""}>
                                     <option disabled value="">Diet Plan</option>
                                     <option value="Maintain weight"  onChange={this.handleChange}>Maintain Weight</option>
                                     <option value="Lose weight"  onChange={this.handleChange}>Lose Weight</option>

@@ -512,6 +512,7 @@ div.input-field.col {
   .submit-box {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     .alert {
       background: $primaryColor;
       margin-left: 32px;
@@ -522,6 +523,9 @@ div.input-field.col {
       &:hover {
         background: black;
       }
+    }
+    .input-field{
+      width: 40%;
     }
   }
   .register-form {
