@@ -75,7 +75,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="kcalbar"/>
                         <span className="counter">{this.round(this.props.actual_values.kcal,2)}
-                        /{this.props.planned_values.kcal}</span>
+                        /{this.props.planned_values.kcal} kcal</span>
                     </div>
                     <div className="subtitle">Calories: </div>
                 </div>
@@ -83,7 +83,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="protsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.prots,2)}
-                        /{this.props.planned_values.prots}</span>
+                        /{this.props.planned_values.prots} g</span>
                     </div>
                     <div className="subtitle">Protein: </div>
                 </div>
@@ -91,7 +91,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="carbsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.carbs,2)}
-                        /{this.props.planned_values.carbs}</span>
+                        /{this.props.planned_values.carbs} g</span>
                     </div>
                     <div className="subtitle">Carbs: </div>
                 </div>
@@ -99,7 +99,7 @@ export default class NutriScore extends React.Component {
                     <div className="nutribar">
                         <span className="bar" id="fatsbar"/>
                         <span className="counter">{this.round(this.props.actual_values.fats,2)}
-                        /{this.props.planned_values.fats}</span>
+                        /{this.props.planned_values.fats} g</span>
                     </div>
                     <div className="subtitle">Fats: </div>
                 </div>
