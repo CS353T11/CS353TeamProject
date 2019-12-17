@@ -58,6 +58,7 @@ export default class MealPlannerPage extends React.Component {
         this.cacheTile=this.cacheTile.bind(this);
         this.confirmDeletion=this.confirmDeletion.bind(this);
         this.confirmBox=this.confirmBox.bind(this);
+        this.editBox=this.editBox.bind(this);
     }
 
     async componentDidMount() {
@@ -195,6 +196,7 @@ export default class MealPlannerPage extends React.Component {
                     cacheTile={this.cacheTile}
                     foodObjProp={this.state.cachedMeals.monday[rowkey]}
                     confirmBox={this.confirmBox}
+                    editBox={this.editBox}
                 />
                 <DragDropBox
                     index={"tuesday:"+rowkey}
@@ -202,6 +204,7 @@ export default class MealPlannerPage extends React.Component {
                     cacheTile={this.cacheTile}
                     foodObjProp={this.state.cachedMeals.tuesday[rowkey]}
                     confirmBox={this.confirmBox}
+                    editBox={this.editBox}
                 />
                 <DragDropBox
                     index={"wednesday:"+rowkey}
@@ -209,6 +212,7 @@ export default class MealPlannerPage extends React.Component {
                     cacheTile={this.cacheTile}
                     foodObjProp={this.state.cachedMeals.wednesday[rowkey]}
                     confirmBox={this.confirmBox}
+                    editBox={this.editBox}
                 />
                 <DragDropBox
                     index={"thursday:"+rowkey}
@@ -216,6 +220,7 @@ export default class MealPlannerPage extends React.Component {
                     cacheTile={this.cacheTile}
                     foodObjProp={this.state.cachedMeals.thursday[rowkey]}
                     confirmBox={this.confirmBox}
+                    editBox={this.editBox}
                 />
                 <DragDropBox
                     index={"friday:"+rowkey}
@@ -223,6 +228,7 @@ export default class MealPlannerPage extends React.Component {
                     cacheTile={this.cacheTile}
                     foodObjProp={this.state.cachedMeals.friday[rowkey]}
                     confirmBox={this.confirmBox}
+                    editBox={this.editBox}
 
                 />
                 <DragDropBox
@@ -231,6 +237,7 @@ export default class MealPlannerPage extends React.Component {
                     cacheTile={this.cacheTile}
                     foodObjProp={this.state.cachedMeals.saturday[rowkey]}
                     confirmBox={this.confirmBox}
+                    editBox={this.editBox}
                 />
                 <DragDropBox
                     index={"sunday:"+rowkey}
@@ -238,6 +245,7 @@ export default class MealPlannerPage extends React.Component {
                     cacheTile={this.cacheTile}
                     foodObjProp={this.state.cachedMeals.sunday[rowkey]}
                     confirmBox={this.confirmBox}
+                    editBox={this.editBox}
                 />
             </tr>
         );
@@ -432,7 +440,7 @@ export default class MealPlannerPage extends React.Component {
                         <div className="mp-settings">
                             <span className="btn-login add" onClick={this.addRow}>ADD</span>
                             <span className="btn-login rm" onClick={() => this.removeRow()}>REMOVE</span>
-                            <span className="btn-login del" onClick={this.confirmDeletion}>DELETE</span>
+                            <span className="btn-login del" onClick={this.confirmDeletion}>RESET</span>
                             <span className="btn-login save" onClick={this.saveMealplan}>SAVE</span>
                         </div>
                         <NutriScore planned_values={this.state.totalNutrRecomended} actual_values={this.state.totalNutrPlan}/>
@@ -469,8 +477,47 @@ export default class MealPlannerPage extends React.Component {
         }
     }
 
-    confirmBox(id) {
+    //Toggle to confirm-unconfirm a dropbox and add or substract to totalNutrReal
+    confirmBox(id, checked) {
         console.log(id);
+        console.log(this.state.nutritionValues[id]);
+
+        //Checking that the tile is not empty
+        if(!this.state.nutritionValues[id]){
+            return null;
+        }
+
+        var operators = {
+            '+': function(a, b){ return a+b},
+            '-': function(a, b){ return a-b}
+        }
+        let key, c, p, k, f;
+
+        checked ? key='-' : key="+";
+
+        k = operators[key](this.state.totalNutrReal.kcal, this.state.nutritionValues[id].cal);
+        p = operators[key](this.state.totalNutrReal.prots, this.state.nutritionValues[id].pro);
+        c = operators[key](this.state.totalNutrReal.carbs, this.state.nutritionValues[id].carbs);
+        f = operators[key](this.state.totalNutrReal.fats, this.state.nutritionValues[id].fat);
+
+        let newNutrition = {
+            kcal:  k,
+            prots: p,
+            carbs: c,
+            fats: f,
+        }
+
+        console.log(newNutrition);
+
+        this.setState({
+            totalNutrReal: newNutrition,
+        })
+    }
+
+    //Toggle to edit-stopediting a dropbox and add or substract to totalNutrReal
+    editBox(id, editing) {
+        console.log(id);
+
     }
 
     render() {

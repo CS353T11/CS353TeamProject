@@ -115,7 +115,7 @@ export default class Register extends React.Component {
                                     <p className="label">Age:</p>
                                     <input required className="input" id="age" name="age" type="number" min="0" max="150" placeholder="Age" onChange={this.handleChange} value={age}></input>
 
-                                    <Select id="gender" name="gender" onChange={this.handleChange} value={gender ? gender : ""}><option disabled value="">Gender</option><option value="Male">Male</option><option value="Female">Female</option></Select>
+                                    <Select id="gender" name="gender" onChange={this.handleChange} value={gender ? gender : ""}><option disabled value="">Sex</option><option value="Male">Male</option><option value="Female">Female</option></Select>
 
                                     <div className="height-weight">
                                         <div className="height">
