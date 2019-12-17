@@ -1,5 +1,9 @@
 import React from 'react';
 import FoodItem from "./FoodItem";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
 
 export default class DragDropTest extends React.Component {
 	constructor(props) {
@@ -144,7 +148,7 @@ export default class DragDropTest extends React.Component {
 	render() {
 		return (
 			<td className={"dropBox "+this.props.using}
-				id={this.props.id}
+				id={this.props.index}
 				onDrop={this.drop}
 				onDragOver={this.dragOver}
 			>
@@ -166,6 +170,14 @@ export default class DragDropTest extends React.Component {
 						<li>Add Item</li>
 					</ul>
 				}
+				<div className="buttons">
+                    <span className="edit" onClick={this.props.editBox} >
+                        <FontAwesomeIcon icon={faEdit} />
+                    </span>
+                    <span className="confirm" onClick={()=>this.props.confirmBox(this.props.index)}>
+                        <FontAwesomeIcon icon={faCheckSquare} />
+                    </span>
+                </div>
 			</td>
 		);
 	};

@@ -57,6 +57,7 @@ export default class MealPlannerPage extends React.Component {
         this.getTotalNutr = this.getTotalNutr.bind(this);
         this.cacheTile=this.cacheTile.bind(this);
         this.confirmDeletion=this.confirmDeletion.bind(this);
+        this.confirmBox=this.confirmBox.bind(this);
     }
 
     async componentDidMount() {
@@ -188,13 +189,56 @@ export default class MealPlannerPage extends React.Component {
         //console.log(this.state.cachedMeals.tuesday["meal1"]);
         let joined = this.state.rows.concat(
             <tr key={rowkey}>
-                <DragDropBox index={"monday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.monday[rowkey]} />
-                <DragDropBox index={"tuesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.tuesday[rowkey]} />
-                <DragDropBox index={"wednesday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.wednesday[rowkey]} />
-                <DragDropBox index={"thursday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.thursday[rowkey]} />
-                <DragDropBox index={"friday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.friday[rowkey]} />
-                <DragDropBox index={"saturday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.saturday[rowkey]} />
-                <DragDropBox index={"sunday:"+rowkey} getTotalNutr={this.getTotalNutr} cacheTile={this.cacheTile} foodObjProp={this.state.cachedMeals.sunday[rowkey]} />
+                <DragDropBox
+                    index={"monday:"+rowkey}
+                    getTotalNutr={this.getTotalNutr}
+                    cacheTile={this.cacheTile}
+                    foodObjProp={this.state.cachedMeals.monday[rowkey]}
+                    confirmBox={this.confirmBox}
+                />
+                <DragDropBox
+                    index={"tuesday:"+rowkey}
+                    getTotalNutr={this.getTotalNutr}
+                    cacheTile={this.cacheTile}
+                    foodObjProp={this.state.cachedMeals.tuesday[rowkey]}
+                    confirmBox={this.confirmBox}
+                />
+                <DragDropBox
+                    index={"wednesday:"+rowkey}
+                    getTotalNutr={this.getTotalNutr}
+                    cacheTile={this.cacheTile}
+                    foodObjProp={this.state.cachedMeals.wednesday[rowkey]}
+                    confirmBox={this.confirmBox}
+                />
+                <DragDropBox
+                    index={"thursday:"+rowkey}
+                    getTotalNutr={this.getTotalNutr}
+                    cacheTile={this.cacheTile}
+                    foodObjProp={this.state.cachedMeals.thursday[rowkey]}
+                    confirmBox={this.confirmBox}
+                />
+                <DragDropBox
+                    index={"friday:"+rowkey}
+                    getTotalNutr={this.getTotalNutr}
+                    cacheTile={this.cacheTile}
+                    foodObjProp={this.state.cachedMeals.friday[rowkey]}
+                    confirmBox={this.confirmBox}
+
+                />
+                <DragDropBox
+                    index={"saturday:"+rowkey}
+                    getTotalNutr={this.getTotalNutr}
+                    cacheTile={this.cacheTile}
+                    foodObjProp={this.state.cachedMeals.saturday[rowkey]}
+                    confirmBox={this.confirmBox}
+                />
+                <DragDropBox
+                    index={"sunday:"+rowkey}
+                    getTotalNutr={this.getTotalNutr}
+                    cacheTile={this.cacheTile}
+                    foodObjProp={this.state.cachedMeals.sunday[rowkey]}
+                    confirmBox={this.confirmBox}
+                />
             </tr>
         );
         this.setState({ rows: joined,
@@ -423,6 +467,10 @@ export default class MealPlannerPage extends React.Component {
                 )
             }
         }
+    }
+
+    confirmBox(id) {
+        console.log(id);
     }
 
     render() {

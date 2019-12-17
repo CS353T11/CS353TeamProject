@@ -760,6 +760,9 @@ div.input-field.col {
     padding: 4px;
     max-width: 50px;
     width: 14%;
+    .buttons {
+      display: none;
+    }
   }
   .plan-item {
     background: gray;
@@ -852,16 +855,16 @@ div.input-field.col {
     margin-top: 32px;
   }
 }
-.loadingSvg{
+.loadingSvg {
   margin: auto;
 }
 
-.foodItem{
+.foodItem {
   position: relative;
   margin: 4px 0;
   background: #fafafa;
   border-radius: 8px;
-  .foodItemTitle{
+  .foodItemTitle {
     padding:8px 24px 8px 8px;
     overflow: hidden;
     white-space: nowrap;
@@ -870,11 +873,11 @@ div.input-field.col {
     text-align: left;
     position: relative;
     font: bold 11px "Montserrat";
-    .foodItemDel{
+    .foodItemDel {
       display:none;
       z-index: 1;
     }
-    &:hover>.foodItemDel{
+    &:hover>.foodItemDel {
       display: block;
       border-radius: 20px;
       position: absolute;
@@ -900,6 +903,8 @@ div.input-field.col {
     background: $primaryColor;
   }
   &.true tbody tr td.dropBox {
+    padding: 4px 4px 20px 4px;
+    position: relative;
     .foodItem {
       position: relative;
       margin: 4px 0;
@@ -911,7 +916,6 @@ div.input-field.col {
       padding: 0px 24px 0px 0px;
       &:before {
         content: '- ';
-
       }
       &:hover>.foodItemDel{
         display: none;
@@ -921,7 +925,30 @@ div.input-field.col {
       background: white;
       padding: 0 4px 0 2px;
     }
+    &:hover {
+      .buttons {
+        display: flex;
+        position: absolute;
+        width: 94%;
+        bottom: 0px;
+        justify-content: space-between;
+        .edit {
+          cursor: pointer;
+          padding: 4px 8px 6px 2px;
+          margin-top: -0.5px;
+          color: $secondaryColor;
+        }
+        .confirm {
+          cursor: pointer;
+          padding: 4px 2px 4px 8px;
+          color: $primaryColor;
+        }
+      }
+    }
   }
+
+  //Buttons
+
 }
 
 //------------------------------------------------ NUTRISCORE ----------------------------------------------
