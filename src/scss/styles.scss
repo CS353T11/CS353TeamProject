@@ -1244,5 +1244,46 @@ div.input-field.col {
 
 //------------------------------------------------ ABOUT US ----------------------------------------------
 .about-us {
+  .title {
+    display: block;
+    font-size: 42px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 24px;
+  }
+  p {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  ul {
+    list-style-type: circle;
+    margin-left: 12px;
+    margin-bottom: 24px;
+    b {
+      font-weight: bold;
+      text-decoration:underline;
+      text-decoration-color: $primaryColor;
+    }
+    li {
+      list-style-type: circle;
+      margin-bottom: 12px;
+    }
+    ul li {
+      margin-left: 24px;
+      b {
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+  }
+  .subtitle {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+    text-decoration:underline;
+    text-decoration-color: $primaryColor;
+  }
 
 }

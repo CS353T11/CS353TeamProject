@@ -98,6 +98,8 @@ export default class DragDropTest extends React.Component {
         let food_id = this.props.index + "i" + parseInt(e.currentTarget.value);
 
         document.getElementById(food_id).classList.toggle("crossed");
+
+
     };
 
 	async groupFoodList(){
