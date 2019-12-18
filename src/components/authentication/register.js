@@ -161,9 +161,9 @@ export default class Register extends React.Component {
                                     <option value="Ketogenic diet" onChange={this.handleChange}>Ketogenic</option>
                                 </Select>
                                 <button type="submit" className="btn-login" >REGISTER</button>
-                                {this.state.error ? <p className="alert">{this.state.error.message}</p> : null}
                             </div>
                         </form>
+                {this.state.error ? <p className="alert">{this.state.error.message}</p> : null}
             </div>
         );
     }
