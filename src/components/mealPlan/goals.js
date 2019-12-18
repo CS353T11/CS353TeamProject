@@ -25,7 +25,7 @@ export default class Goals extends React.Component {
                     //console.log(doc.data())
                     this.setState((preState) => ({ ...preState.user, ...doc.data() }))
                     this.calcDiet();
-                    console.log(this.state)
+                    //console.log(this.state)
                 });
                 //console.log(this.state)
             } else {

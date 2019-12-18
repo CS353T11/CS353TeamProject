@@ -20,9 +20,9 @@ export default class aboutUs extends React.Component {
         return (
             <div className="view about-us">
                 <h3 className="title">About this project</h3>
-                <p> Planmy.ml was a project created for our CS353(Team Project) module in Maynooth University. The aim
-                    of the module was to create a Web App, using tech stacks we haven't used before, and organised
-                    manner within a team. A key component being the use of an agile development or more specifically
+                <p> Planmy.ml was a project created for our CS353 Team Project module in Maynooth University. The aim
+                    of the module was to create a Web App, using tech stacks we haven't used before, in an organised
+                    manner with a group of people. A key component being the use of agile development or more specifically
                     SCRUM within our team.
                     </p>
                 <p> The whole project was developed over the span of 3 months by 6 students (Group 11): Aaron, Ayman
@@ -30,9 +30,9 @@ export default class aboutUs extends React.Component {
 
                 <h4 className="subtitle">Design</h4>
 
-                <p> The idea and the first sketches were done by Ayman on paper. Afterwards we worked with Figma
-                to create actual designs of the web app. We chose the following colors scheme (thinking about a color
-                associated to each nutrient) and a modern accessible font, Montserrat.</p>
+                <p> The idea and the first sketches were drawn by Ayman on paper. Afterwards we worked with Figma
+                to create actual designs of the web app. We chose the following color scheme, thinking about color
+                and their association to each nutrient as well as a modern accessible font, Montserrat.</p>
 
                 <p> The logo is a toast with a tick on it, so it reflects both food, and the idea of tracking or
                     organizing a persons meals. The toast icon itself is used in different illustrations
@@ -65,15 +65,15 @@ export default class aboutUs extends React.Component {
 
                 <ul className="stack-list">
                     <li><b>User Authentication and Profile:</b> We used Firebase for user authentication and have a
-                        full fledged login/create account system with email verification for password changes. Moreover
-                        we store submitted information about the user such as height, weight, activity level etc</li>
+                        fully fledged login/create account system with email verification for password changes. Moreover
+                        we store submitted information about the user such as height, weight, activity level etc.</li>
                     <li><b>Food Search bar:</b> By using EDAMAM API we can search for any food and get a list of related items and their nutrition
                      values. Additionally we can modify the quantity of grams and the proportional nutrition will be automatically updated.
                     The API includes a natural speech recognition engine which helps give accurate search results
                     no matter the users dialect.</li>
                     <li><b>Drag-N-Drop:</b> Using new HTML5 functions, we allow users to drag/drop food they searched
                     for into their meal plans, without the use of 3rd party libraries. Each food item is mapped in a
-                    way that resembles the database structure for easy saving/retrieving of users diets</li>
+                    way that resembles the database structure for easy saving/retrieving of users diets.</li>
                     <li><b>Nutrition calculation:</b> A user's recommended nutrition intake is calculated based on factors
                         such as their height, weight, age, gender and activity level. From our researched formulas, we
                         calculate accurate nutrition recommendations based on these factors. <br/>
@@ -84,7 +84,7 @@ export default class aboutUs extends React.Component {
                         will dynamically update to the graph the users nutrition intake against their desired diet.
                     </li>
                 </ul>
-                <h5 className="title">Got this far?</h5>
+                <h5 className="title" style={{marginTop:"60px"}}>Got this far?</h5>
                 <h5 className="title">🎉 Thank you for reading! 🎉</h5>
 
             </div>

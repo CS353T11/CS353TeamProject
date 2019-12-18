@@ -1,7 +1,7 @@
 //sd
 
 import React from 'react';
-import avatar from '../../images/profile.svg';
+import coolAvatar from '../../images/coolAvatar.jpg';
 import { NavLink } from 'react-router-dom';
 
 export default class SideBar extends React.Component {
@@ -36,7 +36,7 @@ export default class SideBar extends React.Component {
         const { name,email } = this.props;
         return (
             <div className="profile-sidebar">
-                <img src={avatar} alt="avatar"></img>
+                <img src={coolAvatar} style={{borderRadius:"50%"}} alt="avatar"></img>
                 <h4 className="name">{name}</h4>
                 <span className="email">{email}</span>
 
