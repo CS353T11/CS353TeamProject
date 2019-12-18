@@ -16,25 +16,25 @@ export const mealPlanDayStructure={
 
 export const mealPlanOBJTemplate={
     monday:{
-        "meal1":[]
+        "meal0":[]
     },
     tuesday:{
-        "meal1":[]
+        "meal0":[]
     },
     wednesday:{
-        "meal1":[]
+        "meal0":[]
     },
     thursday:{
-        "meal1":[]
+        "meal0":[]
     },
     friday:{
-        "meal1":[]
+        "meal0":[]
     },
     saturday:{
-        "meal1":[]
+        "meal0":[]
     },
     sunday:{
-        "meal1":[]
+        "meal0":[]
     },
     rowcount:1
 }

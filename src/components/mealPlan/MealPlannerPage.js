@@ -256,6 +256,7 @@ export default class MealPlannerPage extends React.Component {
     async removeRow() {
         if(this.state.rowcount!==1){
             let newRows = this.state.rows;
+            //console.log(this.state.rowcount);
             let rowkey = "meal" + (this.state.rowcount - 1);
             let newNutritionValues = [];
             let index, i;
@@ -265,6 +266,7 @@ export default class MealPlannerPage extends React.Component {
             //This takes out from the list all the items that where in the row we are deleting
             for (index in this.state.nutritionValues) {
                 i = index.slice(-5);
+                console.log("i =>"+index);
                 console.log(i, rowkey);
                 if (i !== rowkey) {
                     newNutritionValues[index] = this.state.nutritionValues[index];
@@ -274,7 +276,7 @@ export default class MealPlannerPage extends React.Component {
             newRows.pop();
 
             let temp=this.state.cachedMeals;
-            temp=temp.filter((item,j) => i!==j);
+            //temp=temp.filter((item,j) => i!==j);
 
             let totalNutrWeek;
             let foodArray = newNutritionValues;
@@ -520,7 +522,6 @@ export default class MealPlannerPage extends React.Component {
     //Toggle to edit-stopediting a dropbox and add or substract to totalNutrReal
     editBox(id, editing) {
         console.log(id);
-
     }
 
     render() {

@@ -12,6 +12,7 @@ export default class DragDropTest extends React.Component {
 		this.state = {
 			foodList: [],
             foodReal: [],
+			foodDel:{},
 			totalNutr: {
 				cal: "",
 				fat: "",
@@ -75,6 +76,7 @@ export default class DragDropTest extends React.Component {
 	};
 
 	onRemoveItem = i =>{
+		console.log(i);
 		this.setState(state=>{
 			const foodList=state.foodList.filter((item,j) => i!==j);
 			return {foodList};
@@ -94,12 +96,48 @@ export default class DragDropTest extends React.Component {
     }
 
     async targetCross(e){
-        console.log(e.currentTarget);
-        let food_id = this.props.index + "i" + parseInt(e.currentTarget.value);
+		let target=e.currentTarget;
+		target=target.parentNode;
+		target=target.parentNode;
+        let tId=target.id;
+        let arIndex=tId.split(':');
+        //console.log(arIndex[2]);
+        arIndex= parseInt(arIndex[2]);
+		//console.log(this.state.foodList[arIndex[2]]);
+        let food_id = this.props.index + ":" + parseInt(e.currentTarget.value);
+
+
+		//sets the nutrition for the food item to zero and save it temporarily in an object
+        for(let j=0; j<this.state.foodList.length; j++){
+
+			if(this.state.foodList[j].cal!==0 && j===arIndex){
+				//console.log("Zero'ing nutrients...");
+				await this.setState(prevState => {
+					let foodList = prevState.foodList;
+					let foodDel=prevState.foodDel;
+					foodDel[""+j]=JSON.parse(JSON.stringify(foodList[j]));
+					foodList[j].cal=foodList[j].carbs=foodList[j].fat=foodList[j].pro=0;
+					return {foodList,foodDel};
+				})
+                //console.log("Calories",this.state.foodList[j].cal);
+            }else if(this.state.foodList[j].cal===0 && j===arIndex){
+				//console.log("reverting nutrients...");
+				await this.setState(prevState => {
+					let foodList = prevState.foodList;
+					let foodDel=prevState.foodDel;
+					foodList[j]=JSON.parse(JSON.stringify(foodDel[""+j]));
+					delete foodDel[""+j];
+					return {foodList,foodDel};
+				})
+                //console.log("Calories",this.state.foodList[j].cal);
+            }
+
+        }
+
+        //Recalculate Nutrients in foodlist
+        this.groupFoodList();
 
         document.getElementById(food_id).classList.toggle("crossed");
-
-
     };
 
 	async groupFoodList(){
@@ -181,8 +219,8 @@ export default class DragDropTest extends React.Component {
 								obj={obj}
 								index={index}
 								onDel={this.state.boxEditing ? this.targetCross : this.targetDel}
-								id={this.props.index+"i"+index}
-                                key={this.props.index+"i"+index}
+								id={this.props.index+":"+index}
+                                key={this.props.index+":"+index}
 								using={this.props.using}
 							/>
 						);

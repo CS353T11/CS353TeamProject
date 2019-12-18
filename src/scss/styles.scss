@@ -1255,6 +1255,11 @@ div.input-field.col {
     color: black;
     margin-bottom: 24px;
   }
+  h5{
+    font-size: 34px !important;
+    text-align: center;
+    margin-top:20px;
+  }
   p {
     font-size: 20px;
     margin-bottom: 12px;
@@ -1282,10 +1287,11 @@ div.input-field.col {
   }
   .subtitle {
     display: block;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: black;
     margin-bottom: 20px;
+    margin-top:40px;
     text-decoration:underline;
     text-decoration-color: $primaryColor;
   }
