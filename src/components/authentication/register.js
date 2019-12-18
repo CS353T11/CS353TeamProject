@@ -131,7 +131,7 @@ export default class Register extends React.Component {
                                         </div>
                                         <div className="weight">
                                             <input required className="input" id="weight" name="weight"
-                                                   type="number" min="0" max="200"placeholder="Weight"
+                                                   type="number" min="0" max="400"placeholder="Weight"
                                                    onChange={this.handleChange} value={weight}>
                                             </input>
                                             <p>Kg</p>
