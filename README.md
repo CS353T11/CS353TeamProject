@@ -1,3 +1,4 @@
 # CS353TeamProject
-Meal MealPlannerPage Team Project
+
+[Planmy.ml](https://planmy.ml/) - A Meal Planner
 
