@@ -18,7 +18,7 @@ export default class SearchBar extends React.Component {
 		}
     }
 
-	//change the state when the content change in the form
+	/* This updates the state whenever we change a form value in the SearchBar*/
 	handleChange = (e) => {
         let val = e.target.value;
         if(e.target.id === "qtyGrams"){
@@ -29,26 +29,7 @@ export default class SearchBar extends React.Component {
 		})
 	}
 
-	componentDidMount() {
-        var user = firebase.auth().currentUser;
-        if (user) {
-            //console.log(user.uid);
-        } else {
-            // No user is signed in.
-        }
-
-        // mealPlan.doc('sendTest').get()
-        //     .then(doc => {
-        //         if(doc.exists){
-        //             console.log("weee");
-        //         }else{
-        //             console.log("uuuuuu");
-        //         }
-        //     })
-    }
-
-    //Rounds a number to only "exp" decimals :
-    // https://stackoverflow.com/questions/1726630/formatting-a-number-with-exactly-two-decimals-in-javascript
+    /*Rounds a number to only 2 decimals*/
 	round = (value, exp) => {
         if (typeof exp === 'undefined' || +exp === 0)
             return Math.round(value);
@@ -68,35 +49,42 @@ export default class SearchBar extends React.Component {
         return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
     }
 
-     keyPressed = async (event) => {
+    /* Handles the search query*/
+    keyPressed = async (event) => {
+        // If the user clicks on search or presses "Enter"
         if ((event.key === "Enter" || event.type === "click") && this.state.lastSearch !== this.state.searchTerm) {
             document.body.style.cursor = "progress";
+
+            // Calls the EDAMAM API with the searchTerm
 			let urlFood=encodeURI(this.state.searchTerm);
-            //making a hard coded post request for an apple
             let results= await axios.get("https://api.edamam.com/api/food-database/parser?ingr="
                 +urlFood+"&app_id=9ccfd3ea&app_key=422e0ba66ae6c563f47a9fe391a437f0")
                 .then(function(response){
 
+                    // If there are results
                     console.log("----------Response JSON----------");
                     console.log(response.data);
                     console.log("---------------------------------");
 
-                    var obj=response.data;
-
+                    let obj=response.data;
                     return obj;
                 })
                 .catch(function(error){
+                    // If there are not results
                     console.log(error);
                     return "Error 400";
             })
-            //stops from setting state when user inputs empty string
+
+            // If there are results, update state with the array of results
             if(results !== "Error 400"){
                 this.setState({
                     results: results,
                     lastSearch: this.state.searchTerm,
                 })
                 document.body.style.cursor = "default";
+
             }else{
+                //If there isn't a search term
                 console.log("Empty Search Parameters!");
                 document.body.style.cursor = "default";
             }
@@ -123,6 +111,7 @@ export default class SearchBar extends React.Component {
 
                     {this.state.results.hints && this.state.results.hints!=="" ?
                         this.state.results.hints.map((obj,index) => {
+                            // Maps every item values to a SearchResultTile, and calculates values depending on the Qty specified
                             return (
                                     <SearchResultTile
                                         id={"foodRes"+index}
