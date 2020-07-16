@@ -11,10 +11,10 @@ export default class SearchBar extends React.Component {
     constructor(props){
         super(props);
 		this.state = {
-			searchTerm: '',
-			results: '',
-            qtyGrams: 100,
-            lastSearch: '',
+			searchTerm: '',         // Search term written in the input
+			results: '',            // Array of results
+            qtyGrams: 100,          // Quantity specified (in grams)
+            lastSearch: '',         // Last query (to avoid unnecessary calls to API)
 		}
     }
 
