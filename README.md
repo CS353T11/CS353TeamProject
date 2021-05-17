@@ -1,4 +1,4 @@
 # CS353TeamProject
 
-[Planmy.ml](https://planmy.ml/) - A Meal Planner
+[Planmy.ml](https://planmyml.firebaseapp.com/) - A Meal Planner
 
