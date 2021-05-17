@@ -22,7 +22,7 @@ export default class Footer extends React.Component {
                         <p className="bold">Contact & Suport</p>
                         <NavLink to="/about">FAQ</NavLink>
                         <a  href="mailto:info@planmy.ml?Subject=Hello" rel="noopener noreferrer" target="_blank">Email</a>
-                        <a href="https://www.instagram.com/aymchill/"  rel="noopener noreferrer" target="_blank">Instagram</a>
+                        <a href="http://letmegooglethat.com/?q=cheeky+self+promotion"  rel="noopener noreferrer" target="_blank">Instagram</a>
                     </div>
                 </div>
                 <div className="footer-bottom">

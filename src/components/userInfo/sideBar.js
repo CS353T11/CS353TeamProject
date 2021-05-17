@@ -1,5 +1,7 @@
+//sd
+
 import React from 'react';
-import coolAvatar from '../../images/avatar.svg';
+import coolAvatar from '../../images/coolAvatar.jpg';
 import { NavLink } from 'react-router-dom';
 
 export default class SideBar extends React.Component {
@@ -9,21 +11,21 @@ export default class SideBar extends React.Component {
             return (
                 <div>
                     <NavLink className="edit-dets btn-login" to='/profile'>Cancel</NavLink>
-                    <NavLink className="edit-dets btn-login" to='/edit-pwd'>Change Password</NavLink>
+                    <NavLink className="edit-pwd" to='/edit-pwd'>Change Password</NavLink>
                 </div>
             )
         }else if(this.props.path === "/edit-pwd"){
             return (
                 <div>
                     <NavLink className="edit-dets btn-login" to='/edit-profile'>Edit details</NavLink>
-                    <NavLink className="edit-dets btn-login" to='/profile'>Cancel</NavLink>
+                    <NavLink className="edit-pwd" to='/profile'>Cancel</NavLink>
                 </div>
             )
         }else {
             return (
                 <div>
                     <NavLink className="edit-dets btn-login" to='/edit-profile'>Edit details</NavLink>
-                    <NavLink className="edit-dets btn-login" to='/edit-pwd'>Change Password</NavLink>
+                    <NavLink className="edit-pwd" to='/edit-pwd'>Change Password</NavLink>
                 </div>
             )
         }
