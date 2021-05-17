@@ -25,8 +25,8 @@ export default class aboutUs extends React.Component {
                     manner with a group of people. A key component being the use of agile development or more specifically
                     SCRUM within our team.
                     </p>
-                <p> The whole project was developed over the span of 3 months by 6 students (Group 11): Aaron, Ayman
-                , Jake, Enming, Luke and Giorgio. </p>
+                <p> The whole project was developed over the span of 3 months by 5 students (Group 11): Aaron, Ayman
+                , Jake, Enming and Luke. </p>
 
                 <h4 className="subtitle">Design</h4>
 

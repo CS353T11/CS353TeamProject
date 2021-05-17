@@ -1,7 +1,7 @@
 import React from 'react';
 import firebase from '../firebase/firebase';
 import SideBar from './sideBar';
-import Diet from '../mealPlan/goals';
+import Diet from '../mealPlan/diet';
 
 export default class Profile extends React.Component {
     state = {

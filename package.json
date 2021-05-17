@@ -11,7 +11,8 @@
     "firebase": "^7.2.3",
     "firebase-tools": "^7.8.1",
     "materialize-css": "^1.0.0",
-    "node-sass": "^4.13.0",
+    "multer": "^1.4.2",
+    "node-sass": "^4.13.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-materialize": "^3.4.1",
@@ -41,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-avatar-edit": "^0.8.3"
   }
 }

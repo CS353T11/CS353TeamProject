@@ -121,6 +121,7 @@ class LoginPopUp extends React.Component {
                     </div>)
                 }
             </Modal>
+
         )
     }
 }

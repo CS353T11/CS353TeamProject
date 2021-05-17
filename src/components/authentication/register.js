@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import {Select} from "react-materialize";
+import LoginPopUP from '../authentication/loginPopUp';
 
 export default class Register extends React.Component {
     constructor(props){
@@ -44,7 +45,7 @@ export default class Register extends React.Component {
                         this.setState({ error })
                     })
             } else {
-                this.setState((preState) => ({ ...preState, error: { message: 'Two password are different' } }))
+                this.setState((preState) => ({ ...preState, error: { message: 'Passwords do not match' } }))
             }
         } else {
             this.setState((preState) => ({ ...preState, error: { message: 'Password should be more than 6 characters' } }))
@@ -154,14 +155,16 @@ export default class Register extends React.Component {
                                             dropdownOptions: {alignment: 'left', autoTrigger: true, closeOnClick: true, constrainWidth: true, container: null, coverTrigger: true, hover: false, inDuration: 150, onCloseEnd: null, onCloseStart: null, onOpenEnd: null, onOpenStart: null, outDuration: 250}
                                         }} value={diet ? diet : ""}>
                                     <option disabled value="">Diet Plan</option>
-                                    <option value="Maintain weight" onChange={this.handleChange}>Maintain Weight</option>
-                                    <option value="Lose weight" onChange={this.handleChange}>Lose Weight</option>
-                                    <option value="Gain weight" onChange={this.handleChange}>Gain Weight</option>
-                                    <option value="High Protein diet" onChange={this.handleChange}>High Protein</option>
-                                    <option value="Ketogenic diet" onChange={this.handleChange}>Ketogenic</option>
+                                    <option value="Maintain weight"  onChange={this.handleChange}>Maintain Weight</option>
+                                    <option value="Lose weight"  onChange={this.handleChange}>Lose Weight</option>
+                                    <option value="Gain weight"  onChange={this.handleChange}>Gain Weight</option>
+                                    <option value="High Protein diet"  onChange={this.handleChange}>High Protein</option>
+                                    <option value="Ketogenic diet"  onChange={this.handleChange}>Ketogenic</option>
                                 </Select>
                                 <button type="submit" className="btn-login" >REGISTER</button>
                             </div>
+                            Already have an account? Press the button bellow to log in.
+                            <LoginPopUP history={this.props.history}/>
                         </form>
                 {this.state.error ? <p className="alert">{this.state.error.message}</p> : null}
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Select} from 'react-materialize';
 import firebase from '../firebase/firebase';
-export default class Goals extends React.Component {
+export default class Diet extends React.Component {
     state = {
         user: null,
         name: '',
@@ -146,6 +146,17 @@ export default class Goals extends React.Component {
             f=c*0.085;
             diet = e.target.value;
         }
+
+        else if(e.target.value==="Custom diet"){
+            this.setState({dietCalc:this.getCalculateResult()});
+            c=0;
+            carb = 0;
+            p=0;
+            f=0;
+            diet = e.target.value;
+        }
+
+
         console.log(c);
         this.setState({dietCalc:c});
         console.log(this.state.dietCalc);
@@ -219,6 +230,7 @@ export default class Goals extends React.Component {
                                     <option value="Gain weight"  onChange={this.handleChange}>Gain Weight</option>
                                     <option value="High Protein diet"  onChange={this.handleChange}>High Protein</option>
                                     <option value="Ketogenic diet"  onChange={this.handleChange}>Ketogenic</option>
+                                    <option value="Custom diet" onChange={this.handleChange}>Custom</option>
                                 </Select>
                             </div>
                         <div className="row">
