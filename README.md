@@ -1,6 +1,6 @@
 # CS353TeamProject
 <h1>About</h1>
-[Planmy.ml](https://planmyml.firebaseapp.com/) was a project created for our CS353 Team Project module in Maynooth University. The aim of the module was to create a Web App, using tech stacks we haven't used before, in an organised manner with a group of people. A key component being the use of agile development or more specifically SCRUM within our team.
+<a href="https://planmyml.firebaseapp.com/">Planmy.ml</a> was a project created for our CS353 Team Project module in Maynooth University. The aim of the module was to create a Web App, using tech stacks we haven't used before, in an organised manner with a group of people. A key component being the use of agile development or more specifically SCRUM within our team.
 
 The whole project was developed over the span of 3 months by 6 students (Group 11): Aaron, Ayman , Jake, Enming, Luke and Giorgio.
 
