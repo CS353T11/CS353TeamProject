@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "content-editable": "^0.2.0",
     "firebase": "^7.2.3",
     "firebase-tools": "^7.8.1",
